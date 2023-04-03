@@ -1,41 +1,44 @@
-export enum Drugs {
-  Cocaine = "cocaine",
-  Heroin = "heroin",
-  Acid = "acid",
-  Weed = "weed",
-  Speed = "speed",
-  Ludes = "ludes",
+import { Drugs, DrugNames } from "./drugs";
+
+export enum Areas {
+  Bronx,
+  Ghetto,
+  CentralPark,
+  Manhattan,
+  ConeyIsland,
+  Brooklyn,
 }
 
-export class Player {
+interface Transactions {
+  getDrug(drug: DrugNames): number;
+  buy(drug: DrugNames, amount: number, price: number): void;
+  sell(drug: DrugNames, amount: number, price: number): void;
+  canBuy(amount: number, price: number): boolean;
+  canSell(drug: DrugNames, amount: number): boolean;
+}
+
+export class Player extends Drugs implements Transactions {
   money: number;
-  cocaine: number;
-  heroin: number;
-  acid: number;
-  weed: number;
-  speed: number;
-  ludes: number;
   maxTrench: number;
+  currentArea: Areas;
+  daysEnd: number;
 
   constructor() {
+    super();
     this.money = 2000;
-    this.cocaine = 0;
-    this.heroin = 0;
-    this.acid = 0;
-    this.weed = 0;
-    this.speed = 0;
-    this.ludes = 0;
     this.maxTrench = 100;
+    this.currentArea = Areas.Bronx;
+    this.daysEnd = 30;
   }
 
-  getDrug(drug: Drugs): number {
+  getDrug(drug: DrugNames): number {
     for (let prop in this) {
       if (prop === drug) return this[drug];
     }
     return 0;
   }
 
-  buy(drug: Drugs, amount: number, price: number) {
+  buy(drug: DrugNames, amount: number, price: number) {
     const totalPrice = price * amount;
     for (let prop in this) {
       if (prop === drug) {
@@ -45,7 +48,7 @@ export class Player {
     }
   }
 
-  sell(drug: Drugs, amount: number, price: number) {
+  sell(drug: DrugNames, amount: number, price: number) {
     const totalPrice = price * amount;
     for (let prop in this) {
       if (prop === drug) {
@@ -69,7 +72,7 @@ export class Player {
     return true;
   }
 
-  canSell(drug: Drugs, amount: number) {
+  canSell(drug: DrugNames, amount: number) {
     const hasAmount = this.getDrug(drug);
     if (amount > hasAmount) return false;
     return true;
