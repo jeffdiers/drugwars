@@ -31,6 +31,17 @@ export class Player extends Drugs implements Transactions {
     this.daysEnd = 30;
   }
 
+  totalInventory() {
+    return (
+      this.cocaine +
+      this.heroin +
+      this.acid +
+      this.weed +
+      this.speed +
+      this.ludes
+    );
+  }
+
   getDrug(drug: DrugNames): number {
     for (let prop in this) {
       if (prop === drug) return this[drug];
@@ -60,14 +71,10 @@ export class Player extends Drugs implements Transactions {
 
   canBuy(amount: number, price: number) {
     const totalPrice = price * amount;
-    const totalInventory =
-      this.cocaine +
-      this.heroin +
-      this.acid +
-      this.weed +
-      this.speed +
-      this.ludes;
-    if (totalPrice > this.money || amount + totalInventory > this.maxTrench)
+    if (
+      totalPrice > this.money ||
+      amount + this.totalInventory() > this.maxTrench
+    )
       return false;
     return true;
   }
