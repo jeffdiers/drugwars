@@ -2,25 +2,44 @@ import { Player, Areas } from "./player";
 import { DrugNames } from "./drugs";
 
 describe("Player", () => {
-  describe("can get amount of a drug", () => {
-    test("can get cocaine", () => {
+  describe("getMaxSell", () => {
+    test("get amount of cocain can sell", () => {
       const sut = new Player();
       const expected = 0;
 
-      const actual = sut.getDrug(DrugNames.Cocaine);
+      const actual = sut.getMaxSell(DrugNames.Cocaine);
 
       expect(actual).toBe(expected);
     });
 
-    test("can buy a drug and get amount", () => {
+    test("can buy a drug and get amount can sell", () => {
       const sut = new Player();
       sut.buy(DrugNames.Weed, 420, 3);
       const expected = 420;
 
-      const actual = sut.getDrug(DrugNames.Weed);
+      const actual = sut.getMaxSell(DrugNames.Weed);
 
       expect(actual).toBe(expected);
     });
+  });
+
+  describe("getMaxBuy", () => {
+    test.each([
+      { input: 10000, expected: 0, inTrench: null },
+      { input: 1000, expected: 2, inTrench: null },
+      { input: 1, expected: 10, inTrench: 90 },
+      { input: 1, expected: 0, inTrench: 100 },
+    ])(
+      "input: $input, expected: $expected, inTrench: $inTrench",
+      ({ input, expected, inTrench }) => {
+        const sut = new Player();
+
+        inTrench && sut.buy(DrugNames.Weed, inTrench, 0);
+        const actual = sut.getMaxBuy(input);
+
+        expect(actual).toBe(expected);
+      }
+    );
   });
 
   describe("can buy all drugs", () => {
@@ -37,7 +56,7 @@ describe("Player", () => {
         const sut = new Player();
         sut.buy(drug, amount, price);
 
-        const actualAmount = sut.getDrug(drug);
+        const actualAmount = sut.getMaxSell(drug);
         const actualMoney = sut.money;
 
         expect(actualAmount).toEqual(amount);
@@ -61,7 +80,7 @@ describe("Player", () => {
         sut.buy(drug, amount, 0);
         sut.sell(drug, amount, price);
 
-        const actualAmount = sut.getDrug(drug);
+        const actualAmount = sut.getMaxSell(drug);
         const actualMoney = sut.money;
 
         expect(actualAmount).toEqual(0);

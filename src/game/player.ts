@@ -1,16 +1,17 @@
 import { Drugs, DrugNames } from "./drugs";
 
 export enum Areas {
-  Bronx,
-  Ghetto,
-  CentralPark,
-  Manhattan,
-  ConeyIsland,
-  Brooklyn,
+  Bronx = "bronx",
+  Ghetto = "ghetto",
+  CentralPark = "central park",
+  Manhattan = "manhattan",
+  ConeyIsland = "coney island",
+  Brooklyn = "brooklyn",
 }
 
 interface Transactions {
-  getDrug(drug: DrugNames): number;
+  getMaxSell(drug: DrugNames): number;
+  getMaxBuy(price: number): number;
   buy(drug: DrugNames, amount: number, price: number): void;
   sell(drug: DrugNames, amount: number, price: number): void;
   canBuy(amount: number, price: number): boolean;
@@ -42,11 +43,18 @@ export class Player extends Drugs implements Transactions {
     );
   }
 
-  getDrug(drug: DrugNames): number {
+  getMaxSell(drug: DrugNames): number {
     for (let prop in this) {
       if (prop === drug) return this[drug];
     }
     return 0;
+  }
+
+  getMaxBuy(price: number): number {
+    const maxAmount = Math.floor(this.money / price);
+    const coatSpace = this.maxTrench - this.totalInventory();
+    if (maxAmount > coatSpace) return coatSpace;
+    return maxAmount;
   }
 
   buy(drug: DrugNames, amount: number, price: number) {
@@ -80,7 +88,7 @@ export class Player extends Drugs implements Transactions {
   }
 
   canSell(drug: DrugNames, amount: number) {
-    const hasAmount = this.getDrug(drug);
+    const hasAmount = this.getMaxSell(drug);
     if (amount > hasAmount) return false;
     return true;
   }

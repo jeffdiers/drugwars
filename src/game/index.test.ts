@@ -1,142 +1,120 @@
 import { DrugNames } from "./drugs";
-import { DrugWars, GamePhase, GamePrompt } from "./index";
+import { DrugWars, GamePhase } from "./index";
 import { Areas } from "./player";
 
 describe("DrugWars", () => {
-  describe("has correct properties", () => {
-    test.each([
-      { property: "player" },
-      { property: "prices" },
-      { property: "shark" },
-      { property: "prompt" },
-    ])("property: $property", ({ property }) => {
-      const sut = new DrugWars();
-
-      expect(sut).toHaveProperty(property);
-    });
-  });
-
   describe("action", () => {
     describe("Start", () => {
       test.each([
-        {
-          input: "Enter",
-          expectedPhase: GamePhase.Main,
-          expectedPrompt: GamePrompt.Main,
-        },
-        {
-          input: "s",
-          expectedPhase: GamePhase.Start,
-          expectedPrompt: GamePrompt.Start,
-        },
-      ])(
-        "input: $input, expectedPhase: $expectedPhase, expectedPrompt: $expectedPrompt",
-        ({ input, expectedPhase, expectedPrompt }) => {
-          const sut = new DrugWars();
+        { input: "Enter", expected: GamePhase.Main },
+        { input: "s", expected: GamePhase.Start },
+      ])("input: $input, expected: $expected", ({ input, expected }) => {
+        const sut = new DrugWars();
 
-          sut.action(input);
+        sut.action(input);
 
-          const actualPrompt = sut.prompt;
-          const actualPhase = sut.phase;
+        const actualPhase = sut.phase;
 
-          expect(actualPrompt).toBe(expectedPrompt);
-          expect(actualPhase).toBe(expectedPhase);
-        }
-      );
+        expect(actualPhase).toBe(expected);
+      });
     });
 
     describe("Main", () => {
       test.each([
-        {
-          input: "b",
-          expectedPhase: GamePhase.Buy_SelectDrug,
-          expectedPrompt: GamePrompt.Buy_SelectDrug,
-        },
-        {
-          input: "p",
-          expectedPhase: GamePhase.Main,
-          expectedPrompt: GamePrompt.Main,
-        },
-        {
-          input: "s",
-          expectedPhase: GamePhase.Sell_SelectDrug,
-          expectedPrompt: GamePrompt.Sell_SelectDrug,
-        },
-        {
-          input: "j",
-          expectedPhase: GamePhase.Jet,
-          expectedPrompt: GamePrompt.Jet,
-        },
-      ])(
-        "input: $input, expectedPhase: $expectedPhase, expectedPrompt: $expectedPrompt",
-        ({ input, expectedPhase, expectedPrompt }) => {
-          const sut = new DrugWars();
+        { input: "b", expected: GamePhase.Buy_SelectDrug },
+        { input: "p", expected: GamePhase.Main },
+        { input: "s", expected: GamePhase.Sell_SelectDrug },
+        { input: "j", expected: GamePhase.Jet },
+      ])("input: $input, expected: $expected", ({ input, expected }) => {
+        const sut = new DrugWars();
 
-          sut.action("Enter");
-          sut.action(input);
+        sut.action("Enter");
+        sut.action(input);
 
-          const actualPrompt = sut.prompt;
-          const actualPhase = sut.phase;
+        const actualPhase = sut.phase;
 
-          expect(actualPrompt).toBe(expectedPrompt);
-          expect(actualPhase).toBe(expectedPhase);
-        }
-      );
+        expect(actualPhase).toBe(expected);
+      });
+    });
+
+    describe("Jet", () => {
+      test.each([
+        { input: "1", expected: Areas.Bronx },
+        { input: "2", expected: Areas.Ghetto },
+        { input: "3", expected: Areas.CentralPark },
+        { input: "4", expected: Areas.Manhattan },
+        { input: "5", expected: Areas.ConeyIsland },
+        { input: "6", expected: Areas.Brooklyn },
+      ])("input: $input, expected: $expected", ({ input, expected }) => {
+        const sut = new DrugWars();
+
+        sut.action("Enter");
+        sut.action("j");
+        sut.action(input);
+
+        const actual = sut.player.currentArea;
+
+        expect(actual).toBe(expected);
+      });
+
+      test("player changes area and menu is main", () => {
+        const sut = new DrugWars();
+        const expected = GamePhase.Main;
+
+        sut.action("Enter");
+        sut.action("j");
+        sut.action("6");
+
+        const actual = sut.phase;
+
+        expect(actual).toBe(expected);
+      });
+
+      test("player enters a letter", () => {
+        const sut = new DrugWars();
+
+        sut.action("Enter");
+        sut.action("j");
+        sut.action("p");
+
+        const actual = sut.errorJet;
+
+        expect(actual).toBeTruthy();
+      });
+
+      test("player enters a number not in list", () => {
+        const sut = new DrugWars();
+
+        sut.action("Enter");
+        sut.action("j");
+        sut.action("7");
+
+        const actual = sut.errorJet;
+
+        expect(actual).toBeTruthy();
+      });
     });
 
     describe("Buy_SelectDrug", () => {
       test.each([
-        {
-          input: "c",
-          expected: DrugNames.Cocaine,
-          expectedPrompt: GamePrompt.Buy_SelectAmount,
-        },
-        {
-          input: "h",
-          expected: DrugNames.Heroin,
-          expectedPrompt: GamePrompt.Buy_SelectAmount,
-        },
-        {
-          input: "a",
-          expected: DrugNames.Acid,
-          expectedPrompt: GamePrompt.Buy_SelectAmount,
-        },
-        {
-          input: "w",
-          expected: DrugNames.Weed,
-          expectedPrompt: GamePrompt.Buy_SelectAmount,
-        },
-        {
-          input: "s",
-          expected: DrugNames.Speed,
-          expectedPrompt: GamePrompt.Buy_SelectAmount,
-        },
-        {
-          input: "l",
-          expected: DrugNames.Ludes,
-          expectedPrompt: GamePrompt.Buy_SelectAmount,
-        },
-        {
-          input: "p",
-          expected: undefined,
-          expectedPrompt: GamePrompt.ErrorWrongLetter,
-        },
-      ])(
-        "input: $input, expected: $expected, expectedPrompt: $expectedPrompt",
-        ({ input, expected, expectedPrompt }) => {
-          const sut = new DrugWars();
+        { input: "c", expected: DrugNames.Cocaine },
+        { input: "h", expected: DrugNames.Heroin },
+        { input: "a", expected: DrugNames.Acid },
+        { input: "w", expected: DrugNames.Weed },
+        { input: "s", expected: DrugNames.Speed },
+        { input: "l", expected: DrugNames.Ludes },
+        { input: "p", expected: undefined },
+      ])("input: $input, expected: $expected", ({ input, expected }) => {
+        const sut = new DrugWars();
 
-          sut.action("Enter");
-          sut.action("b");
-          sut.action(input);
+        sut.action("Enter");
+        sut.action("b");
+        sut.action(input);
 
-          const actual = sut.drugToDeal;
-          const actualPrompt = sut.prompt;
+        const actual = sut.drugToDeal;
 
-          expect(actual).toBe(expected);
-          expect(actualPrompt).toBe(expectedPrompt);
-        }
-      );
+        expect(actual).toBe(expected);
+      });
     });
 
     describe("Buy_SelectAmount", () => {
@@ -146,51 +124,34 @@ describe("DrugWars", () => {
           input2: null,
           inputDrug: "l",
           expected: 5,
-          expectedDrug: DrugNames.Ludes,
-          expectedPrompt: GamePrompt.Main,
         },
         {
           input: "5",
           input2: null,
           inputDrug: "c",
           expected: 0,
-          expectedDrug: DrugNames.Cocaine,
-          expectedPrompt: GamePrompt.BuyErrorCantBuy,
         },
         {
           input: "1",
           input2: "1",
           inputDrug: "l",
           expected: 11,
-          expectedDrug: DrugNames.Ludes,
-          expectedPrompt: GamePrompt.Main,
         },
         {
           input: "1",
           input2: "0",
           inputDrug: "l",
           expected: 10,
-          expectedDrug: DrugNames.Ludes,
-          expectedPrompt: GamePrompt.Main,
         },
         {
           input: "0",
           input2: null,
           inputDrug: "l",
           expected: 0,
-          expectedDrug: DrugNames.Ludes,
-          expectedPrompt: GamePrompt.Main,
         },
       ])(
-        "input: $input, input2: $input2, inputDrug: $inputDrug, expected: $expected, expectedPrompt: $expectedPrompt",
-        ({
-          input,
-          input2,
-          inputDrug,
-          expected,
-          expectedDrug,
-          expectedPrompt,
-        }) => {
+        "input: $input, input2: $input2, inputDrug: $inputDrug, expected: $expected",
+        ({ input, input2, inputDrug, expected }) => {
           const sut = new DrugWars();
 
           sut.action("Enter");
@@ -200,17 +161,14 @@ describe("DrugWars", () => {
           input2 && sut.action(input2);
           sut.action("Enter");
 
-          const actual = sut.player[expectedDrug];
-          const actualPrompt = sut.prompt;
+          const actual = sut.player.totalInventory();
 
           expect(actual).toBe(expected);
-          expect(actualPrompt).toBe(expectedPrompt);
         }
       );
 
-      test("if cant buy and hit enter go back to buy screen", () => {
+      test("if cant buy and hit enter go back to buy phase", () => {
         const sut = new DrugWars();
-        const expectedPrompt = GamePrompt.Buy_SelectAmount;
         const expectedPhase = GamePhase.Buy_SelectAmount;
 
         sut.action("Enter");
@@ -220,67 +178,32 @@ describe("DrugWars", () => {
         sut.action("Enter");
         sut.action("Enter");
 
-        const actualPrompt = sut.prompt;
         const actualPhase = sut.phase;
 
-        expect(actualPrompt).toBe(expectedPrompt);
         expect(actualPhase).toBe(expectedPhase);
       });
     });
 
     describe("Sell_SelectDrug", () => {
       test.each([
-        {
-          input: "c",
-          expected: DrugNames.Cocaine,
-          expectedPrompt: GamePrompt.Sell_SelectAmount,
-        },
-        {
-          input: "h",
-          expected: DrugNames.Heroin,
-          expectedPrompt: GamePrompt.Sell_SelectAmount,
-        },
-        {
-          input: "a",
-          expected: DrugNames.Acid,
-          expectedPrompt: GamePrompt.Sell_SelectAmount,
-        },
-        {
-          input: "w",
-          expected: DrugNames.Weed,
-          expectedPrompt: GamePrompt.Sell_SelectAmount,
-        },
-        {
-          input: "s",
-          expected: DrugNames.Speed,
-          expectedPrompt: GamePrompt.Sell_SelectAmount,
-        },
-        {
-          input: "l",
-          expected: DrugNames.Ludes,
-          expectedPrompt: GamePrompt.Sell_SelectAmount,
-        },
-        {
-          input: "p",
-          expected: undefined,
-          expectedPrompt: GamePrompt.ErrorWrongLetter,
-        },
-      ])(
-        "input: $input, expected: $expected, expectedPrompt: $expectedPrompt",
-        ({ input, expected, expectedPrompt }) => {
-          const sut = new DrugWars();
+        { input: "c", expected: DrugNames.Cocaine },
+        { input: "h", expected: DrugNames.Heroin },
+        { input: "a", expected: DrugNames.Acid },
+        { input: "w", expected: DrugNames.Weed },
+        { input: "s", expected: DrugNames.Speed },
+        { input: "l", expected: DrugNames.Ludes },
+        { input: "p", expected: undefined },
+      ])("input: $input, expected: $expected", ({ input, expected }) => {
+        const sut = new DrugWars();
 
-          sut.action("Enter");
-          sut.action("s");
-          sut.action(input);
+        sut.action("Enter");
+        sut.action("s");
+        sut.action(input);
 
-          const actual = sut.drugToDeal;
-          const actualPrompt = sut.prompt;
+        const actual = sut.drugToDeal;
 
-          expect(actual).toBe(expected);
-          expect(actualPrompt).toBe(expectedPrompt);
-        }
-      );
+        expect(actual).toBe(expected);
+      });
     });
 
     describe("Sell_SelectAmount", () => {
@@ -290,51 +213,34 @@ describe("DrugWars", () => {
           input2: null,
           inputDrug: "l",
           expected: 5,
-          expectedDrug: DrugNames.Ludes,
-          expectedPrompt: GamePrompt.Main,
         },
         {
           input: "5",
           input2: null,
           inputDrug: "c",
-          expected: 0,
-          expectedDrug: DrugNames.Cocaine,
-          expectedPrompt: GamePrompt.SellError,
+          expected: 10,
         },
         {
           input: "1",
           input2: "1",
           inputDrug: "l",
           expected: 10,
-          expectedDrug: DrugNames.Ludes,
-          expectedPrompt: GamePrompt.SellError,
         },
         {
           input: "1",
           input2: "0",
           inputDrug: "l",
           expected: 0,
-          expectedDrug: DrugNames.Ludes,
-          expectedPrompt: GamePrompt.Main,
         },
         {
           input: "0",
           input2: null,
           inputDrug: "l",
           expected: 10,
-          expectedDrug: DrugNames.Ludes,
-          expectedPrompt: GamePrompt.Main,
         },
       ])(
-        "input: $input, input2: $input2, inputDrug: $inputDrug, expected: $expected, expectedPrompt: $expectedPrompt",
-        ({
-          input,
-          input2,
-          inputDrug,
-          expected,
-          expectedDrug,
-          expectedPrompt,
-        }) => {
+        "input: $input, input2: $input2, inputDrug: $inputDrug, expected: $expected",
+        ({ input, input2, inputDrug, expected }) => {
           const sut = new DrugWars();
 
           sut.action("Enter");
@@ -350,30 +256,25 @@ describe("DrugWars", () => {
           input2 && sut.action(input2);
           sut.action("Enter");
 
-          const actual = sut.player[expectedDrug];
-          const actualPrompt = sut.prompt;
+          const actual = sut.player.totalInventory();
 
           expect(actual).toBe(expected);
-          expect(actualPrompt).toBe(expectedPrompt);
         }
       );
 
-      test("if cant buy and hit enter go back to buy screen", () => {
+      test("if cant sell and hit enter go back to buy screen", () => {
         const sut = new DrugWars();
-        const expectedPrompt = GamePrompt.Buy_SelectAmount;
-        const expectedPhase = GamePhase.Buy_SelectAmount;
+        const expectedPhase = GamePhase.Sell_SelectAmount;
 
         sut.action("Enter");
-        sut.action("b");
+        sut.action("s");
         sut.action("c");
         sut.action("1");
         sut.action("Enter");
         sut.action("Enter");
 
-        const actualPrompt = sut.prompt;
         const actualPhase = sut.phase;
 
-        expect(actualPrompt).toBe(expectedPrompt);
         expect(actualPhase).toBe(expectedPhase);
       });
     });
