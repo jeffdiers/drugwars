@@ -1,6 +1,6 @@
 import { KeyboardEvent, useState, FC } from "react";
-import { DrugWars, GamePhase, GamePrompts } from "./game";
-import { DrugNames } from "./game/drugs";
+import { DrugWars, GamePhase, GamePrompts } from ".";
+import { DrugNames } from "./drugs";
 
 type MainPageProps = { game: DrugWars };
 

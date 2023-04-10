@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { fireEvent, render, screen } from "@testing-library/react";
-import { MainPage } from "./main-page";
-import { DrugWars } from "./game";
+import { MainPage } from "../src/main-page";
+import { DrugWars } from ".";
 
 describe("Main Page", () => {
   test("renders 'press enter to start''", () => {
