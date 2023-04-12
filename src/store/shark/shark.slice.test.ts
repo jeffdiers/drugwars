@@ -1,11 +1,11 @@
-import reducer, { addInterest } from "./shark.slice";
+import reducer, { addInterestShark } from "./shark.slice";
 import { setupStore } from "../store";
 
 describe("shark slice", () => {
   test("should update interest", () => {
     const store = setupStore();
     const state = store.getState().shark;
-    const action = addInterest();
+    const action = addInterestShark();
 
     const expected = { ...state, balance: 5940 };
 

@@ -1,12 +1,13 @@
 import { KeyboardEvent } from "react";
 import { GameStage, updateStage } from "../store/main/main.slice";
+import { Areas, changeArea, selectArea } from "../store/player/player.slice";
+import { setPrices } from "../store/price/price.slice";
+import { addInterestShark } from "../store/shark/shark.slice";
+import { addInterestBank } from "../store/bank/bank.slice";
 import { useAppDispatch, useAppSelector } from "../utils/hooks";
 import { getAreaByKey } from "../utils/helpers";
 
 import Input from "../components/input.component";
-import { Areas, changeArea, selectArea } from "../store/player/player.slice";
-import { setPrices } from "../store/price/price.slice";
-import { addInterest } from "../store/shark/shark.slice";
 
 export default function Jet() {
   const dispatch = useAppDispatch();
@@ -17,9 +18,12 @@ export default function Jet() {
     const areaKey = getAreaByKey(event.key);
     if (areaKey && areaKey !== currentArea) {
       dispatch(changeArea(areaKey));
+      areaKey === Areas.Bronx
+        ? dispatch(updateStage(GameStage.SHARK))
+        : dispatch(updateStage(GameStage.MAIN));
       dispatch(setPrices());
-      dispatch(addInterest());
-      dispatch(updateStage(GameStage.MAIN));
+      dispatch(addInterestShark());
+      dispatch(addInterestBank());
     }
   };
 

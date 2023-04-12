@@ -10,14 +10,21 @@ const sharkSlice = createSlice({
   name: "shark",
   initialState,
   reducers: {
-    addInterest(state, _action: PayloadAction) {
-      return { ...state, balance: state.balance * state.interest };
+    addInterestShark(state, _action: PayloadAction) {
+      return { ...state, balance: Math.floor(state.balance * state.interest) };
+    },
+    depositShark(state, action: PayloadAction<number>) {
+      return { ...state, balance: state.balance - action.payload };
+    },
+    withdrawShark(state, action: PayloadAction<number>) {
+      return { ...state, balance: state.balance + action.payload };
     },
   },
 });
 
 export const selectSharkBalance = (state: RootState) => state.shark.balance;
 
-export const { addInterest } = sharkSlice.actions;
+export const { addInterestShark, depositShark, withdrawShark } =
+  sharkSlice.actions;
 
 export default sharkSlice.reducer;

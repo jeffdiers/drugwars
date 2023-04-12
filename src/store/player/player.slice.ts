@@ -57,11 +57,18 @@ const playerSlice = createSlice({
       const money = state.money + totalPrice;
       return { ...state, money, [drug]: state[drug] - amount };
     },
+    depositPlayer(state, action: PayloadAction<number>) {
+      return { ...state, money: state.money + action.payload };
+    },
+    withdrawPlayer(state, action: PayloadAction<number>) {
+      return { ...state, money: state.money - action.payload };
+    },
   },
 });
 
 export const selectPlayer = (state: RootState) => state.player;
 export const selectArea = (state: RootState) => state.player.area;
+export const selectMoney = (state: RootState) => state.player.money;
 export const selectTotalInventory = (state: RootState) => {
   return (
     state.player.cocaine +
@@ -83,6 +90,7 @@ export const selectMaxSell = (state: RootState, drug: Drugs) => {
   return state.player[drug];
 };
 
-export const { changeArea, buy, sell } = playerSlice.actions;
+export const { changeArea, buy, sell, depositPlayer, withdrawPlayer } =
+  playerSlice.actions;
 
 export default playerSlice.reducer;

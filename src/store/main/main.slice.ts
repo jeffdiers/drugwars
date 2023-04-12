@@ -3,13 +3,18 @@ import { RootState } from "../store";
 
 export enum GameStage {
   START,
+  SHARK,
+  BANK,
+  STASH,
   MAIN,
   BUY,
   SELL,
   JET,
 }
 
-const initialState = { stage: GameStage.START };
+const initialState = {
+  stage: GameStage.START,
+};
 
 const mainSlice = createSlice({
   name: "main",
