@@ -115,7 +115,7 @@ describe("main component", () => {
   test("go to stash when player selects to visit stash", () => {
     renderWithProviders(<App />);
 
-    const expected = /How much drugs would you like to deposit/i;
+    const expected = /Which drug do you want to stash/i;
 
     fireEvent.keyDown(screen.getByRole("input"), { key: "Enter", keyCode: 13 });
     fireEvent.keyDown(screen.getByRole("input"), { key: "n", keyCode: 13 });

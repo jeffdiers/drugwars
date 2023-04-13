@@ -79,13 +79,6 @@ export const selectTotalInventory = (state: RootState) => {
     state.player.ludes
   );
 };
-export const selectMaxBuy = (state: RootState, drug: Drugs) => {
-  const price = state.price[drug];
-  const maxAmount = Math.floor(state.player.money / price);
-  const coatSpace = state.player.maxTrench - selectTotalInventory(state);
-  if (maxAmount > coatSpace) return coatSpace;
-  return maxAmount;
-};
 export const selectMaxSell = (state: RootState, drug: Drugs) => {
   return state.player[drug];
 };

@@ -1,64 +1,79 @@
-import { FC, KeyboardEvent, useState } from "react";
+import { KeyboardEvent, useEffect, useState } from "react";
 import { GameStage, updateStage } from "../store/main/main.slice";
-import { selectDrugPrice } from "../store/price/price.slice";
-import { Drugs, selectMaxSell, sell } from "../store/player/player.slice";
+import { selectPrices } from "../store/price/price.slice";
+import { Drugs, selectPlayer, sell } from "../store/player/player.slice";
 import { useAppDispatch, useAppSelector } from "../utils/hooks";
 import { getDrugByKey } from "../utils/helpers";
 
 import Input from "../components/input.component";
+import SubmitInput from "../components/input-submit.component";
 
-type AskSellProps = { drug: Drugs };
+enum AskSell {
+  ASK_SELECT,
+  ASK_SELL,
+}
 
-const AskSell: FC<AskSellProps> = ({ drug }) => {
-  const [amount, setAmount] = useState("");
+export default function Sell() {
+  const [currentAsk, setCurrentAsk] = useState(AskSell.ASK_SELECT);
+  const [currentDrug, setCurrentDrug] = useState(Drugs.Cocaine);
+  const [maxSell, setMaxSell] = useState(0);
+  const [info, setInfo] = useState("");
+
+  const player = useAppSelector(selectPlayer);
+  const prices = useAppSelector(selectPrices);
 
   const dispatch = useAppDispatch();
 
-  const maxSell = useAppSelector((state) => selectMaxSell(state, drug));
-  const price = useAppSelector((state) => selectDrugPrice(state, drug));
+  const handleOnKeyDownSelectDrug = (event: KeyboardEvent) => {
+    event.preventDefault();
 
-  const handleOnKeyDown = (event: KeyboardEvent) => {
-    if (Number(event.key) || event.key === "0") {
-      setAmount(amount + event.key);
-    }
-    if (event.key === "Enter") {
-      const canSell = Number(amount) <= maxSell;
-      if (canSell) {
-        dispatch(sell({ drug, amount: Number(amount), price }));
-        dispatch(updateStage(GameStage.MAIN));
-      } else {
-        setAmount("");
-      }
-    }
-  };
-
-  return (
-    <Input onKeyDown={handleOnKeyDown}>
-      How much {drug} would you like to sell? Max Allowed: {maxSell}
-      <br />
-      {amount}
-    </Input>
-  );
-};
-
-export default function Sell() {
-  const [drug, setDrug] = useState<Drugs | undefined>(undefined);
-  const [keyInfo, setKeyInfo] = useState<boolean>(false);
-
-  const handleOnKeyDown = (event: KeyboardEvent) => {
     const drugKey = getDrugByKey(event.key);
-    if (!drugKey) setKeyInfo(true);
-    setDrug(drugKey);
+    if (event.key === "x") {
+      dispatch(updateStage(GameStage.MAIN));
+    } else if (!drugKey) {
+      setInfo("Enter the first letter of a drug to choose! Or x to exit");
+    } else {
+      setInfo("");
+      setCurrentDrug(drugKey);
+      setCurrentAsk(AskSell.ASK_SELL);
+    }
   };
 
+  const handleValueSell = (value: string) => {
+    const amount = Number(value);
+    const price = prices[currentDrug];
+    const canSell = amount <= maxSell;
+    if (Number.isNaN(amount)) {
+      setInfo("That isn't a number!");
+    } else if (!canSell) {
+      setInfo("You don't have enough money/coat space to buy that!");
+    } else {
+      setInfo("");
+      dispatch(sell({ drug: currentDrug, amount, price }));
+      dispatch(updateStage(GameStage.MAIN));
+    }
+  };
+
+  useEffect(() => {
+    const max = player[currentDrug];
+    setMaxSell(max);
+  }, [currentDrug, player]);
+
   return (
-    <div>
-      {drug ? (
-        <AskSell drug={drug} />
-      ) : (
-        <Input onKeyDown={handleOnKeyDown}>What would you like to sell?</Input>
+    <>
+      {currentAsk === AskSell.ASK_SELECT && (
+        <Input onKeyDown={handleOnKeyDownSelectDrug}>
+          What would you like to sell?
+        </Input>
       )}
-      {keyInfo && <div>Enter the first letter of a drug to choose!</div>}
-    </div>
+      {currentAsk === AskSell.ASK_SELL && (
+        <SubmitInput
+          name={currentDrug}
+          labelText={`How much ${currentDrug} would you like to sell? Max Allowed: ${maxSell}`}
+          handleValue={handleValueSell}
+        />
+      )}
+      {info}
+    </>
   );
 }

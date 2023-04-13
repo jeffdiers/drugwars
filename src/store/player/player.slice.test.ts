@@ -4,7 +4,6 @@ import reducer, {
   changeArea,
   buy,
   sell,
-  selectMaxBuy,
   selectTotalInventory,
   selectMaxSell,
 } from "./player.slice";
@@ -86,33 +85,6 @@ describe("player slice", () => {
     const expected = 0;
 
     const actual = selectTotalInventory(state);
-
-    expect(actual).toBe(expected);
-  });
-
-  test("can select max buy", () => {
-    const drug = Drugs.Cocaine;
-    const state = setupStore().getState();
-    const expected = 0;
-
-    const actual = selectMaxBuy(state, drug);
-
-    expect(actual).toBe(expected);
-  });
-
-  test("return correct max buy", () => {
-    const price = 1;
-    let state = setupStore().getState();
-    const expected = 10;
-
-    let player = reducer(
-      state.player,
-      buy({ drug: Drugs.Ludes, amount: 90, price: 0 })
-    );
-
-    state = { ...state, player };
-
-    const actual = selectMaxBuy(state, Drugs.Ludes);
 
     expect(actual).toBe(expected);
   });

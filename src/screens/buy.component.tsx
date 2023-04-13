@@ -1,66 +1,88 @@
-import { FC, KeyboardEvent, useState } from "react";
+import { KeyboardEvent, useEffect, useState } from "react";
 import { GameStage, updateStage } from "../store/main/main.slice";
-import { Drugs, selectMaxBuy, buy } from "../store/player/player.slice";
-import { selectDrugPrice } from "../store/price/price.slice";
+import {
+  Drugs,
+  selectPlayer,
+  selectTotalInventory,
+  buy,
+} from "../store/player/player.slice";
+import { selectPrices } from "../store/price/price.slice";
 import { useAppDispatch, useAppSelector } from "../utils/hooks";
 import { getDrugByKey } from "../utils/helpers";
 
 import Input from "../components/input.component";
+import SubmitInput from "../components/input-submit.component";
 
-type AskBuyProps = { drug: Drugs };
+enum AskBuy {
+  ASK_SELECT,
+  ASK_BUY,
+}
 
-const AskBuy: FC<AskBuyProps> = ({ drug }) => {
-  const [amount, setAmount] = useState("");
+export default function Buy() {
+  const [currentAsk, setCurrentAsk] = useState(AskBuy.ASK_SELECT);
+  const [currentDrug, setCurrentDrug] = useState(Drugs.Cocaine);
+  const [maxBuy, setMaxBuy] = useState(0);
+  const [info, setInfo] = useState("");
+
+  const player = useAppSelector(selectPlayer);
+  const totalInventory = useAppSelector(selectTotalInventory);
+  const prices = useAppSelector(selectPrices);
 
   const dispatch = useAppDispatch();
 
-  const maxBuy = useAppSelector((state) => selectMaxBuy(state, drug));
-  const price = useAppSelector((state) => selectDrugPrice(state, drug));
+  const handleOnKeyDownSelectDrug = (event: KeyboardEvent) => {
+    event.preventDefault();
 
-  const handleOnKeyDown = (event: KeyboardEvent) => {
-    if (Number(event.key) || event.key === "0") {
-      setAmount(amount + event.key);
-    }
-    if (event.key === "Enter") {
-      const canBuy = Number(amount) > 0 && Number(amount) <= maxBuy;
-      if (canBuy) {
-        dispatch(buy({ drug, amount: Number(amount), price }));
-        dispatch(updateStage(GameStage.MAIN));
-      } else {
-        setAmount("");
-      }
-    }
-  };
-
-  return (
-    <Input onKeyDown={handleOnKeyDown}>
-      <>
-        How much {drug} would you like to buy? Max Allowed: {maxBuy}
-        <br />
-        {amount}
-      </>
-    </Input>
-  );
-};
-
-export default function Buy() {
-  const [drug, setDrug] = useState<Drugs | undefined>(undefined);
-  const [keyInfo, setKeyInfo] = useState<boolean>(false);
-
-  const handleOnKeyDown = (event: KeyboardEvent) => {
     const drugKey = getDrugByKey(event.key);
-    if (!drugKey) setKeyInfo(true);
-    setDrug(drugKey);
+    if (event.key === "x") {
+      dispatch(updateStage(GameStage.MAIN));
+    } else if (!drugKey) {
+      setInfo("Enter the first letter of a drug to choose! Or x to exit");
+    } else {
+      setInfo("");
+      setCurrentDrug(drugKey);
+      setCurrentAsk(AskBuy.ASK_BUY);
+    }
   };
 
+  const handleValueBuy = (value: string) => {
+    const amount = Number(value);
+    const price = prices[currentDrug];
+    const canBuy = amount >= 0 && amount <= maxBuy;
+    if (Number.isNaN(amount)) {
+      setInfo("That isn't a number!");
+    } else if (!canBuy) {
+      setInfo("You don't have enough money/coat space to buy that!");
+    } else {
+      setInfo("");
+      dispatch(buy({ drug: currentDrug, amount, price }));
+      dispatch(updateStage(GameStage.MAIN));
+    }
+  };
+
+  useEffect(() => {
+    const price = prices[currentDrug];
+    const maxAmount = Math.floor(player.money / price);
+    const coatSpace = player.maxTrench - totalInventory;
+    const max = maxAmount > coatSpace ? coatSpace : maxAmount;
+    setMaxBuy(max);
+  }, [currentDrug, player.money, player.maxTrench, prices, totalInventory]);
+
   return (
-    <div>
-      {drug ? (
-        <AskBuy drug={drug} />
-      ) : (
-        <Input onKeyDown={handleOnKeyDown}>What would you like to buy?</Input>
+    <>
+      {currentAsk === AskBuy.ASK_SELECT && (
+        <Input onKeyDown={handleOnKeyDownSelectDrug}>
+          What would you like to buy?
+        </Input>
       )}
-      {keyInfo && <div>Enter the first letter of a drug to choose!</div>}
-    </div>
+      {currentAsk === AskBuy.ASK_BUY && (
+        <SubmitInput
+          name={currentDrug}
+          labelText={`How much ${currentDrug} would you like to buy? Max Allowed: ${maxBuy}`}
+          handleValue={handleValueBuy}
+        />
+      )}
+      {info}
+    </>
   );
 }
