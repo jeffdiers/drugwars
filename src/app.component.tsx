@@ -10,7 +10,6 @@ import Main from "./screens/main.component";
 import Buy from "./screens/buy.component";
 import Sell from "./screens/sell.component";
 import Jet from "./screens/jet.component";
-import { useEffect } from "react";
 import { selectSharkBalance } from "./store/shark/shark.slice";
 import { selectBankBalance } from "./store/bank/bank.slice";
 import { selectStashBalance } from "./store/stash/stash.slice";
@@ -22,10 +21,6 @@ export default function App() {
   const stash = useAppSelector(selectStashBalance);
   const sharkBalance = useAppSelector(selectSharkBalance);
   const bankBalance = useAppSelector(selectBankBalance);
-
-  useEffect(() => {
-    console.log(player);
-  }, [player]);
 
   return (
     <div>

@@ -17,6 +17,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "game/main-page.test.tsx", "game/main-page.tsx"],
-  "exclude": ["game"]
+  "include": ["src"],
 }
