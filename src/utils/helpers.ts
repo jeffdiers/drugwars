@@ -19,3 +19,7 @@ export const getAreaByKey = (key: string) => {
   if (key === "6") return Areas.Brooklyn;
   return undefined;
 };
+
+export const randomInteger = (min: number, max: number) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};

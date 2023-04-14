@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
+import { randomInteger } from "../../utils/helpers";
 
 export enum Areas {
   Bronx = "bronx",
@@ -19,13 +20,32 @@ export enum Drugs {
   Ludes = "ludes",
 }
 
+export enum EventActions {
+  UpgradeCoat,
+}
+
 export interface BuyAndSellPayloadAction {
   drug: Drugs;
   amount: number;
   price: number;
 }
 
-const initialState = {
+type PlayerState = {
+  readonly area: Areas;
+  readonly daysEnd: number;
+  readonly money: number;
+  readonly maxTrench: number;
+  readonly cocaine: number;
+  readonly heroin: number;
+  readonly acid: number;
+  readonly weed: number;
+  readonly speed: number;
+  readonly ludes: number;
+  readonly events: string[];
+  readonly eventAction: EventActions | undefined;
+};
+
+const initialState: PlayerState = {
   area: Areas.Bronx,
   daysEnd: 30,
   money: 2000,
@@ -36,6 +56,8 @@ const initialState = {
   weed: 0,
   speed: 0,
   ludes: 0,
+  events: [],
+  eventAction: undefined,
 };
 
 const playerSlice = createSlice({
@@ -63,6 +85,48 @@ const playerSlice = createSlice({
     withdrawPlayer(state, action: PayloadAction<number>) {
       return { ...state, money: state.money - action.payload };
     },
+    rollPlayerEvents(state, _action: PayloadAction) {
+      const updateState = { ...state };
+      const choice = randomInteger(1, 5);
+      if (choice === 1 && 1 === randomInteger(1, 8)) {
+        const lostMoney = state.money - Math.floor(state.money * 0.8);
+        updateState.money = updateState.money - lostMoney;
+        updateState.events = updateState.events.concat(
+          `** You got mugged!! You lost ${lostMoney} dollars!! **`
+        );
+      }
+      if (choice === 2 && 1 === randomInteger(1, 10)) {
+        const amount = randomInteger(1, 10);
+        const drug: Drugs =
+          Object.values(Drugs)[
+            randomInteger(1, Object.values(Drugs).length) - 1
+          ];
+        updateState[drug] = updateState[drug] + amount;
+        updateState.events = updateState.events.concat(
+          `** You found ${amount} bags of ${drug} on the ground!! FUCK YEAH **`
+        );
+      }
+      if (choice === 3) {
+        updateState.eventAction = EventActions.UpgradeCoat;
+      }
+      return { ...state, ...updateState };
+    },
+    upgradeCoat(state, action: PayloadAction<number>) {
+      return {
+        ...state,
+        maxTrench: state.maxTrench + 15,
+        money: state.money - action.payload,
+      };
+    },
+    addPlayerEvent(state, action: PayloadAction<string>) {
+      return { ...state, events: state.events.concat(action.payload) };
+    },
+    removePlayerEvent(state, _action: PayloadAction) {
+      return { ...state, events: state.events.slice(1) };
+    },
+    removePlayerEventAction(state, _action: PayloadAction) {
+      return { ...state, eventAction: undefined };
+    },
   },
 });
 
@@ -79,11 +143,21 @@ export const selectTotalInventory = (state: RootState) => {
     state.player.ludes
   );
 };
-export const selectMaxSell = (state: RootState, drug: Drugs) => {
-  return state.player[drug];
-};
+export const selectPlayerEvents = (state: RootState) => state.player.events;
+export const selectPlayerEventAction = (state: RootState) =>
+  state.player.eventAction;
 
-export const { changeArea, buy, sell, depositPlayer, withdrawPlayer } =
-  playerSlice.actions;
+export const {
+  changeArea,
+  buy,
+  sell,
+  depositPlayer,
+  withdrawPlayer,
+  rollPlayerEvents,
+  upgradeCoat,
+  addPlayerEvent,
+  removePlayerEvent,
+  removePlayerEventAction,
+} = playerSlice.actions;
 
 export default playerSlice.reducer;

@@ -1,10 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { Drugs } from "../player/player.slice";
-
-const randomInteger = (min: number, max: number) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
+import { randomInteger } from "../../utils/helpers";
 
 type PriceState = {
   readonly cocaine: number;

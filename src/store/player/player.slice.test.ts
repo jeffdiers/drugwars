@@ -5,7 +5,6 @@ import reducer, {
   buy,
   sell,
   selectTotalInventory,
-  selectMaxSell,
 } from "./player.slice";
 import { setupStore } from "../store";
 
@@ -22,6 +21,7 @@ describe("player slice", () => {
       weed: 0,
       speed: 0,
       ludes: 0,
+      events: [],
     };
 
     const actual = reducer(undefined, { type: undefined });
@@ -85,33 +85,6 @@ describe("player slice", () => {
     const expected = 0;
 
     const actual = selectTotalInventory(state);
-
-    expect(actual).toBe(expected);
-  });
-
-  test("can select max sell", () => {
-    const drug = Drugs.Cocaine;
-    const state = setupStore().getState();
-    const expected = 0;
-
-    const actual = selectMaxSell(state, drug);
-
-    expect(actual).toBe(expected);
-  });
-
-  test("return correct max sell", () => {
-    const price = 1;
-    let state = setupStore().getState();
-    const expected = 10;
-
-    let player = reducer(
-      state.player,
-      buy({ drug: Drugs.Ludes, amount: 10, price: 0 })
-    );
-
-    state = { ...state, player };
-
-    const actual = selectMaxSell(state, Drugs.Ludes);
 
     expect(actual).toBe(expected);
   });

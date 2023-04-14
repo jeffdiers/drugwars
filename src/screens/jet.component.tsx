@@ -1,6 +1,11 @@
 import { KeyboardEvent } from "react";
 import { GameStage, updateStage } from "../store/main/main.slice";
-import { Areas, changeArea, selectArea } from "../store/player/player.slice";
+import {
+  Areas,
+  changeArea,
+  selectArea,
+  rollPlayerEvents,
+} from "../store/player/player.slice";
 import { setPrices, rollEvents } from "../store/price/price.slice";
 import { addInterestShark } from "../store/shark/shark.slice";
 import { addInterestBank } from "../store/bank/bank.slice";
@@ -23,6 +28,7 @@ export default function Jet() {
         : dispatch(updateStage(GameStage.MAIN));
       dispatch(setPrices());
       dispatch(rollEvents());
+      dispatch(rollPlayerEvents());
       dispatch(addInterestShark());
       dispatch(addInterestBank());
     }
