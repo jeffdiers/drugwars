@@ -4,6 +4,7 @@ import App from "./app.component";
 import { setupStore } from "./store/store";
 import { GameStage, updateStage } from "./store/main/main.slice";
 import { Areas, changeArea } from "./store/player/player.slice";
+import { hitPlayer } from "./store/player/player.slice";
 
 describe("main component", () => {
   test("render with default state", () => {
@@ -223,5 +224,18 @@ describe("main component", () => {
         expect(actual).toBeInTheDocument();
       });
     });
+  });
+
+  test("if player health reaches 0 game over", () => {
+    const store = setupStore();
+    store.dispatch(updateStage(GameStage.MAIN));
+    store.dispatch(hitPlayer(100));
+    renderWithProviders(<App />, { store });
+
+    const expected = /Game over/i;
+
+    const actual = screen.getByText(expected);
+
+    expect(actual).toBeInTheDocument();
   });
 });

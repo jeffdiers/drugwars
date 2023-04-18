@@ -3,6 +3,8 @@ import { GameStage, updateStage } from "../store/main/main.slice";
 import { selectPriceEvents, removeEvent } from "../store/price/price.slice";
 import {
   upgradeCoat,
+  buyGun,
+  healPlayer,
   addPlayerEvent,
   removePlayerEvent,
   removePlayerEventAction,
@@ -10,6 +12,8 @@ import {
   selectPlayerEventAction,
   selectMoney,
   EventActions,
+  selectCoatSpace,
+  selectCopsAmount,
 } from "../store/player/player.slice";
 import { useAppDispatch, useAppSelector } from "../utils/hooks";
 
@@ -23,6 +27,8 @@ export default function Main() {
   const playerEvents = useAppSelector(selectPlayerEvents);
   const playerEventAction = useAppSelector(selectPlayerEventAction);
   const money = useAppSelector(selectMoney);
+  const coatSpace = useAppSelector(selectCoatSpace);
+  const copsAmount = useAppSelector(selectCopsAmount);
 
   const handleOnKeyDown = (event: KeyboardEvent) => {
     if (event.key === "b") dispatch(updateStage(GameStage.BUY));
@@ -40,22 +46,66 @@ export default function Main() {
 
   const coatPrice = randomInteger(150, 250);
 
-  const handleOnKeyDownEventAction = (event: KeyboardEvent) => {
+  const handleOnKeyDownEventAction_Coat = (event: KeyboardEvent) => {
     if (event.key === "y") {
-      dispatch(upgradeCoat(coatPrice));
-      dispatch(
-        addPlayerEvent(`** You bought more trench pockets for $${coatPrice} **`)
-      );
+      const canBuy = coatPrice < money;
+      if (canBuy) {
+        dispatch(upgradeCoat(coatPrice));
+        dispatch(
+          addPlayerEvent(
+            `** You bought more trench pockets for $${coatPrice} **`
+          )
+        );
+      } else {
+        dispatch(addPlayerEvent("You don't have enough money to buy a coat!"));
+      }
       dispatch(removePlayerEventAction());
     }
     if (event.key === "n") dispatch(removePlayerEventAction());
   };
 
+  const gunPrice = randomInteger(200, 300);
+
+  const handleOnKeyDownEventAction_Gun = (event: KeyboardEvent) => {
+    if (event.key === "y") {
+      const canBuy = gunPrice <= money && coatSpace >= 5;
+      if (canBuy) {
+        dispatch(buyGun(gunPrice));
+        dispatch(addPlayerEvent(`** You bought a gun for $${gunPrice} **`));
+      } else {
+        dispatch(
+          addPlayerEvent("You don't have enough money/coat space to buy a gun!")
+        );
+      }
+      dispatch(removePlayerEventAction());
+    }
+    if (event.key === "n") dispatch(removePlayerEventAction());
+  };
+
+  const handleOnKeyDownEventAction_CopsChase = (event: KeyboardEvent) => {
+    if (event.key === "Enter") {
+      dispatch(updateStage(GameStage.COPS_CHASE));
+      dispatch(removePlayerEventAction());
+    }
+  };
+
   return (
     <>
-      {playerEventAction === EventActions.UpgradeCoat ? (
-        <Input onKeyDown={handleOnKeyDownEventAction}>
+      {playerEventAction === EventActions.CopsChase ? (
+        <Input onKeyDown={handleOnKeyDownEventAction_CopsChase}>
+          {`Officer Hardass and ${copsAmount} of his deputies are chasing you !!!!!`}
+          <br />
+          Press ENTER to Continue
+        </Input>
+      ) : playerEventAction === EventActions.UpgradeCoat ? (
+        <Input onKeyDown={handleOnKeyDownEventAction_Coat}>
           {`** Would you like to buy 15 more pockets for more drugs? It's $${coatPrice} **`}
+          <br />
+          {`Wallet: ${money}`}
+        </Input>
+      ) : playerEventAction === EventActions.BuyGun ? (
+        <Input onKeyDown={handleOnKeyDownEventAction_Gun}>
+          {`** Would you like to buy a gun for $${gunPrice}? **`}
           <br />
           {`Wallet: ${money}`}
         </Input>

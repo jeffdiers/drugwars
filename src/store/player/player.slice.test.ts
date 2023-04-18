@@ -13,8 +13,10 @@ describe("player slice", () => {
     const expected = {
       area: "bronx",
       daysEnd: 30,
+      health: 100,
       money: 2000,
       maxTrench: 100,
+      guns: 0,
       cocaine: 0,
       heroin: 0,
       acid: 0,
@@ -22,6 +24,8 @@ describe("player slice", () => {
       speed: 0,
       ludes: 0,
       events: [],
+      eventAction: undefined,
+      cops: 0,
     };
 
     const actual = reducer(undefined, { type: undefined });

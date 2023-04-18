@@ -22,6 +22,9 @@ export enum Drugs {
 
 export enum EventActions {
   UpgradeCoat,
+  BuyGun,
+  CopsChase,
+  HealPlayer,
 }
 
 export interface BuyAndSellPayloadAction {
@@ -33,8 +36,10 @@ export interface BuyAndSellPayloadAction {
 type PlayerState = {
   readonly area: Areas;
   readonly daysEnd: number;
+  readonly health: number;
   readonly money: number;
   readonly maxTrench: number;
+  readonly guns: number;
   readonly cocaine: number;
   readonly heroin: number;
   readonly acid: number;
@@ -43,13 +48,16 @@ type PlayerState = {
   readonly ludes: number;
   readonly events: string[];
   readonly eventAction: EventActions | undefined;
+  readonly cops: number;
 };
 
 const initialState: PlayerState = {
   area: Areas.Bronx,
   daysEnd: 30,
+  health: 100,
   money: 2000,
   maxTrench: 100,
+  guns: 0,
   cocaine: 0,
   heroin: 0,
   acid: 0,
@@ -58,6 +66,7 @@ const initialState: PlayerState = {
   ludes: 0,
   events: [],
   eventAction: undefined,
+  cops: 0,
 };
 
 const playerSlice = createSlice({
@@ -106,8 +115,16 @@ const playerSlice = createSlice({
           `** You found ${amount} bags of ${drug} on the ground!! FUCK YEAH **`
         );
       }
+      // police dogs chase you for (number) blocks! you dropped some drugs!! thats a drag man!!
       if (choice === 3) {
         updateState.eventAction = EventActions.UpgradeCoat;
+      }
+      if (choice === 4) {
+        updateState.eventAction = EventActions.BuyGun;
+      }
+      if (choice === 5) {
+        updateState.cops = randomInteger(1, 4);
+        updateState.eventAction = EventActions.CopsChase;
       }
       return { ...state, ...updateState };
     },
@@ -117,6 +134,22 @@ const playerSlice = createSlice({
         maxTrench: state.maxTrench + 15,
         money: state.money - action.payload,
       };
+    },
+    buyGun(state, action: PayloadAction<number>) {
+      return {
+        ...state,
+        guns: state.guns + 1,
+        money: state.money - action.payload,
+      };
+    },
+    hitCop(state, _action: PayloadAction) {
+      return { ...state, cops: state.cops - 1 };
+    },
+    hitPlayer(state, action: PayloadAction<number>) {
+      return { ...state, health: state.health - action.payload };
+    },
+    healPlayer(state, _action: PayloadAction) {
+      return { ...state, health: 100 };
     },
     addPlayerEvent(state, action: PayloadAction<string>) {
       return { ...state, events: state.events.concat(action.payload) };
@@ -130,22 +163,32 @@ const playerSlice = createSlice({
   },
 });
 
-export const selectPlayer = (state: RootState) => state.player;
-export const selectArea = (state: RootState) => state.player.area;
-export const selectMoney = (state: RootState) => state.player.money;
-export const selectTotalInventory = (state: RootState) => {
+export const selectPlayer = (state: RootState): PlayerState => state.player;
+export const selectArea = (state: RootState): Areas => state.player.area;
+export const selectMoney = (state: RootState): number => state.player.money;
+export const selectTotalInventory = (state: RootState): number => {
   return (
     state.player.cocaine +
     state.player.heroin +
     state.player.acid +
     state.player.weed +
     state.player.speed +
-    state.player.ludes
+    state.player.ludes +
+    state.player.guns * 5
   );
 };
-export const selectPlayerEvents = (state: RootState) => state.player.events;
-export const selectPlayerEventAction = (state: RootState) =>
-  state.player.eventAction;
+export const selectCoatSpace = (state: RootState): number => {
+  return state.player.maxTrench - selectTotalInventory(state);
+};
+export const selectPlayerEvents = (state: RootState): string[] =>
+  state.player.events;
+export const selectPlayerEventAction = (
+  state: RootState
+): EventActions | undefined => state.player.eventAction;
+export const selectCopsAmount = (state: RootState): number => state.player.cops;
+export const selectPlayerHealth = (state: RootState): number =>
+  state.player.health;
+export const selectPlayerGuns = (state: RootState): number => state.player.guns;
 
 export const {
   changeArea,
@@ -155,6 +198,10 @@ export const {
   withdrawPlayer,
   rollPlayerEvents,
   upgradeCoat,
+  buyGun,
+  hitCop,
+  hitPlayer,
+  healPlayer,
   addPlayerEvent,
   removePlayerEvent,
   removePlayerEventAction,

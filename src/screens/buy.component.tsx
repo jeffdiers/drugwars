@@ -19,6 +19,8 @@ enum AskBuy {
 }
 
 export default function Buy() {
+  const dispatch = useAppDispatch();
+
   const [currentAsk, setCurrentAsk] = useState(AskBuy.ASK_SELECT);
   const [currentDrug, setCurrentDrug] = useState(Drugs.Cocaine);
   const [maxBuy, setMaxBuy] = useState(0);
@@ -27,8 +29,6 @@ export default function Buy() {
   const player = useAppSelector(selectPlayer);
   const totalInventory = useAppSelector(selectTotalInventory);
   const prices = useAppSelector(selectPrices);
-
-  const dispatch = useAppDispatch();
 
   const handleOnKeyDownSelectDrug = (event: KeyboardEvent) => {
     event.preventDefault();

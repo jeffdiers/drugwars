@@ -1,17 +1,24 @@
 import { selectSharkBalance } from "../store/shark/shark.slice";
 import { selectBankBalance } from "../store/bank/bank.slice";
 import { selectStashBalance } from "../store/stash/stash.slice";
-import { selectPlayer, Drugs } from "../store/player/player.slice";
+import {
+  selectPlayer,
+  Drugs,
+  selectTotalInventory,
+  selectCoatSpace,
+} from "../store/player/player.slice";
 import { selectPrices } from "../store/price/price.slice";
 
 import { useAppSelector } from "../utils/hooks";
 
 export default function GameStats() {
   const player = useAppSelector(selectPlayer);
+  const totalInventory = useAppSelector(selectTotalInventory);
   const prices = useAppSelector(selectPrices);
   const stash = useAppSelector(selectStashBalance);
   const sharkBalance = useAppSelector(selectSharkBalance);
   const bankBalance = useAppSelector(selectBankBalance);
+  const coatSpace = useAppSelector(selectCoatSpace);
 
   return (
     <div>
@@ -20,6 +27,8 @@ export default function GameStats() {
       <div>debt: {sharkBalance}</div>
       <div>bank: {bankBalance}</div>
       <div>money: {player.money}</div>
+      <div>trench space: {coatSpace}</div>
+      <div>guns: {player.guns}</div>
       <div>stash: </div>
       <ul>
         <li>
