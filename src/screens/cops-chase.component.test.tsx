@@ -20,7 +20,7 @@ describe("Cops Chase", () => {
 
   test("if player has guns the prompt is will you fight", () => {
     const store = setupStore();
-    store.dispatch(buyGun(0));
+    store.dispatch(buyGun());
     store.dispatch(updateStage(GameStage.COPS_CHASE));
     renderWithProviders(<App />, { store });
 
@@ -77,7 +77,7 @@ describe("Cops Chase", () => {
   test("if player fights and cops are gone you got away", () => {
     const store = setupStore();
     store.dispatch(updateStage(GameStage.COPS_CHASE));
-    store.dispatch(buyGun(0));
+    store.dispatch(buyGun());
     global.Math.random = () => 0;
     renderWithProviders(<App />, { store });
     fireEvent.keyDown(screen.getByRole("input"), { key: "f", keyCode: 13 });
@@ -92,7 +92,7 @@ describe("Cops Chase", () => {
   test("if player fights and health gets to 0 you got busted", () => {
     const store = setupStore();
     store.dispatch(updateStage(GameStage.COPS_CHASE));
-    store.dispatch(buyGun(0));
+    store.dispatch(buyGun());
     store.dispatch(hitPlayer(94));
     global.Math.random = () => 0.5;
     renderWithProviders(<App />, { store });
@@ -108,7 +108,7 @@ describe("Cops Chase", () => {
   test("if player wins fight they found money", () => {
     const store = setupStore();
     store.dispatch(updateStage(GameStage.COPS_CHASE));
-    store.dispatch(buyGun(0));
+    store.dispatch(buyGun());
     global.Math.random = () => 0;
     renderWithProviders(<App />, { store });
     fireEvent.keyDown(screen.getByRole("input"), { key: "f", keyCode: 13 });

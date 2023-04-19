@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { randomInteger } from "../../utils/helpers";
+import { playerReducers } from "./player.reducers";
 
 export enum Areas {
   Bronx = "bronx",
@@ -33,13 +33,15 @@ export interface BuyAndSellPayloadAction {
   price: number;
 }
 
-type PlayerState = {
+export type PlayerState = {
   readonly area: Areas;
   readonly daysEnd: number;
   readonly health: number;
   readonly money: number;
   readonly maxTrench: number;
+  readonly coatPrice: number;
   readonly guns: number;
+  readonly gunPrice: number;
   readonly cocaine: number;
   readonly heroin: number;
   readonly acid: number;
@@ -57,7 +59,9 @@ const initialState: PlayerState = {
   health: 100,
   money: 2000,
   maxTrench: 100,
+  coatPrice: 0,
   guns: 0,
+  gunPrice: 0,
   cocaine: 0,
   heroin: 0,
   acid: 0,
@@ -69,116 +73,25 @@ const initialState: PlayerState = {
   cops: 0,
 };
 
+export const inventoryHelper = (playerState: PlayerState) => {
+  let total = playerState.guns * 5;
+  Object.values(Drugs).forEach((drug) => (total += playerState[drug]));
+  return total;
+};
+
 const playerSlice = createSlice({
   name: "player",
   initialState,
-  reducers: {
-    changeArea(state, action: PayloadAction<Areas>) {
-      return { ...state, area: action.payload, daysEnd: state.daysEnd - 1 };
-    },
-    buy(state, action: PayloadAction<BuyAndSellPayloadAction>) {
-      const { drug, amount, price } = action.payload;
-      const totalPrice = price * amount;
-      const money = state.money - totalPrice;
-      return { ...state, money, [drug]: state[drug] + amount };
-    },
-    sell(state, action: PayloadAction<BuyAndSellPayloadAction>) {
-      const { drug, amount, price } = action.payload;
-      const totalPrice = price * amount;
-      const money = state.money + totalPrice;
-      return { ...state, money, [drug]: state[drug] - amount };
-    },
-    depositPlayer(state, action: PayloadAction<number>) {
-      return { ...state, money: state.money + action.payload };
-    },
-    withdrawPlayer(state, action: PayloadAction<number>) {
-      return { ...state, money: state.money - action.payload };
-    },
-    rollPlayerEvents(state, _action: PayloadAction) {
-      const updateState = { ...state };
-      const choice = randomInteger(1, 5);
-      if (choice === 1 && 1 === randomInteger(1, 8)) {
-        const lostMoney = state.money - Math.floor(state.money * 0.8);
-        updateState.money = updateState.money - lostMoney;
-        updateState.events = updateState.events.concat(
-          `** You got mugged!! You lost ${lostMoney} dollars!! **`
-        );
-      }
-      if (choice === 2 && 1 === randomInteger(1, 10)) {
-        const amount = randomInteger(1, 10);
-        const drug: Drugs =
-          Object.values(Drugs)[
-            randomInteger(1, Object.values(Drugs).length) - 1
-          ];
-        updateState[drug] = updateState[drug] + amount;
-        updateState.events = updateState.events.concat(
-          `** You found ${amount} bags of ${drug} on the ground!! FUCK YEAH **`
-        );
-      }
-      // police dogs chase you for (number) blocks! you dropped some drugs!! thats a drag man!!
-      if (choice === 3) {
-        updateState.eventAction = EventActions.UpgradeCoat;
-      }
-      if (choice === 4) {
-        updateState.eventAction = EventActions.BuyGun;
-      }
-      if (choice === 5) {
-        updateState.cops = randomInteger(1, 4);
-        updateState.eventAction = EventActions.CopsChase;
-      }
-      return { ...state, ...updateState };
-    },
-    upgradeCoat(state, action: PayloadAction<number>) {
-      return {
-        ...state,
-        maxTrench: state.maxTrench + 15,
-        money: state.money - action.payload,
-      };
-    },
-    buyGun(state, action: PayloadAction<number>) {
-      return {
-        ...state,
-        guns: state.guns + 1,
-        money: state.money - action.payload,
-      };
-    },
-    hitCop(state, _action: PayloadAction) {
-      return { ...state, cops: state.cops - 1 };
-    },
-    hitPlayer(state, action: PayloadAction<number>) {
-      return { ...state, health: state.health - action.payload };
-    },
-    healPlayer(state, _action: PayloadAction) {
-      return { ...state, health: 100 };
-    },
-    addPlayerEvent(state, action: PayloadAction<string>) {
-      return { ...state, events: state.events.concat(action.payload) };
-    },
-    removePlayerEvent(state, _action: PayloadAction) {
-      return { ...state, events: state.events.slice(1) };
-    },
-    removePlayerEventAction(state, _action: PayloadAction) {
-      return { ...state, eventAction: undefined };
-    },
-  },
+  reducers: playerReducers,
 });
 
 export const selectPlayer = (state: RootState): PlayerState => state.player;
 export const selectArea = (state: RootState): Areas => state.player.area;
 export const selectMoney = (state: RootState): number => state.player.money;
-export const selectTotalInventory = (state: RootState): number => {
-  return (
-    state.player.cocaine +
-    state.player.heroin +
-    state.player.acid +
-    state.player.weed +
-    state.player.speed +
-    state.player.ludes +
-    state.player.guns * 5
-  );
-};
+export const selectTotalInventory = (state: RootState): number =>
+  inventoryHelper(state.player);
 export const selectCoatSpace = (state: RootState): number => {
-  return state.player.maxTrench - selectTotalInventory(state);
+  return state.player.maxTrench - inventoryHelper(state.player);
 };
 export const selectPlayerEvents = (state: RootState): string[] =>
   state.player.events;
@@ -189,6 +102,10 @@ export const selectCopsAmount = (state: RootState): number => state.player.cops;
 export const selectPlayerHealth = (state: RootState): number =>
   state.player.health;
 export const selectPlayerGuns = (state: RootState): number => state.player.guns;
+export const selectGunPrice = (state: RootState): number =>
+  state.player.gunPrice;
+export const selectCoatPrice = (state: RootState): number =>
+  state.player.coatPrice;
 
 export const {
   changeArea,
