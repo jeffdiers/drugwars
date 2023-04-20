@@ -25,6 +25,7 @@ export enum EventActions {
   BuyGun,
   CopsChase,
   HealPlayer,
+  AskHeal,
 }
 
 export interface BuyAndSellPayloadAction {
@@ -39,9 +40,7 @@ export type PlayerState = {
   readonly health: number;
   readonly money: number;
   readonly maxTrench: number;
-  readonly coatPrice: number;
   readonly guns: number;
-  readonly gunPrice: number;
   readonly cocaine: number;
   readonly heroin: number;
   readonly acid: number;
@@ -59,9 +58,7 @@ const initialState: PlayerState = {
   health: 100,
   money: 2000,
   maxTrench: 100,
-  coatPrice: 0,
   guns: 0,
-  gunPrice: 0,
   cocaine: 0,
   heroin: 0,
   acid: 0,
@@ -102,10 +99,12 @@ export const selectCopsAmount = (state: RootState): number => state.player.cops;
 export const selectPlayerHealth = (state: RootState): number =>
   state.player.health;
 export const selectPlayerGuns = (state: RootState): number => state.player.guns;
-export const selectGunPrice = (state: RootState): number =>
-  state.player.gunPrice;
-export const selectCoatPrice = (state: RootState): number =>
-  state.player.coatPrice;
+export const selectCanBuyGun = (state: RootState): boolean => {
+  const coatSpace = state.player.maxTrench - inventoryHelper(state.player);
+  const canBuyGun = state.price.gun <= state.player.money && coatSpace >= 5;
+  return canBuyGun;
+};
+export const selectCops = (state: RootState): number => state.player.cops;
 
 export const {
   changeArea,
@@ -122,6 +121,7 @@ export const {
   addPlayerEvent,
   removePlayerEvent,
   removePlayerEventAction,
+  askHealPlayer,
 } = playerSlice.actions;
 
 export default playerSlice.reducer;

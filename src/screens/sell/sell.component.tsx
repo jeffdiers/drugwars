@@ -1,12 +1,11 @@
-import { KeyboardEvent, useEffect, useState } from "react";
-import { GameStage, updateStage } from "../store/main/main.slice";
-import { selectPrices } from "../store/price/price.slice";
-import { Drugs, selectPlayer, sell } from "../store/player/player.slice";
-import { useAppDispatch, useAppSelector } from "../utils/hooks";
-import { getDrugByKey } from "../utils/helpers";
+import { useEffect, useState } from "react";
+import { GameStage, updateStage } from "../../store/main/main.slice";
+import { selectPrices } from "../../store/price/price.slice";
+import { Drugs, selectPlayer, sell } from "../../store/player/player.slice";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
-import Input from "../components/input.component";
-import SubmitInput from "../components/input-submit.component";
+import InputAmount from "../../components/input-amount.component";
+import InputSelectDrug from "../../components/input-select-drug.component";
 
 enum AskSell {
   ASK_SELECT,
@@ -23,21 +22,6 @@ export default function Sell() {
   const prices = useAppSelector(selectPrices);
 
   const dispatch = useAppDispatch();
-
-  const handleOnKeyDownSelectDrug = (event: KeyboardEvent) => {
-    event.preventDefault();
-
-    const drugKey = getDrugByKey(event.key);
-    if (event.key === "x") {
-      dispatch(updateStage(GameStage.MAIN));
-    } else if (!drugKey) {
-      setInfo("Enter the first letter of a drug to choose! Or x to exit");
-    } else {
-      setInfo("");
-      setCurrentDrug(drugKey);
-      setCurrentAsk(AskSell.ASK_SELL);
-    }
-  };
 
   const handleValueSell = (value: string) => {
     const amount = Number(value);
@@ -62,12 +46,16 @@ export default function Sell() {
   return (
     <>
       {currentAsk === AskSell.ASK_SELECT && (
-        <Input onKeyDown={handleOnKeyDownSelectDrug}>
-          What would you like to sell?
-        </Input>
+        <InputSelectDrug
+          text="What would you like to sell?"
+          onSelect={(drugKey) => {
+            setCurrentDrug(drugKey);
+            setCurrentAsk(AskSell.ASK_SELL);
+          }}
+        />
       )}
       {currentAsk === AskSell.ASK_SELL && (
-        <SubmitInput
+        <InputAmount
           name={currentDrug}
           labelText={`How much ${currentDrug} would you like to sell? Max Allowed: ${maxSell}`}
           handleValue={handleValueSell}

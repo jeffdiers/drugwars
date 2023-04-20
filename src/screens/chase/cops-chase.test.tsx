@@ -1,9 +1,9 @@
 import { fireEvent, screen } from "@testing-library/react";
-import { renderWithProviders } from "../utils/test-utils";
-import App from "../app.component";
-import { setupStore } from "../store/store";
-import { GameStage, updateStage } from "../store/main/main.slice";
-import { buyGun, hitPlayer } from "../store/player/player.slice";
+import { renderWithProviders } from "../../utils/test-utils";
+import App from "../../app.component";
+import { setupStore } from "../../store/store";
+import { GameStage, updateStage } from "../../store/main/main.slice";
+import { buyGun, hitPlayer } from "../../store/player/player.slice";
 
 describe("Cops Chase", () => {
   test("if player has no guns the prompt is Will you run?", () => {
@@ -20,7 +20,7 @@ describe("Cops Chase", () => {
 
   test("if player has guns the prompt is will you fight", () => {
     const store = setupStore();
-    store.dispatch(buyGun());
+    store.dispatch(buyGun(0));
     store.dispatch(updateStage(GameStage.COPS_CHASE));
     renderWithProviders(<App />, { store });
 
@@ -36,7 +36,7 @@ describe("Cops Chase", () => {
     store.dispatch(updateStage(GameStage.COPS_CHASE));
     global.Math.random = () => 0.5;
     renderWithProviders(<App />, { store });
-    fireEvent.keyDown(screen.getByRole("input"), { key: "r", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("button"), { key: "r", keyCode: 13 });
 
     const expected = /You got away/i;
 
@@ -51,7 +51,7 @@ describe("Cops Chase", () => {
     store.dispatch(hitPlayer(97));
     global.Math.random = () => 0;
     renderWithProviders(<App />, { store });
-    fireEvent.keyDown(screen.getByRole("input"), { key: "r", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("button"), { key: "r", keyCode: 13 });
 
     const expected = /Game over/i;
 
@@ -65,7 +65,7 @@ describe("Cops Chase", () => {
     store.dispatch(updateStage(GameStage.COPS_CHASE));
     global.Math.random = () => 0;
     renderWithProviders(<App />, { store });
-    fireEvent.keyDown(screen.getByRole("input"), { key: "f", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("button"), { key: "f", keyCode: 13 });
 
     const expected = "Will you run?";
 
@@ -77,10 +77,10 @@ describe("Cops Chase", () => {
   test("if player fights and cops are gone you got away", () => {
     const store = setupStore();
     store.dispatch(updateStage(GameStage.COPS_CHASE));
-    store.dispatch(buyGun());
+    store.dispatch(buyGun(0));
     global.Math.random = () => 0;
     renderWithProviders(<App />, { store });
-    fireEvent.keyDown(screen.getByRole("input"), { key: "f", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("button"), { key: "f", keyCode: 13 });
 
     const expected = /You got away/i;
 
@@ -92,11 +92,11 @@ describe("Cops Chase", () => {
   test("if player fights and health gets to 0 you got busted", () => {
     const store = setupStore();
     store.dispatch(updateStage(GameStage.COPS_CHASE));
-    store.dispatch(buyGun());
+    store.dispatch(buyGun(0));
     store.dispatch(hitPlayer(94));
     global.Math.random = () => 0.5;
     renderWithProviders(<App />, { store });
-    fireEvent.keyDown(screen.getByRole("input"), { key: "f", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("button"), { key: "f", keyCode: 13 });
 
     const expected = /Game over/i;
 
@@ -105,15 +105,15 @@ describe("Cops Chase", () => {
     expect(actual).toBeInTheDocument();
   });
 
-  test("if player wins fight they found money", () => {
+  test("if player wins fight they got away", () => {
     const store = setupStore();
     store.dispatch(updateStage(GameStage.COPS_CHASE));
-    store.dispatch(buyGun());
+    store.dispatch(buyGun(0));
     global.Math.random = () => 0;
     renderWithProviders(<App />, { store });
-    fireEvent.keyDown(screen.getByRole("input"), { key: "f", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("button"), { key: "f", keyCode: 13 });
 
-    const expected = /You found /i;
+    const expected = /You got away/i;
 
     const actual = screen.getByText(expected);
 

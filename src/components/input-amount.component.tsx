@@ -1,12 +1,12 @@
 import { FC, FormEvent } from "react";
 
-type SubmitInputProps = {
+type InputAmountProps = {
   name: string;
   labelText: string;
   handleValue: Function;
 };
 
-const SubmitInput: FC<SubmitInputProps> = ({
+const InputAmount: FC<InputAmountProps> = ({
   name,
   labelText,
   handleValue,
@@ -32,4 +32,4 @@ const SubmitInput: FC<SubmitInputProps> = ({
   );
 };
 
-export default SubmitInput;
+export default InputAmount;

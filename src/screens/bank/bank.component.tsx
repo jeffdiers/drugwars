@@ -1,19 +1,19 @@
 import { KeyboardEvent, useState } from "react";
-import { GameStage, updateStage } from "../store/main/main.slice";
+import { GameStage, updateStage } from "../../store/main/main.slice";
 import {
   depositBank,
   withdrawBank,
   selectBankBalance,
-} from "../store/bank/bank.slice";
+} from "../../store/bank/bank.slice";
 import {
   depositPlayer,
   withdrawPlayer,
   selectMoney,
-} from "../store/player/player.slice";
-import { useAppDispatch, useAppSelector } from "../utils/hooks";
+} from "../../store/player/player.slice";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
-import Input from "../components/input.component";
-import SubmitInput from "../components/input-submit.component";
+import InputYesNo from "../../components/input-yes-no.component";
+import InputAmount from "../../components/input-amount.component";
 
 export enum CurrentAsk {
   ASK_VISIT,
@@ -29,13 +29,6 @@ export default function Shark() {
   const money = useAppSelector(selectMoney);
 
   const dispatch = useAppDispatch();
-
-  const handleOnKeyDown = (event: KeyboardEvent) => {
-    event.preventDefault();
-
-    if (event.key === "y") setCurrentAsk(CurrentAsk.ASK_DEPOSIT);
-    if (event.key === "n") dispatch(updateStage(GameStage.STASH));
-  };
 
   const handleValueDeposit = (value: string) => {
     const amount = Number(value);
@@ -68,19 +61,21 @@ export default function Shark() {
   return (
     <>
       {currentAsk === CurrentAsk.ASK_VISIT && (
-        <Input onKeyDown={handleOnKeyDown}>
-          Would you like to visit the bank?
-        </Input>
+        <InputYesNo
+          text="Would you like to visit the bank?"
+          onYes={() => setCurrentAsk(CurrentAsk.ASK_DEPOSIT)}
+          onNo={() => dispatch(updateStage(GameStage.STASH))}
+        />
       )}
       {currentAsk === CurrentAsk.ASK_DEPOSIT && (
-        <SubmitInput
+        <InputAmount
           name="amount"
           labelText={`How much would you like to deposit? Bank: ${bankBalance} | Wallet: ${money}`}
           handleValue={handleValueDeposit}
         />
       )}
       {currentAsk === CurrentAsk.ASK_WITHDRAW && (
-        <SubmitInput
+        <InputAmount
           name="amount"
           labelText={`How much would you like to withdraw? Bank: ${bankBalance} | Wallet: ${money}`}
           handleValue={handleValueWithdraw}

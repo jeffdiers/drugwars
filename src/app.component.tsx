@@ -1,16 +1,16 @@
 import { GameStage, selectStage } from "./store/main/main.slice";
 import { useAppSelector } from "./utils/hooks";
 
-import Start from "./screens/start.component";
-import Shark from "./screens/shark.component";
-import Bank from "./screens/bank.component";
-import Stash from "./screens/stash.component";
-import Main from "./screens/main.component";
-import Buy from "./screens/buy.component";
-import Sell from "./screens/sell.component";
-import Jet from "./screens/jet.component";
-import CopsChase from "./screens/cops-chase.component";
-import GameOver from "./screens/game-over.component";
+import Start from "./screens/start/start.component";
+import Shark from "./screens/shark/shark.component";
+import Bank from "./screens/bank/bank.component";
+import Stash from "./screens/stash/stash.component";
+import Main from "./screens/main/main.component";
+import Buy from "./screens/buy/buy.component";
+import Sell from "./screens/sell/sell.component";
+import Jet from "./screens/jet/jet.component";
+import CopsChase from "./screens/chase/cops-chase.component";
+import GameOver from "./screens/end/game-over.component";
 
 import GameStats from "./components/game-stats.component";
 

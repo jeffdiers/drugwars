@@ -9,6 +9,9 @@ type PriceState = {
   readonly weed: number;
   readonly speed: number;
   readonly ludes: number;
+  readonly coat: number;
+  readonly gun: number;
+  readonly heal: number;
   readonly events: string[];
 };
 
@@ -19,6 +22,9 @@ const initialState: PriceState = {
   weed: randomInteger(300, 899),
   speed: randomInteger(90, 249),
   ludes: randomInteger(10, 89),
+  coat: randomInteger(150, 250),
+  gun: randomInteger(200, 400),
+  heal: randomInteger(1000, 3000),
   events: [],
 };
 
@@ -35,6 +41,9 @@ const priceSlice = createSlice({
         weed: randomInteger(300, 899),
         speed: randomInteger(90, 249),
         ludes: randomInteger(10, 89),
+        coat: randomInteger(150, 250),
+        gun: randomInteger(200, 400),
+        heal: randomInteger(1000, 3000),
       };
     },
     rollEvents(state, _action: PayloadAction) {
@@ -101,7 +110,7 @@ const priceSlice = createSlice({
       }
       return { ...state, ...updateState };
     },
-    removeEvent(state, _action: PayloadAction) {
+    removePriceEvent(state, _action: PayloadAction) {
       return { ...state, events: state.events.slice(1) };
     },
   },
@@ -110,6 +119,6 @@ const priceSlice = createSlice({
 export const selectPrices = (state: RootState) => state.price;
 export const selectPriceEvents = (state: RootState) => state.price.events;
 
-export const { setPrices, rollEvents, removeEvent } = priceSlice.actions;
+export const { setPrices, rollEvents, removePriceEvent } = priceSlice.actions;
 
 export default priceSlice.reducer;

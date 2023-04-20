@@ -10,7 +10,7 @@ describe("main component", () => {
   test("render with default state", () => {
     renderWithProviders(<App />);
 
-    const expected = /Press ENTER to Play/i;
+    const expected = /New game/i;
 
     const actual = screen.getByText(expected);
 
@@ -33,7 +33,7 @@ describe("main component", () => {
 
   test("render shark with Enter key press from start", () => {
     renderWithProviders(<App />);
-    const element = screen.getByRole("input");
+    const element = screen.getByRole("button");
 
     const expected = /Would you like to visit the loan shark/i;
 
@@ -49,8 +49,11 @@ describe("main component", () => {
 
     const expected = /Would you like to visit the bank/i;
 
-    fireEvent.keyDown(screen.getByRole("input"), { key: "Enter", keyCode: 13 });
-    fireEvent.keyDown(screen.getByRole("input"), { key: "n", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("button"), {
+      key: "Enter",
+      keyCode: 13,
+    });
+    fireEvent.keyDown(screen.getByRole("button"), { key: "n", keyCode: 13 });
 
     const actual = screen.getByText(expected);
 
@@ -62,9 +65,12 @@ describe("main component", () => {
 
     const expected = /Would you like to stash any drugs/i;
 
-    fireEvent.keyDown(screen.getByRole("input"), { key: "Enter", keyCode: 13 });
-    fireEvent.keyDown(screen.getByRole("input"), { key: "n", keyCode: 13 });
-    fireEvent.keyDown(screen.getByRole("input"), { key: "n", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("button"), {
+      key: "Enter",
+      keyCode: 13,
+    });
+    fireEvent.keyDown(screen.getByRole("button"), { key: "n", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("button"), { key: "n", keyCode: 13 });
 
     const actual = screen.getByText(expected);
 
@@ -76,10 +82,13 @@ describe("main component", () => {
 
     const expected = /Are you going to/i;
 
-    fireEvent.keyDown(screen.getByRole("input"), { key: "Enter", keyCode: 13 });
-    fireEvent.keyDown(screen.getByRole("input"), { key: "n", keyCode: 13 });
-    fireEvent.keyDown(screen.getByRole("input"), { key: "n", keyCode: 13 });
-    fireEvent.keyDown(screen.getByRole("input"), { key: "n", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("button"), {
+      key: "Enter",
+      keyCode: 13,
+    });
+    fireEvent.keyDown(screen.getByRole("button"), { key: "n", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("button"), { key: "n", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("button"), { key: "n", keyCode: 13 });
 
     const actual = screen.getByText(expected);
 
@@ -91,8 +100,11 @@ describe("main component", () => {
 
     const expected = /How much would you like to repay/i;
 
-    fireEvent.keyDown(screen.getByRole("input"), { key: "Enter", keyCode: 13 });
-    fireEvent.keyDown(screen.getByRole("input"), { key: "y", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("button"), {
+      key: "Enter",
+      keyCode: 13,
+    });
+    fireEvent.keyDown(screen.getByRole("button"), { key: "y", keyCode: 13 });
 
     const actual = screen.getByText(expected);
 
@@ -104,9 +116,12 @@ describe("main component", () => {
 
     const expected = /How much would you like to deposit/i;
 
-    fireEvent.keyDown(screen.getByRole("input"), { key: "Enter", keyCode: 13 });
-    fireEvent.keyDown(screen.getByRole("input"), { key: "n", keyCode: 13 });
-    fireEvent.keyDown(screen.getByRole("input"), { key: "y", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("button"), {
+      key: "Enter",
+      keyCode: 13,
+    });
+    fireEvent.keyDown(screen.getByRole("button"), { key: "n", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("button"), { key: "y", keyCode: 13 });
 
     const actual = screen.getByText(expected);
 
@@ -118,10 +133,13 @@ describe("main component", () => {
 
     const expected = /Which drug do you want to stash/i;
 
-    fireEvent.keyDown(screen.getByRole("input"), { key: "Enter", keyCode: 13 });
-    fireEvent.keyDown(screen.getByRole("input"), { key: "n", keyCode: 13 });
-    fireEvent.keyDown(screen.getByRole("input"), { key: "n", keyCode: 13 });
-    fireEvent.keyDown(screen.getByRole("input"), { key: "y", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("button"), {
+      key: "Enter",
+      keyCode: 13,
+    });
+    fireEvent.keyDown(screen.getByRole("button"), { key: "n", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("button"), { key: "n", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("button"), { key: "y", keyCode: 13 });
 
     const actual = screen.getByText(expected);
 
@@ -140,7 +158,7 @@ describe("main component", () => {
 
       store.dispatch(action);
       renderWithProviders(<App />, { store });
-      const element = screen.getByRole("input");
+      const element = screen.getByRole("button");
 
       fireEvent.keyDown(element, { key: input, keyCode: 66 });
 
@@ -166,7 +184,7 @@ describe("main component", () => {
 
         store.dispatch(action);
         renderWithProviders(<App />, { store });
-        const element = screen.getByRole("input");
+        const element = screen.getByRole("button");
 
         fireEvent.keyDown(element, { key: input, keyCode: 66 });
 
@@ -193,7 +211,7 @@ describe("main component", () => {
 
         store.dispatch(action);
         renderWithProviders(<App />, { store });
-        const element = screen.getByRole("input");
+        const element = screen.getByRole("button");
 
         fireEvent.keyDown(element, { key: input, keyCode: 66 });
 
@@ -215,7 +233,7 @@ describe("main component", () => {
 
         store.dispatch(action);
         renderWithProviders(<App />, { store });
-        const element = screen.getByRole("input");
+        const element = screen.getByRole("button");
 
         fireEvent.keyDown(element, { key: input, keyCode: 66 });
 

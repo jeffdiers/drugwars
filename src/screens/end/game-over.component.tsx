@@ -1,7 +1,7 @@
-import { selectPlayerHealth } from "../store/player/player.slice";
-import { selectProfit, selectDealerRank } from "../store/main/main.slice";
-import { useAppSelector } from "../utils/hooks";
-import { selectSharkBalance } from "../store/shark/shark.slice";
+import { selectPlayerHealth } from "../../store/player/player.slice";
+import { selectProfit, selectDealerRank } from "../../store/main/main.slice";
+import { useAppSelector } from "../../utils/hooks";
+import { selectSharkBalance } from "../../store/shark/shark.slice";
 
 export default function GameOver() {
   const health = useAppSelector(selectPlayerHealth);

@@ -1,6 +1,6 @@
 import {
   FC,
-  KeyboardEventHandler,
+  KeyboardEvent,
   useEffect,
   useRef,
   ReactElement,
@@ -9,18 +9,23 @@ import {
 
 type InputProps = {
   children: ReactElement | string | ReactNode;
-  onKeyDown: KeyboardEventHandler<HTMLDivElement>;
+  onKeyDown: (key: string) => void;
 };
 
 const Input: FC<InputProps> = ({ children, onKeyDown }) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleOnKeyDown = (event: KeyboardEvent) => {
+    event.preventDefault();
+    onKeyDown(event.key);
+  };
 
   useEffect(() => {
     inputRef.current?.focus();
   });
 
   return (
-    <div ref={inputRef} role="input" tabIndex={0} onKeyDown={onKeyDown}>
+    <div ref={inputRef} role="button" tabIndex={0} onKeyDown={handleOnKeyDown}>
       {children}
     </div>
   );

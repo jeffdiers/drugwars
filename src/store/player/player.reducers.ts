@@ -5,7 +5,6 @@ import {
   Drugs,
   EventActions,
   BuyAndSellPayloadAction,
-  inventoryHelper,
 } from "./player.slice";
 import { randomInteger } from "../../utils/helpers";
 
@@ -78,37 +77,10 @@ export const playerReducers = {
         break;
 
       case 4 || 5:
-        const coatPrice = randomInteger(150, 250);
-        const canBuyCoat = coatPrice <= state.money;
-        if (canBuyCoat) {
-          return {
-            ...state,
-            coatPrice,
-            events: state.events.concat(
-              `** Would you like to buy 15 more pockets for more drugs? It's $${coatPrice} **`
-            ),
-            eventAction: EventActions.UpgradeCoat,
-          };
-        }
-
-        break;
+        return { ...state, eventAction: EventActions.UpgradeCoat };
 
       case 6 || 7:
-        const gunPrice = randomInteger(200, 400);
-        const coatSpace = state.maxTrench - inventoryHelper(state);
-        const canBuyGun = gunPrice <= state.money && coatSpace >= 5;
-        if (canBuyGun) {
-          return {
-            ...state,
-            gunPrice,
-            events: state.events.concat(
-              `** Would you like to buy a gun for $${gunPrice}? **`
-            ),
-            eventAction: EventActions.BuyGun,
-          };
-        }
-
-        break;
+        return { ...state, eventAction: EventActions.BuyGun };
 
       case 8 || 9:
         return {
@@ -121,26 +93,32 @@ export const playerReducers = {
         return state;
     }
   },
-  upgradeCoat(state: PlayerState, _action: PayloadAction) {
+  upgradeCoat(state: PlayerState, action: PayloadAction<number>) {
     return {
       ...state,
       maxTrench: state.maxTrench + 15,
-      money: state.money - state.coatPrice,
-      events: state.events
-        .slice(1)
-        .concat(`** You bought more trench pockets for $${state.coatPrice} **`),
-      eventAction: undefined,
+      money: state.money - action.payload,
+      events: state.events.concat(
+        `** You bought more trench pockets for $${action.payload} **`
+      ),
     };
   },
-  buyGun(state: PlayerState, _action: PayloadAction) {
+  buyGun(state: PlayerState, action: PayloadAction<number>) {
     return {
       ...state,
       guns: state.guns + 1,
-      money: state.money - state.gunPrice,
-      events: state.events
-        .slice(1)
-        .concat(`** You bought a gun for $${state.gunPrice} **`),
-      eventAction: undefined,
+      money: state.money - action.payload,
+      events: state.events.concat(
+        `** You bought a gun for $${action.payload} **`
+      ),
+    };
+  },
+  healPlayer(state: PlayerState, action: PayloadAction<number>) {
+    return {
+      ...state,
+      health: 100,
+      money: state.money - action.payload,
+      events: state.events.concat(`** You're back to full health! **`),
     };
   },
   hitCop(state: PlayerState, _action: PayloadAction) {
@@ -149,9 +127,6 @@ export const playerReducers = {
   hitPlayer(state: PlayerState, action: PayloadAction<number>) {
     return { ...state, health: state.health - action.payload };
   },
-  healPlayer(state: PlayerState, _action: PayloadAction) {
-    return { ...state, health: 100 };
-  },
   addPlayerEvent(state: PlayerState, action: PayloadAction<string>) {
     return { ...state, events: state.events.concat(action.payload) };
   },
@@ -159,6 +134,9 @@ export const playerReducers = {
     return { ...state, events: state.events.slice(1) };
   },
   removePlayerEventAction(state: PlayerState, _action: PayloadAction) {
-    return { ...state, eventAction: undefined, events: state.events.slice(1) };
+    return { ...state, eventAction: undefined };
+  },
+  askHealPlayer(state: PlayerState, _action: PayloadAction) {
+    return { ...state, eventAction: EventActions.AskHeal };
   },
 };

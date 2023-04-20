@@ -1,16 +1,21 @@
-import { KeyboardEvent, useState } from "react";
-import { GameStage, updateStage } from "../store/main/main.slice";
+import { useState } from "react";
+import { GameStage, updateStage } from "../../store/main/main.slice";
 import {
   depositStash,
   withdrawStash,
   selectStashBalance,
-} from "../store/stash/stash.slice";
-import { buy, sell, selectPlayer, Drugs } from "../store/player/player.slice";
-import { useAppDispatch, useAppSelector } from "../utils/hooks";
-import { getDrugByKey } from "../utils/helpers";
+} from "../../store/stash/stash.slice";
+import {
+  buy,
+  sell,
+  selectPlayer,
+  Drugs,
+} from "../../store/player/player.slice";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
-import Input from "../components/input.component";
-import SubmitInput from "../components/input-submit.component";
+import InputYesNo from "../../components/input-yes-no.component";
+import InputAmount from "../../components/input-amount.component";
+import InputSelectDrug from "../../components/input-select-drug.component";
 
 export enum CurrentAsk {
   ASK_VISIT,
@@ -28,28 +33,6 @@ export default function Shark() {
   const player = useAppSelector(selectPlayer);
 
   const dispatch = useAppDispatch();
-
-  const handleOnKeyDown = (event: KeyboardEvent) => {
-    event.preventDefault();
-
-    if (event.key === "y") setCurrentAsk(CurrentAsk.ASK_SELECT_DRUG);
-    if (event.key === "n") dispatch(updateStage(GameStage.MAIN));
-  };
-
-  const handleOnKeyDownSelectDrug = (event: KeyboardEvent) => {
-    event.preventDefault();
-
-    const drugKey = getDrugByKey(event.key);
-    if (event.key === "x") {
-      dispatch(updateStage(GameStage.MAIN));
-    } else if (!drugKey) {
-      setInfo("Enter the first letter of a drug to choose! Or x to exit");
-    } else {
-      setInfo("");
-      setCurrentDrug(drugKey);
-      setCurrentAsk(CurrentAsk.ASK_DEPOSIT);
-    }
-  };
 
   const handleValueDeposit = (value: string) => {
     const amount = Number(value);
@@ -82,24 +65,30 @@ export default function Shark() {
   return (
     <>
       {currentAsk === CurrentAsk.ASK_VISIT && (
-        <Input onKeyDown={handleOnKeyDown}>
-          Would you like to stash any drugs?
-        </Input>
+        <InputYesNo
+          text="Would you like to stash any drugs?"
+          onYes={() => setCurrentAsk(CurrentAsk.ASK_SELECT_DRUG)}
+          onNo={() => dispatch(updateStage(GameStage.MAIN))}
+        />
       )}
       {currentAsk === CurrentAsk.ASK_SELECT_DRUG && (
-        <Input onKeyDown={handleOnKeyDownSelectDrug}>
-          Which drug do you want to stash?
-        </Input>
+        <InputSelectDrug
+          text="Which drug do you want to stash?"
+          onSelect={(drugKey) => {
+            setCurrentDrug(drugKey);
+            setCurrentAsk(CurrentAsk.ASK_DEPOSIT);
+          }}
+        />
       )}
       {currentAsk === CurrentAsk.ASK_DEPOSIT && (
-        <SubmitInput
+        <InputAmount
           name={currentDrug}
           labelText={`How much ${currentDrug} would you like to deposit? Stash: ${stash[currentDrug]} | Coat: ${player[currentDrug]}`}
           handleValue={handleValueDeposit}
         />
       )}
       {currentAsk === CurrentAsk.ASK_WITHDRAW && (
-        <SubmitInput
+        <InputAmount
           name={currentDrug}
           labelText={`How much ${currentDrug} would you like to take out? Stash: ${stash[currentDrug]} | Coat: ${player[currentDrug]}`}
           handleValue={handleValueWithdraw}

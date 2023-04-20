@@ -26,9 +26,7 @@ describe("player slice", () => {
       health: 100,
       money: 2000,
       maxTrench: 100,
-      coatPrice: 0,
       guns: 0,
-      gunPrice: 0,
       cocaine: 0,
       heroin: 0,
       acid: 0,
@@ -181,11 +179,7 @@ describe("player slice", () => {
       const { state, action } = setupRollPlayerEvents(0.3);
       const expected = {
         ...state,
-        coatPrice: 180,
         eventAction: EventActions.UpgradeCoat,
-        events: [
-          "** Would you like to buy 15 more pockets for more drugs? It's $180 **",
-        ],
       };
 
       const actual = reducer(state, action);
@@ -197,9 +191,7 @@ describe("player slice", () => {
       const { state, action } = setupRollPlayerEvents(0.45);
       const expected = {
         ...state,
-        gunPrice: 290,
         eventAction: EventActions.BuyGun,
-        events: ["** Would you like to buy a gun for $290? **"],
       };
 
       const actual = reducer(state, action);
