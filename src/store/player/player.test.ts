@@ -4,7 +4,6 @@ import reducer, {
   changeArea,
   buy,
   sell,
-  selectTotalInventory,
   rollPlayerEvents,
   EventActions,
 } from "./player.slice";
@@ -92,15 +91,6 @@ describe("player slice", () => {
     const actual = reducer(actual1, action2);
 
     expect(actual).toEqual(expected);
-  });
-
-  test("can select total inventory", () => {
-    const state = setupStore().getState();
-    const expected = 0;
-
-    const actual = selectTotalInventory(state);
-
-    expect(actual).toBe(expected);
   });
 
   describe("test random number with global Math.random set", () => {

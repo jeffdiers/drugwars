@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { GameStage, updateStage } from "../../store/main/main.slice";
 import { selectPrices } from "../../store/price/price.slice";
-import { Drugs, selectPlayer, sell } from "../../store/player/player.slice";
+import { Drugs, sell } from "../../store/player/player.slice";
+import { selectPlayerInventory } from "../../store/player/player.selectors";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
 import InputAmount from "../../components/action/input-amount.component";
@@ -18,8 +19,9 @@ export default function Sell() {
   const [maxSell, setMaxSell] = useState(0);
   const [info, setInfo] = useState("");
 
-  const player = useAppSelector(selectPlayer);
   const prices = useAppSelector(selectPrices);
+
+  const playerInventory = useAppSelector(selectPlayerInventory);
 
   const dispatch = useAppDispatch();
 
@@ -39,9 +41,9 @@ export default function Sell() {
   };
 
   useEffect(() => {
-    const max = player[currentDrug];
+    const max = playerInventory[currentDrug];
     setMaxSell(max);
-  }, [currentDrug, player]);
+  }, [currentDrug, playerInventory]);
 
   return (
     <>

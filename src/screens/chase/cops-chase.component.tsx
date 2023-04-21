@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
 import {
-  selectPlayerHealth,
-  selectCopsAmount,
-  selectPlayerGuns,
   hitCop,
   hitPlayer,
   addPlayerEvent,
@@ -10,6 +7,11 @@ import {
   removePlayerEventAction,
   askHealPlayer,
 } from "../../store/player/player.slice";
+import {
+  selectPlayerCops,
+  selectPlayerHealth,
+  selectPlayerGuns,
+} from "../../store/player/player.selectors";
 import { GameStage, updateStage } from "../../store/main/main.slice";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { randomInteger } from "../../utils/helpers";
@@ -23,9 +25,9 @@ export default function CopsChase() {
   const [gotAway, setGotaway] = useState(false);
   const [winByFight, setWinByFight] = useState(false);
 
-  const health = useAppSelector(selectPlayerHealth);
-  const cops = useAppSelector(selectCopsAmount) + 1;
-  const guns = useAppSelector(selectPlayerGuns);
+  const playerCops = useAppSelector(selectPlayerCops);
+  const playerHealth = useAppSelector(selectPlayerHealth);
+  const playerGuns = useAppSelector(selectPlayerGuns);
 
   const run = () => {
     setWinByFight(false);
@@ -38,7 +40,7 @@ export default function CopsChase() {
   };
 
   const rollsPerGun = () => {
-    let rolls = guns;
+    let rolls = playerGuns;
     while (rolls > 0) {
       if (1 === randomInteger(1, 6)) return true;
       rolls--;
@@ -68,8 +70,8 @@ export default function CopsChase() {
   };
 
   useEffect(() => {
-    if (cops <= 0) setGotaway(true);
-  }, [cops]);
+    if (playerCops <= 0) setGotaway(true);
+  }, [playerCops]);
 
   return (
     <>
@@ -77,10 +79,10 @@ export default function CopsChase() {
         <Continue text="You got away!" onContinue={handleGotAway} />
       ) : (
         <div>
-          <div>Health: {health}</div>
-          <div>Cops: {cops}</div>
-          <div>Guns: {guns}</div>
-          <RunFight onFight={fight} onRun={run} canFight={guns > 0} />
+          <div>Health: {playerHealth}</div>
+          <div>Cops: {playerCops}</div>
+          <div>Guns: {playerGuns}</div>
+          <RunFight onFight={fight} onRun={run} canFight={playerGuns > 0} />
         </div>
       )}
     </>

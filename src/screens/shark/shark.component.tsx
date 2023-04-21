@@ -5,11 +5,8 @@ import {
   withdrawShark,
   selectSharkBalance,
 } from "../../store/shark/shark.slice";
-import {
-  depositPlayer,
-  withdrawPlayer,
-  selectMoney,
-} from "../../store/player/player.slice";
+import { depositPlayer, withdrawPlayer } from "../../store/player/player.slice";
+import { selectPlayerMoney } from "../../store/player/player.selectors";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
 import YesNo from "../../components/action/yes-no.component";
@@ -26,7 +23,8 @@ export default function Shark() {
   const [info, setInfo] = useState("");
 
   const debt = useAppSelector(selectSharkBalance);
-  const money = useAppSelector(selectMoney);
+
+  const playerMoney = useAppSelector(selectPlayerMoney);
 
   const dispatch = useAppDispatch();
 
@@ -36,7 +34,7 @@ export default function Shark() {
       setInfo("That isn't a number!");
     } else if (amount > debt) {
       setInfo("That's more than you owe!");
-    } else if (amount > money) {
+    } else if (amount > playerMoney) {
       setInfo("You don't have enough!");
     } else {
       setInfo("");
@@ -52,7 +50,7 @@ export default function Shark() {
       setInfo("That isn't a number!");
     } else if (debt > 0 && amount > debt) {
       setInfo("You can't borrow more than you owe!");
-    } else if (amount > money) {
+    } else if (amount > playerMoney) {
       setInfo("You can't borrow more than you have!");
     } else {
       setInfo("");
@@ -74,14 +72,14 @@ export default function Shark() {
       {currentAsk === CurrentAsk.ASK_DEPOSIT && (
         <InputAmount
           name="amount"
-          labelText={`How much would you like to repay? Debt: ${debt} | Wallet: ${money}`}
+          labelText={`How much would you like to repay? Debt: ${debt} | Wallet: ${playerMoney}`}
           handleValue={handleValueDeposit}
         />
       )}
       {currentAsk === CurrentAsk.ASK_WITHDRAW && (
         <InputAmount
           name="amount"
-          labelText={`How much would you like to borrow? Debt: ${debt} | Wallet: ${money}`}
+          labelText={`How much would you like to borrow? Debt: ${debt} | Wallet: ${playerMoney}`}
           handleValue={handleValueWithdraw}
         />
       )}

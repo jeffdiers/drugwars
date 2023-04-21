@@ -5,11 +5,8 @@ import {
   withdrawBank,
   selectBankBalance,
 } from "../../store/bank/bank.slice";
-import {
-  depositPlayer,
-  withdrawPlayer,
-  selectMoney,
-} from "../../store/player/player.slice";
+import { depositPlayer, withdrawPlayer } from "../../store/player/player.slice";
+import { selectPlayerMoney } from "../../store/player/player.selectors";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
 import YesNo from "../../components/action/yes-no.component";
@@ -26,7 +23,8 @@ export default function Shark() {
   const [info, setInfo] = useState("");
 
   const bankBalance = useAppSelector(selectBankBalance);
-  const money = useAppSelector(selectMoney);
+
+  const playerMoney = useAppSelector(selectPlayerMoney);
 
   const dispatch = useAppDispatch();
 
@@ -34,7 +32,7 @@ export default function Shark() {
     const amount = Number(value);
     if (Number.isNaN(amount)) {
       setInfo("That isn't a number!");
-    } else if (amount > money) {
+    } else if (amount > playerMoney) {
       setInfo("You don't have that much!");
     } else {
       setInfo("");
@@ -70,14 +68,14 @@ export default function Shark() {
       {currentAsk === CurrentAsk.ASK_DEPOSIT && (
         <InputAmount
           name="amount"
-          labelText={`How much would you like to deposit? Bank: ${bankBalance} | Wallet: ${money}`}
+          labelText={`How much would you like to deposit? Bank: ${bankBalance} | Wallet: ${playerMoney}`}
           handleValue={handleValueDeposit}
         />
       )}
       {currentAsk === CurrentAsk.ASK_WITHDRAW && (
         <InputAmount
           name="amount"
-          labelText={`How much would you like to withdraw? Bank: ${bankBalance} | Wallet: ${money}`}
+          labelText={`How much would you like to withdraw? Bank: ${bankBalance} | Wallet: ${playerMoney}`}
           handleValue={handleValueWithdraw}
         />
       )}

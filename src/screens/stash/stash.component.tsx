@@ -5,17 +5,13 @@ import {
   withdrawStash,
   selectStashBalance,
 } from "../../store/stash/stash.slice";
-import {
-  buy,
-  sell,
-  selectPlayer,
-  Drugs,
-} from "../../store/player/player.slice";
+import { buy, sell, Drugs } from "../../store/player/player.slice";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
 import YesNo from "../../components/action/yes-no.component";
 import InputAmount from "../../components/action/input-amount.component";
 import SelectDrug from "../../components/action/select-drug.component";
+import { selectPlayerInventory } from "../../store/player/player.selectors";
 
 export enum CurrentAsk {
   ASK_VISIT,
@@ -30,7 +26,8 @@ export default function Shark() {
   const [info, setInfo] = useState("");
 
   const stash = useAppSelector(selectStashBalance);
-  const player = useAppSelector(selectPlayer);
+
+  const playerInventory = useAppSelector(selectPlayerInventory);
 
   const dispatch = useAppDispatch();
 
@@ -38,7 +35,7 @@ export default function Shark() {
     const amount = Number(value);
     if (Number.isNaN(amount)) {
       setInfo("That isn't a number!");
-    } else if (amount > player[currentDrug]) {
+    } else if (amount > playerInventory[currentDrug]) {
       setInfo(`You don't have that much ${currentDrug}!`);
     } else {
       setInfo("");
@@ -83,14 +80,14 @@ export default function Shark() {
       {currentAsk === CurrentAsk.ASK_DEPOSIT && (
         <InputAmount
           name={currentDrug}
-          labelText={`How much ${currentDrug} would you like to deposit? Stash: ${stash[currentDrug]} | Coat: ${player[currentDrug]}`}
+          labelText={`How much ${currentDrug} would you like to deposit? Stash: ${stash[currentDrug]} | Coat: ${playerInventory[currentDrug]}`}
           handleValue={handleValueDeposit}
         />
       )}
       {currentAsk === CurrentAsk.ASK_WITHDRAW && (
         <InputAmount
           name={currentDrug}
-          labelText={`How much ${currentDrug} would you like to take out? Stash: ${stash[currentDrug]} | Coat: ${player[currentDrug]}`}
+          labelText={`How much ${currentDrug} would you like to take out? Stash: ${stash[currentDrug]} | Coat: ${playerInventory[currentDrug]}`}
           handleValue={handleValueWithdraw}
         />
       )}

@@ -1,10 +1,12 @@
-import { selectPlayerHealth } from "../../store/player/player.slice";
 import { selectProfit, selectDealerRank } from "../../store/main/main.slice";
 import { useAppSelector } from "../../utils/hooks";
 import { selectSharkBalance } from "../../store/shark/shark.slice";
 
+import { selectPlayerHealth } from "../../store/player/player.selectors";
+
 export default function GameOver() {
-  const health = useAppSelector(selectPlayerHealth);
+  const playerHealth = useAppSelector(selectPlayerHealth);
+
   const profit = useAppSelector(selectProfit);
   const rank = useAppSelector(selectDealerRank);
   const sharkBalance = useAppSelector(selectSharkBalance);
@@ -21,7 +23,7 @@ export default function GameOver() {
     <div>
       <div>Game Over!</div>
       <br />
-      {health <= 0 ? (
+      {playerHealth <= 0 ? (
         <div>You got busted!</div>
       ) : (
         <div>

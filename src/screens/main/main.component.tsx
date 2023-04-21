@@ -9,15 +9,17 @@ import {
   buyGun,
   removePlayerEvent,
   removePlayerEventAction,
-  selectPlayerEvents,
-  selectPlayerEventAction,
   EventActions,
   healPlayer,
-  selectMoney,
   addPlayerEvent,
-  selectCanBuyGun,
-  selectCops,
 } from "../../store/player/player.slice";
+import {
+  selectPlayerMoney,
+  selectPlayerCoatSpace,
+  selectPlayerEvents,
+  selectPlayerEventAction,
+  selectPlayerCops,
+} from "../../store/player/player.selectors";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
 import YesNo from "../../components/action/yes-no.component";
@@ -27,26 +29,27 @@ import BuySellJet from "../../components/action/buy-sell-jet.component";
 export default function Main() {
   const dispatch = useAppDispatch();
 
-  const priceEvents = useAppSelector(selectPriceEvents);
-  const prices = useAppSelector(selectPrices);
-  const money = useAppSelector(selectMoney);
-  const cops = useAppSelector(selectCops);
-  const canBuyGun = useAppSelector(selectCanBuyGun);
+  const playerMoney = useAppSelector(selectPlayerMoney);
+  const playerCoatSpace = useAppSelector(selectPlayerCoatSpace);
   const playerEvents = useAppSelector(selectPlayerEvents);
   const playerEventAction = useAppSelector(selectPlayerEventAction);
+  const playerCops = useAppSelector(selectPlayerCops);
+
+  const priceEvents = useAppSelector(selectPriceEvents);
+  const prices = useAppSelector(selectPrices);
 
   return (
     <>
       {playerEventAction === EventActions.CopsChase ? (
         <Continue
-          text={`Officer Hardass and ${cops} of his deputies are chasing you !!!!!`}
+          text={`Officer Hardass and ${playerCops} of his deputies are chasing you !!!!!`}
           onContinue={() => dispatch(updateStage(GameStage.COPS_CHASE))}
         />
       ) : playerEventAction === EventActions.UpgradeCoat ? (
         <YesNo
           text={`Would you like to buy 15 more pockets for more drugs? It's $${prices.coat}`}
           onYes={() => {
-            if (prices.coat <= money) {
+            if (prices.coat <= playerMoney) {
               dispatch(upgradeCoat(prices.coat));
             } else {
               dispatch(
@@ -61,7 +64,7 @@ export default function Main() {
         <YesNo
           text={`Would you like to buy a gun for $${prices.gun}?`}
           onYes={() => {
-            if (canBuyGun) {
+            if (prices.gun <= playerMoney && playerCoatSpace >= 5) {
               dispatch(buyGun(prices.gun));
             } else {
               dispatch(
@@ -78,7 +81,7 @@ export default function Main() {
         <YesNo
           text={`Do you want to heal for $${prices.heal}?`}
           onYes={() => {
-            if (prices.heal <= money) {
+            if (prices.heal <= playerMoney) {
               dispatch(healPlayer(prices.heal));
             } else {
               dispatch(addPlayerEvent("You don't have enough money to heal!"));

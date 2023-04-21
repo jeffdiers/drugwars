@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { GameStage, updateStage } from "../../store/main/main.slice";
+import { Drugs, buy } from "../../store/player/player.slice";
 import {
-  Drugs,
-  selectPlayer,
-  selectTotalInventory,
-  buy,
-} from "../../store/player/player.slice";
+  selectPlayerCoatSpace,
+  selectPlayerMoney,
+} from "../../store/player/player.selectors";
 import { selectPrices } from "../../store/price/price.slice";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
@@ -25,8 +24,8 @@ export default function Buy() {
   const [maxBuy, setMaxBuy] = useState(0);
   const [info, setInfo] = useState("");
 
-  const player = useAppSelector(selectPlayer);
-  const totalInventory = useAppSelector(selectTotalInventory);
+  const playerMoney = useAppSelector(selectPlayerMoney);
+  const playerCoatSpace = useAppSelector(selectPlayerCoatSpace);
   const prices = useAppSelector(selectPrices);
 
   const handleValueBuy = (value: string) => {
@@ -46,11 +45,10 @@ export default function Buy() {
 
   useEffect(() => {
     const price = prices[currentDrug];
-    const maxAmount = Math.floor(player.money / price);
-    const coatSpace = player.maxTrench - totalInventory;
-    const max = maxAmount > coatSpace ? coatSpace : maxAmount;
+    const maxAmount = Math.floor(playerMoney / price);
+    const max = maxAmount > playerCoatSpace ? playerCoatSpace : maxAmount;
     setMaxBuy(max);
-  }, [currentDrug, player.money, player.maxTrench, prices, totalInventory]);
+  }, [currentDrug, playerMoney, playerCoatSpace, prices]);
 
   return (
     <>

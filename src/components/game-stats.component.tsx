@@ -1,34 +1,41 @@
 import { selectSharkBalance } from "../store/shark/shark.slice";
 import { selectBankBalance } from "../store/bank/bank.slice";
 import { selectStashBalance } from "../store/stash/stash.slice";
+import { Drugs } from "../store/player/player.slice";
 import {
-  selectPlayer,
-  Drugs,
-  selectTotalInventory,
-  selectCoatSpace,
-} from "../store/player/player.slice";
+  selectPlayerArea,
+  selectPlayerCoatSpace,
+  selectPlayerDaysEnd,
+  selectPlayerGuns,
+  selectPlayerInventory,
+  selectPlayerMoney,
+} from "../store/player/player.selectors";
 import { selectPrices } from "../store/price/price.slice";
 
 import { useAppSelector } from "../utils/hooks";
 
 export default function GameStats() {
-  const player = useAppSelector(selectPlayer);
-  const totalInventory = useAppSelector(selectTotalInventory);
   const prices = useAppSelector(selectPrices);
   const stash = useAppSelector(selectStashBalance);
   const sharkBalance = useAppSelector(selectSharkBalance);
   const bankBalance = useAppSelector(selectBankBalance);
-  const coatSpace = useAppSelector(selectCoatSpace);
+
+  const playerCoatSpace = useAppSelector(selectPlayerCoatSpace);
+  const playerInventory = useAppSelector(selectPlayerInventory);
+  const playerArea = useAppSelector(selectPlayerArea);
+  const playerMoney = useAppSelector(selectPlayerMoney);
+  const playerGuns = useAppSelector(selectPlayerGuns);
+  const playerDaysEnd = useAppSelector(selectPlayerDaysEnd);
 
   return (
     <div>
-      <div>area: {player.area}</div>
-      <div>days left: {player.daysEnd}</div>
+      <div>area: {playerArea}</div>
+      <div>days left: {playerDaysEnd}</div>
       <div>debt: {sharkBalance}</div>
       <div>bank: {bankBalance}</div>
-      <div>money: {player.money}</div>
-      <div>trench space: {coatSpace}</div>
-      <div>guns: {player.guns}</div>
+      <div>money: {playerMoney}</div>
+      <div>trench space: {playerCoatSpace}</div>
+      <div>guns: {playerGuns}</div>
       <div>stash: </div>
       <ul>
         <li>
@@ -74,22 +81,22 @@ export default function GameStats() {
       <div>trench: </div>
       <ul>
         <li>
-          {Drugs.Cocaine}: {player.cocaine}
+          {Drugs.Cocaine}: {playerInventory.cocaine}
         </li>
         <li>
-          {Drugs.Heroin}: {player.heroin}
+          {Drugs.Heroin}: {playerInventory.heroin}
         </li>
         <li>
-          {Drugs.Acid}: {player.acid}
+          {Drugs.Acid}: {playerInventory.acid}
         </li>
         <li>
-          {Drugs.Weed}: {player.weed}
+          {Drugs.Weed}: {playerInventory.weed}
         </li>
         <li>
-          {Drugs.Speed}: {player.speed}
+          {Drugs.Speed}: {playerInventory.speed}
         </li>
         <li>
-          {Drugs.Ludes}: {player.ludes}
+          {Drugs.Ludes}: {playerInventory.ludes}
         </li>
       </ul>
     </div>

@@ -1,8 +1,4 @@
-import {
-  combineReducers,
-  configureStore,
-  getDefaultMiddleware,
-} from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import type { PreloadedState } from "@reduxjs/toolkit";
 import logger from "redux-logger";
 
