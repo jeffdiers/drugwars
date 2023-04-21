@@ -83,7 +83,7 @@ const playerSlice = createSlice({
 });
 
 export const selectPlayer = (state: RootState): PlayerState => state.player;
-export const selectArea = (state: RootState): Areas => state.player.area;
+export const selectPlayerArea = (state: RootState): Areas => state.player.area;
 export const selectMoney = (state: RootState): number => state.player.money;
 export const selectTotalInventory = (state: RootState): number =>
   inventoryHelper(state.player);

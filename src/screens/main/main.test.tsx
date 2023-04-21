@@ -24,7 +24,7 @@ describe("Main Screen", () => {
         eventAction: undefined,
       };
 
-      fireEvent.keyDown(screen.getByRole("button"), { key: "y", keyCode: 13 });
+      fireEvent.keyDown(screen.getByRole("dialog"), { key: "y", keyCode: 13 });
 
       const actual = store.getState().player;
 
@@ -47,7 +47,7 @@ describe("Main Screen", () => {
         eventAction: undefined,
       };
 
-      fireEvent.keyDown(screen.getByRole("button"), { key: "n", keyCode: 13 });
+      fireEvent.keyDown(screen.getByRole("dialog"), { key: "n", keyCode: 13 });
 
       const actual = store.getState().player;
 
@@ -73,7 +73,7 @@ describe("Main Screen", () => {
         eventAction: undefined,
       };
 
-      fireEvent.keyDown(screen.getByRole("button"), { key: "y", keyCode: 13 });
+      fireEvent.keyDown(screen.getByRole("dialog"), { key: "y", keyCode: 13 });
 
       const actual = store.getState().player;
 
@@ -94,7 +94,7 @@ describe("Main Screen", () => {
         eventAction: undefined,
       };
 
-      fireEvent.keyDown(screen.getByRole("button"), { key: "n", keyCode: 13 });
+      fireEvent.keyDown(screen.getByRole("dialog"), { key: "n", keyCode: 13 });
 
       const actual = store.getState().player;
 

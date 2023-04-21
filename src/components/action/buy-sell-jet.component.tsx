@@ -1,18 +1,14 @@
 import { FC } from "react";
 
-import Input from "./input.component";
+import ActionContainer from "./action-container.component";
 
-type InputBuySellJetProps = {
+type BuySellJetProps = {
   onBuy: Function;
   onSell: Function;
   onJet: Function;
 };
 
-const InputBuySellJet: FC<InputBuySellJetProps> = ({
-  onBuy,
-  onSell,
-  onJet,
-}) => {
+const BuySellJet: FC<BuySellJetProps> = ({ onBuy, onSell, onJet }) => {
   const isBuySellJet = (key: string) => {
     return key === "b" || key === "s" || key === "j";
   };
@@ -26,10 +22,10 @@ const InputBuySellJet: FC<InputBuySellJetProps> = ({
   };
 
   return (
-    <Input onKeyDown={handleOnKeyDown}>
+    <ActionContainer onKeyDown={handleOnKeyDown}>
       Are you going to (B)uy, (S)ell, or (J)et?
-    </Input>
+    </ActionContainer>
   );
 };
 
-export default InputBuySellJet;
+export default BuySellJet;

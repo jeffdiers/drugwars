@@ -36,7 +36,7 @@ describe("Cops Chase", () => {
     store.dispatch(updateStage(GameStage.COPS_CHASE));
     global.Math.random = () => 0.5;
     renderWithProviders(<App />, { store });
-    fireEvent.keyDown(screen.getByRole("button"), { key: "r", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("dialog"), { key: "r", keyCode: 13 });
 
     const expected = /You got away/i;
 
@@ -51,7 +51,7 @@ describe("Cops Chase", () => {
     store.dispatch(hitPlayer(97));
     global.Math.random = () => 0;
     renderWithProviders(<App />, { store });
-    fireEvent.keyDown(screen.getByRole("button"), { key: "r", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("dialog"), { key: "r", keyCode: 13 });
 
     const expected = /Game over/i;
 
@@ -65,7 +65,7 @@ describe("Cops Chase", () => {
     store.dispatch(updateStage(GameStage.COPS_CHASE));
     global.Math.random = () => 0;
     renderWithProviders(<App />, { store });
-    fireEvent.keyDown(screen.getByRole("button"), { key: "f", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("dialog"), { key: "f", keyCode: 13 });
 
     const expected = "Will you run?";
 
@@ -80,7 +80,7 @@ describe("Cops Chase", () => {
     store.dispatch(buyGun(0));
     global.Math.random = () => 0;
     renderWithProviders(<App />, { store });
-    fireEvent.keyDown(screen.getByRole("button"), { key: "f", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("dialog"), { key: "f", keyCode: 13 });
 
     const expected = /You got away/i;
 
@@ -96,7 +96,7 @@ describe("Cops Chase", () => {
     store.dispatch(hitPlayer(94));
     global.Math.random = () => 0.5;
     renderWithProviders(<App />, { store });
-    fireEvent.keyDown(screen.getByRole("button"), { key: "f", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("dialog"), { key: "f", keyCode: 13 });
 
     const expected = /Game over/i;
 
@@ -111,7 +111,7 @@ describe("Cops Chase", () => {
     store.dispatch(buyGun(0));
     global.Math.random = () => 0;
     renderWithProviders(<App />, { store });
-    fireEvent.keyDown(screen.getByRole("button"), { key: "f", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("dialog"), { key: "f", keyCode: 13 });
 
     const expected = /You got away/i;
 

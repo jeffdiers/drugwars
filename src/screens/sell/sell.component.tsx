@@ -4,8 +4,8 @@ import { selectPrices } from "../../store/price/price.slice";
 import { Drugs, selectPlayer, sell } from "../../store/player/player.slice";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
-import InputAmount from "../../components/input-amount.component";
-import InputSelectDrug from "../../components/input-select-drug.component";
+import InputAmount from "../../components/action/input-amount.component";
+import SelectDrug from "../../components/action/select-drug.component";
 
 enum AskSell {
   ASK_SELECT,
@@ -46,7 +46,7 @@ export default function Sell() {
   return (
     <>
       {currentAsk === AskSell.ASK_SELECT && (
-        <InputSelectDrug
+        <SelectDrug
           text="What would you like to sell?"
           onSelect={(drugKey) => {
             setCurrentDrug(drugKey);

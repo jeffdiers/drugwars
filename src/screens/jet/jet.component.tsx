@@ -2,7 +2,7 @@ import { GameStage, updateStage } from "../../store/main/main.slice";
 import {
   Areas,
   changeArea,
-  selectArea,
+  selectPlayerArea,
   rollPlayerEvents,
 } from "../../store/player/player.slice";
 import { setPrices, rollEvents } from "../../store/price/price.slice";
@@ -10,12 +10,12 @@ import { addInterestShark } from "../../store/shark/shark.slice";
 import { addInterestBank } from "../../store/bank/bank.slice";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
-import InputSelectArea from "../../components/input-select-area.component";
+import SelectArea from "../../components/action/select-area.component";
 
 export default function Jet() {
   const dispatch = useAppDispatch();
 
-  const currentArea = useAppSelector(selectArea);
+  const currentArea = useAppSelector(selectPlayerArea);
 
   const handleOnSelect = (areaKey: Areas) => {
     if (areaKey !== currentArea) {
@@ -33,7 +33,7 @@ export default function Jet() {
 
   return (
     <>
-      <InputSelectArea onSelect={handleOnSelect} />
+      <SelectArea onSelect={handleOnSelect} />
       <ul>
         <li>1: {Areas.Bronx}</li>
         <li>2: {Areas.Ghetto}</li>

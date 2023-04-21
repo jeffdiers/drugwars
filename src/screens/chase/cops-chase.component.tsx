@@ -14,8 +14,8 @@ import { GameStage, updateStage } from "../../store/main/main.slice";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { randomInteger } from "../../utils/helpers";
 
-import InputRunFight from "../../components/input-run-fight.component";
-import InputContinue from "../../components/input-continue.component";
+import RunFight from "../../components/action/run-fight.component";
+import Continue from "../../components/action/continue.component";
 
 export default function CopsChase() {
   const dispatch = useAppDispatch();
@@ -74,13 +74,13 @@ export default function CopsChase() {
   return (
     <>
       {gotAway ? (
-        <InputContinue text="You got away!" onContinue={handleGotAway} />
+        <Continue text="You got away!" onContinue={handleGotAway} />
       ) : (
         <div>
           <div>Health: {health}</div>
           <div>Cops: {cops}</div>
           <div>Guns: {guns}</div>
-          <InputRunFight onFight={fight} onRun={run} canFight={guns > 0} />
+          <RunFight onFight={fight} onRun={run} canFight={guns > 0} />
         </div>
       )}
     </>

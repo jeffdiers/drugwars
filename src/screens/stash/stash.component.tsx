@@ -13,9 +13,9 @@ import {
 } from "../../store/player/player.slice";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
-import InputYesNo from "../../components/input-yes-no.component";
-import InputAmount from "../../components/input-amount.component";
-import InputSelectDrug from "../../components/input-select-drug.component";
+import YesNo from "../../components/action/yes-no.component";
+import InputAmount from "../../components/action/input-amount.component";
+import SelectDrug from "../../components/action/select-drug.component";
 
 export enum CurrentAsk {
   ASK_VISIT,
@@ -65,14 +65,14 @@ export default function Shark() {
   return (
     <>
       {currentAsk === CurrentAsk.ASK_VISIT && (
-        <InputYesNo
+        <YesNo
           text="Would you like to stash any drugs?"
           onYes={() => setCurrentAsk(CurrentAsk.ASK_SELECT_DRUG)}
           onNo={() => dispatch(updateStage(GameStage.MAIN))}
         />
       )}
       {currentAsk === CurrentAsk.ASK_SELECT_DRUG && (
-        <InputSelectDrug
+        <SelectDrug
           text="Which drug do you want to stash?"
           onSelect={(drugKey) => {
             setCurrentDrug(drugKey);

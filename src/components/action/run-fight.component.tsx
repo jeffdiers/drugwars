@@ -1,18 +1,14 @@
 import { FC } from "react";
 
-import Input from "./input.component";
+import ActionContainer from "./action-container.component";
 
-type InputRunFightProps = {
+type RunFightProps = {
   onRun: Function;
   onFight: Function;
   canFight: boolean;
 };
 
-const InputRunFight: FC<InputRunFightProps> = ({
-  onRun,
-  onFight,
-  canFight,
-}) => {
+const RunFight: FC<RunFightProps> = ({ onRun, onFight, canFight }) => {
   const isRunFight = (key: string) => {
     return key === "r" || key === "f";
   };
@@ -25,10 +21,10 @@ const InputRunFight: FC<InputRunFightProps> = ({
   };
 
   return (
-    <Input onKeyDown={handleOnKeyDown}>
+    <ActionContainer onKeyDown={handleOnKeyDown}>
       {canFight ? `Will you run or fight?` : `Will you run?`}
-    </Input>
+    </ActionContainer>
   );
 };
 
-export default InputRunFight;
+export default RunFight;

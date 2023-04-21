@@ -1,4 +1,4 @@
-import { KeyboardEvent, useState } from "react";
+import { useState } from "react";
 import { GameStage, updateStage } from "../../store/main/main.slice";
 import {
   depositBank,
@@ -12,8 +12,8 @@ import {
 } from "../../store/player/player.slice";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
-import InputYesNo from "../../components/input-yes-no.component";
-import InputAmount from "../../components/input-amount.component";
+import YesNo from "../../components/action/yes-no.component";
+import InputAmount from "../../components/action/input-amount.component";
 
 export enum CurrentAsk {
   ASK_VISIT,
@@ -61,7 +61,7 @@ export default function Shark() {
   return (
     <>
       {currentAsk === CurrentAsk.ASK_VISIT && (
-        <InputYesNo
+        <YesNo
           text="Would you like to visit the bank?"
           onYes={() => setCurrentAsk(CurrentAsk.ASK_DEPOSIT)}
           onNo={() => dispatch(updateStage(GameStage.STASH))}

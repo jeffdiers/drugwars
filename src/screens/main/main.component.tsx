@@ -20,9 +20,9 @@ import {
 } from "../../store/player/player.slice";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
-import InputYesNo from "../../components/input-yes-no.component";
-import InputContinue from "../../components/input-continue.component";
-import InputBuySellJet from "../../components/input-buy-sell-jet.component";
+import YesNo from "../../components/action/yes-no.component";
+import Continue from "../../components/action/continue.component";
+import BuySellJet from "../../components/action/buy-sell-jet.component";
 
 export default function Main() {
   const dispatch = useAppDispatch();
@@ -38,12 +38,12 @@ export default function Main() {
   return (
     <>
       {playerEventAction === EventActions.CopsChase ? (
-        <InputContinue
+        <Continue
           text={`Officer Hardass and ${cops} of his deputies are chasing you !!!!!`}
           onContinue={() => dispatch(updateStage(GameStage.COPS_CHASE))}
         />
       ) : playerEventAction === EventActions.UpgradeCoat ? (
-        <InputYesNo
+        <YesNo
           text={`Would you like to buy 15 more pockets for more drugs? It's $${prices.coat}`}
           onYes={() => {
             if (prices.coat <= money) {
@@ -58,7 +58,7 @@ export default function Main() {
           onNo={() => dispatch(removePlayerEventAction())}
         />
       ) : playerEventAction === EventActions.BuyGun ? (
-        <InputYesNo
+        <YesNo
           text={`Would you like to buy a gun for $${prices.gun}?`}
           onYes={() => {
             if (canBuyGun) {
@@ -75,7 +75,7 @@ export default function Main() {
           onNo={() => dispatch(removePlayerEventAction())}
         />
       ) : playerEventAction === EventActions.AskHeal ? (
-        <InputYesNo
+        <YesNo
           text={`Do you want to heal for $${prices.heal}?`}
           onYes={() => {
             if (prices.heal <= money) {
@@ -88,17 +88,17 @@ export default function Main() {
           onNo={() => dispatch(removePlayerEventAction())}
         />
       ) : playerEvents.length ? (
-        <InputContinue
+        <Continue
           text={playerEvents[0]}
           onContinue={() => dispatch(removePlayerEvent())}
         />
       ) : priceEvents.length ? (
-        <InputContinue
+        <Continue
           text={priceEvents[0]}
           onContinue={() => dispatch(removePriceEvent())}
         />
       ) : (
-        <InputBuySellJet
+        <BuySellJet
           onBuy={() => dispatch(updateStage(GameStage.BUY))}
           onSell={() => dispatch(updateStage(GameStage.SELL))}
           onJet={() => dispatch(updateStage(GameStage.JET))}

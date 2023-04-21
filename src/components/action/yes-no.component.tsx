@@ -1,14 +1,14 @@
 import { FC } from "react";
 
-import Input from "./input.component";
+import ActionContainer from "./action-container.component";
 
-type InputYesNoProps = {
+type YesNoProps = {
   text: string;
   onYes: Function;
   onNo: Function;
 };
 
-const InputYesNo: FC<InputYesNoProps> = ({ text, onYes, onNo }) => {
+const YesNo: FC<YesNoProps> = ({ text, onYes, onNo }) => {
   const isYesNo = (key: string) => {
     return key === "y" || key === "n";
   };
@@ -21,12 +21,12 @@ const InputYesNo: FC<InputYesNoProps> = ({ text, onYes, onNo }) => {
   };
 
   return (
-    <Input onKeyDown={handleOnKeyDown}>
+    <ActionContainer onKeyDown={handleOnKeyDown}>
       {text}
       <br />
       Press y or n
-    </Input>
+    </ActionContainer>
   );
 };
 
-export default InputYesNo;
+export default YesNo;
