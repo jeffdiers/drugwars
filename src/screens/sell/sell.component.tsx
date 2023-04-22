@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { GameStage, updateStage } from "../../store/main/main.slice";
-import { selectPrices } from "../../store/price/price.slice";
-import { Drugs, sell } from "../../store/player/player.slice";
+import { sell } from "../../store/player/player.slice";
+import { Drugs } from "../../store/player/player.types";
 import { selectPlayerInventory } from "../../store/player/player.selectors";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
 import InputAmount from "../../components/action/input-amount.component";
 import SelectDrug from "../../components/action/select-drug.component";
+import { selectPriceDrugs } from "../../store/price/price.selectors";
 
 enum AskSell {
   ASK_SELECT,
@@ -19,15 +20,14 @@ export default function Sell() {
   const [maxSell, setMaxSell] = useState(0);
   const [info, setInfo] = useState("");
 
-  const prices = useAppSelector(selectPrices);
-
   const playerInventory = useAppSelector(selectPlayerInventory);
+  const priceDrugs = useAppSelector(selectPriceDrugs);
 
   const dispatch = useAppDispatch();
 
   const handleValueSell = (value: string) => {
     const amount = Number(value);
-    const price = prices[currentDrug];
+    const price = priceDrugs[currentDrug];
     const canSell = amount <= maxSell;
     if (Number.isNaN(amount)) {
       setInfo("That isn't a number!");

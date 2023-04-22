@@ -5,7 +5,8 @@ import {
   withdrawStash,
   selectStashBalance,
 } from "../../store/stash/stash.slice";
-import { buy, sell, Drugs } from "../../store/player/player.slice";
+import { buy, sell } from "../../store/player/player.slice";
+import { Drugs } from "../../store/player/player.types";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
 import YesNo from "../../components/action/yes-no.component";

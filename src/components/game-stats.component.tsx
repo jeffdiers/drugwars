@@ -1,7 +1,9 @@
+import { useAppSelector } from "../utils/hooks";
+
 import { selectSharkBalance } from "../store/shark/shark.slice";
 import { selectBankBalance } from "../store/bank/bank.slice";
 import { selectStashBalance } from "../store/stash/stash.slice";
-import { Drugs } from "../store/player/player.slice";
+import { Drugs } from "../store/player/player.types";
 import {
   selectPlayerArea,
   selectPlayerCoatSpace,
@@ -10,12 +12,9 @@ import {
   selectPlayerInventory,
   selectPlayerMoney,
 } from "../store/player/player.selectors";
-import { selectPrices } from "../store/price/price.slice";
-
-import { useAppSelector } from "../utils/hooks";
+import { selectPriceDrugs } from "../store/price/price.selectors";
 
 export default function GameStats() {
-  const prices = useAppSelector(selectPrices);
   const stash = useAppSelector(selectStashBalance);
   const sharkBalance = useAppSelector(selectSharkBalance);
   const bankBalance = useAppSelector(selectBankBalance);
@@ -26,6 +25,8 @@ export default function GameStats() {
   const playerMoney = useAppSelector(selectPlayerMoney);
   const playerGuns = useAppSelector(selectPlayerGuns);
   const playerDaysEnd = useAppSelector(selectPlayerDaysEnd);
+
+  const priceDrugs = useAppSelector(selectPriceDrugs);
 
   return (
     <div>
@@ -60,22 +61,22 @@ export default function GameStats() {
       <div>prices: </div>
       <ul>
         <li>
-          {Drugs.Cocaine}: {prices.cocaine}
+          {Drugs.Cocaine}: {priceDrugs.cocaine}
         </li>
         <li>
-          {Drugs.Heroin}: {prices.heroin}
+          {Drugs.Heroin}: {priceDrugs.heroin}
         </li>
         <li>
-          {Drugs.Acid}: {prices.acid}
+          {Drugs.Acid}: {priceDrugs.acid}
         </li>
         <li>
-          {Drugs.Weed}: {prices.weed}
+          {Drugs.Weed}: {priceDrugs.weed}
         </li>
         <li>
-          {Drugs.Speed}: {prices.speed}
+          {Drugs.Speed}: {priceDrugs.speed}
         </li>
         <li>
-          {Drugs.Ludes}: {prices.ludes}
+          {Drugs.Ludes}: {priceDrugs.ludes}
         </li>
       </ul>
       <div>trench: </div>

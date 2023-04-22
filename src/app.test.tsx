@@ -3,7 +3,8 @@ import { renderWithProviders } from "./utils/test-utils";
 import App from "./app.component";
 import { setupStore } from "./store/store";
 import { GameStage, updateStage } from "./store/main/main.slice";
-import { Areas, changeArea } from "./store/player/player.slice";
+import { changeArea } from "./store/player/player.slice";
+import { Areas } from "./store/player/player.types";
 import { hitPlayer } from "./store/player/player.slice";
 
 describe("main component", () => {

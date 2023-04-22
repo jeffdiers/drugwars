@@ -1,12 +1,10 @@
 import reducer, {
-  Areas,
-  Drugs,
   changeArea,
   buy,
   sell,
   rollPlayerEvents,
-  EventActions,
 } from "./player.slice";
+import { Areas, Drugs, EventActions } from "./player.types";
 import { setupStore } from "../store";
 import { randomInteger } from "../../utils/helpers";
 

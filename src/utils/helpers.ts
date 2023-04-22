@@ -1,4 +1,4 @@
-import { Drugs, Areas } from "../store/player/player.slice";
+import { Drugs, Areas } from "../store/player/player.types";
 
 export const getDrugByKey = (key: string) => {
   if (key === "c") return Drugs.Cocaine;

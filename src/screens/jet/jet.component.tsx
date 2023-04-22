@@ -1,9 +1,6 @@
 import { GameStage, updateStage } from "../../store/main/main.slice";
-import {
-  Areas,
-  changeArea,
-  rollPlayerEvents,
-} from "../../store/player/player.slice";
+import { changeArea, rollPlayerEvents } from "../../store/player/player.slice";
+import { Areas } from "../../store/player/player.types";
 import { selectPlayerArea } from "../../store/player/player.selectors";
 import { setPrices, rollEvents } from "../../store/price/price.slice";
 import { addInterestShark } from "../../store/shark/shark.slice";

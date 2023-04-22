@@ -1,6 +1,6 @@
-import { Drugs } from "../player/player.slice";
+import { Drugs } from "../player/player.types";
 import { setupStore } from "../store";
-import reducer, { setPrices, rollEvents } from "./price.slice";
+import reducer, { setPrices } from "./price.slice";
 
 describe("price slice", () => {
   describe("are between correct range", () => {

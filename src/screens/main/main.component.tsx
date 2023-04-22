@@ -1,18 +1,21 @@
+import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { GameStage, updateStage } from "../../store/main/main.slice";
+import { removePriceEvent } from "../../store/price/price.slice";
 import {
+  selectPriceCoat,
+  selectPriceGun,
+  selectPriceHeal,
   selectPriceEvents,
-  removePriceEvent,
-  selectPrices,
-} from "../../store/price/price.slice";
+} from "../../store/price/price.selectors";
 import {
   upgradeCoat,
   buyGun,
   removePlayerEvent,
   removePlayerEventAction,
-  EventActions,
   healPlayer,
   addPlayerEvent,
 } from "../../store/player/player.slice";
+import { EventActions } from "../../store/player/player.types";
 import {
   selectPlayerMoney,
   selectPlayerCoatSpace,
@@ -20,7 +23,6 @@ import {
   selectPlayerEventAction,
   selectPlayerCops,
 } from "../../store/player/player.selectors";
-import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
 import YesNo from "../../components/action/yes-no.component";
 import Continue from "../../components/action/continue.component";
@@ -35,8 +37,10 @@ export default function Main() {
   const playerEventAction = useAppSelector(selectPlayerEventAction);
   const playerCops = useAppSelector(selectPlayerCops);
 
+  const priceGun = useAppSelector(selectPriceGun);
+  const priceCoat = useAppSelector(selectPriceCoat);
+  const priceHeal = useAppSelector(selectPriceHeal);
   const priceEvents = useAppSelector(selectPriceEvents);
-  const prices = useAppSelector(selectPrices);
 
   return (
     <>
@@ -47,10 +51,10 @@ export default function Main() {
         />
       ) : playerEventAction === EventActions.UpgradeCoat ? (
         <YesNo
-          text={`Would you like to buy 15 more pockets for more drugs? It's $${prices.coat}`}
+          text={`Would you like to buy 15 more pockets for more drugs? It's $${priceCoat}`}
           onYes={() => {
-            if (prices.coat <= playerMoney) {
-              dispatch(upgradeCoat(prices.coat));
+            if (priceCoat <= playerMoney) {
+              dispatch(upgradeCoat(priceCoat));
             } else {
               dispatch(
                 addPlayerEvent("You don't have enough money to buy a coat!")
@@ -62,10 +66,10 @@ export default function Main() {
         />
       ) : playerEventAction === EventActions.BuyGun ? (
         <YesNo
-          text={`Would you like to buy a gun for $${prices.gun}?`}
+          text={`Would you like to buy a gun for $${priceGun}?`}
           onYes={() => {
-            if (prices.gun <= playerMoney && playerCoatSpace >= 5) {
-              dispatch(buyGun(prices.gun));
+            if (priceGun <= playerMoney && playerCoatSpace >= 5) {
+              dispatch(buyGun(priceGun));
             } else {
               dispatch(
                 addPlayerEvent(
@@ -79,10 +83,10 @@ export default function Main() {
         />
       ) : playerEventAction === EventActions.AskHeal ? (
         <YesNo
-          text={`Do you want to heal for $${prices.heal}?`}
+          text={`Do you want to heal for $${priceHeal}?`}
           onYes={() => {
-            if (prices.heal <= playerMoney) {
-              dispatch(healPlayer(prices.heal));
+            if (priceHeal <= playerMoney) {
+              dispatch(healPlayer(priceHeal));
             } else {
               dispatch(addPlayerEvent("You don't have enough money to heal!"));
             }

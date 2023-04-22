@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { GameStage, updateStage } from "../../store/main/main.slice";
-import { Drugs, buy } from "../../store/player/player.slice";
+import { buy } from "../../store/player/player.slice";
 import {
   selectPlayerCoatSpace,
   selectPlayerMoney,
 } from "../../store/player/player.selectors";
-import { selectPrices } from "../../store/price/price.slice";
-import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { Drugs } from "../../store/player/player.types";
+import { selectPriceDrugs } from "../../store/price/price.selectors";
 
 import InputAmount from "../../components/action/input-amount.component";
 import SelectDrug from "../../components/action/select-drug.component";
@@ -26,11 +27,11 @@ export default function Buy() {
 
   const playerMoney = useAppSelector(selectPlayerMoney);
   const playerCoatSpace = useAppSelector(selectPlayerCoatSpace);
-  const prices = useAppSelector(selectPrices);
+  const priceDrugs = useAppSelector(selectPriceDrugs);
 
   const handleValueBuy = (value: string) => {
     const amount = Number(value);
-    const price = prices[currentDrug];
+    const price = priceDrugs[currentDrug];
     const canBuy = amount >= 0 && amount <= maxBuy;
     if (Number.isNaN(amount)) {
       setInfo("That isn't a number!");
@@ -44,11 +45,11 @@ export default function Buy() {
   };
 
   useEffect(() => {
-    const price = prices[currentDrug];
+    const price = priceDrugs[currentDrug];
     const maxAmount = Math.floor(playerMoney / price);
     const max = maxAmount > playerCoatSpace ? playerCoatSpace : maxAmount;
     setMaxBuy(max);
-  }, [currentDrug, playerMoney, playerCoatSpace, prices]);
+  }, [currentDrug, playerMoney, playerCoatSpace, priceDrugs]);
 
   return (
     <>

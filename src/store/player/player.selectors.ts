@@ -2,16 +2,12 @@ import { createSelector } from "@reduxjs/toolkit";
 
 import { RootState } from "../store";
 
-import { PlayerState, Drugs } from "./player.slice";
+import { PlayerState, Drugs, DrugsMap } from "./player.types";
 
 export const inventoryHelper = (playerState: PlayerState) => {
   let total = playerState.guns * 5;
   Object.values(Drugs).forEach((drug) => (total += playerState[drug]));
   return total;
-};
-
-export type DrugsMap = {
-  [key: string]: number;
 };
 
 const selectPlayer = (state: RootState): PlayerState => state.player;

@@ -1,8 +1,8 @@
 import { FC } from "react";
+import { Drugs } from "../../store/player/player.types";
 import { getDrugByKey } from "../../utils/helpers";
 
 import ActionContainer from "./action-container.component";
-import { Drugs } from "../../store/player/player.slice";
 
 type SelectDrugProps = {
   text: string;

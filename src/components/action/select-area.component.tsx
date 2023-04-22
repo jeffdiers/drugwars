@@ -1,8 +1,8 @@
 import { FC } from "react";
+import { Areas } from "../../store/player/player.types";
 import { getAreaByKey } from "../../utils/helpers";
 
 import ActionContainer from "./action-container.component";
-import { Areas } from "../../store/player/player.slice";
 
 type SelectAreaProps = {
   onSelect: (key: Areas) => void;
