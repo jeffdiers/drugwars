@@ -41,11 +41,14 @@ const stashSlice = createSlice({
       const { drug, amount } = action.payload;
       return { ...state, [drug]: state[drug] - amount };
     },
+    resetStash(_state: StashState, _action: PayloadAction) {
+      return { ...initialState };
+    },
   },
 });
 
 export const selectStashBalance = (state: RootState) => state.stash;
 
-export const { depositStash, withdrawStash } = stashSlice.actions;
+export const { depositStash, withdrawStash, resetStash } = stashSlice.actions;
 
 export default stashSlice.reducer;

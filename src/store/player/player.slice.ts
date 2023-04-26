@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { playerReducers } from "./player.reducers";
 import { PlayerState, Areas, ActionEvents } from "./player.types";
 
-const initialState: PlayerState = {
+export const initialState: PlayerState = {
   area: Areas.Bronx,
   daysEnd: 30,
   health: 100,
@@ -43,6 +43,7 @@ export const {
   removePlayerEvent,
   askHealPlayer,
   updateActionEvent,
+  resetPlayer,
 } = playerSlice.actions;
 
 export default playerSlice.reducer;

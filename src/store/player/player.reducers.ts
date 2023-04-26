@@ -1,6 +1,7 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { randomInteger } from "../../utils/helpers";
 
+import { initialState } from "./player.slice";
 import {
   PlayerState,
   Areas,
@@ -139,5 +140,8 @@ export const playerReducers = {
   },
   updateActionEvent(state: PlayerState, action: PayloadAction<ActionEvents>) {
     return { ...state, actionEvent: action.payload };
+  },
+  resetPlayer(_state: PlayerState, _action: PayloadAction) {
+    return { ...initialState };
   },
 };

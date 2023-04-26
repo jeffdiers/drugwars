@@ -1,13 +1,22 @@
-import { useAppSelector } from "../../utils/hooks";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { selectSharkBalance } from "../../store/shark/shark.slice";
+
+import Continue from "../../components/action/continue.component";
 
 import {
   selectPlayerHealth,
   selectPlayerMoney,
 } from "../../store/player/player.selectors";
+import { resetPlayer } from "../../store/player/player.slice";
+import { resetShark } from "../../store/shark/shark.slice";
+import { resetStash } from "../../store/stash/stash.slice";
+import { resetBank } from "../../store/bank/bank.slice";
+import { setPrices } from "../../store/price/price.slice";
 import { selectBankBalance } from "../../store/bank/bank.slice";
 
 export default function GameOver() {
+  const dispatch = useAppDispatch();
+
   const playerHealth = useAppSelector(selectPlayerHealth);
   const playerMoney = useAppSelector(selectPlayerMoney);
   const bankBalance = useAppSelector(selectBankBalance);
@@ -42,6 +51,15 @@ export default function GameOver() {
               You might want to skip town... the loan shark is looking for you
             </div>
           )}
+          <Continue
+            onContinue={() => {
+              dispatch(resetPlayer());
+              dispatch(resetShark());
+              dispatch(resetStash());
+              dispatch(resetBank());
+              dispatch(setPrices());
+            }}
+          />
         </div>
       )}
     </div>

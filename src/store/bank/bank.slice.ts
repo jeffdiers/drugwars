@@ -24,11 +24,15 @@ const bankSlice = createSlice({
     withdrawBank(state: BankState, action: PayloadAction<number>) {
       return { ...state, balance: state.balance - action.payload };
     },
+    resetBank(_state: BankState, _action: PayloadAction) {
+      return { ...initialState };
+    },
   },
 });
 
 export const selectBankBalance = (state: RootState) => state.bank.balance;
 
-export const { addInterestBank, depositBank, withdrawBank } = bankSlice.actions;
+export const { addInterestBank, depositBank, withdrawBank, resetBank } =
+  bankSlice.actions;
 
 export default bankSlice.reducer;

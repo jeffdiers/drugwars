@@ -3,7 +3,7 @@ import { FC } from "react";
 import ActionContainer from "./action-container.component";
 
 type ContinueProps = {
-  text: string;
+  text?: string;
   onContinue: Function;
 };
 
