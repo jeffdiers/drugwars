@@ -45,7 +45,12 @@ describe("player slice", () => {
     const state = store.getState().player;
     const action = changeArea(Areas.Ghetto);
 
-    const expected = { ...state, area: Areas.Ghetto, daysEnd: 29 };
+    const expected = {
+      ...state,
+      area: Areas.Ghetto,
+      daysEnd: 29,
+      actionEvent: ActionEvents.Main,
+    };
 
     const actual = reducer(state, action);
 

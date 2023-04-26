@@ -1,9 +1,5 @@
-import {
-  changeArea,
-  rollPlayerEvents,
-  updateActionEvent,
-} from "../../store/player/player.slice";
-import { ActionEvents, Areas } from "../../store/player/player.types";
+import { changeArea, rollPlayerEvents } from "../../store/player/player.slice";
+import { Areas } from "../../store/player/player.types";
 import { selectPlayerArea } from "../../store/player/player.selectors";
 import { setPrices, rollEvents } from "../../store/price/price.slice";
 import { addInterestShark } from "../../store/shark/shark.slice";
@@ -20,9 +16,6 @@ export default function Jet() {
   const handleOnSelect = (areaKey: Areas) => {
     if (areaKey !== playerArea) {
       dispatch(changeArea(areaKey));
-      areaKey === Areas.Bronx
-        ? dispatch(updateActionEvent(ActionEvents.Shark))
-        : dispatch(updateActionEvent(ActionEvents.Main));
       dispatch(setPrices());
       dispatch(rollEvents());
       dispatch(rollPlayerEvents());

@@ -12,7 +12,13 @@ import {
 
 export const playerReducers = {
   changeArea(state: PlayerState, action: PayloadAction<Areas>) {
-    return { ...state, area: action.payload, daysEnd: state.daysEnd - 1 };
+    return {
+      ...state,
+      area: action.payload,
+      daysEnd: state.daysEnd - 1,
+      actionEvent:
+        action.payload === Areas.Bronx ? ActionEvents.Shark : ActionEvents.Main,
+    };
   },
   buy(state: PlayerState, action: PayloadAction<BuyAndSellPayloadAction>) {
     const { drug, amount, price } = action.payload;

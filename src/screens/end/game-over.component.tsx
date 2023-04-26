@@ -42,7 +42,6 @@ export default function GameOver() {
       ) : (
         <div>
           <div>You made ${profit}</div>
-          <div>You rank {rank} out of 100</div>
           <br />
           <div>{dealerRank()}</div>
           <br />
@@ -51,17 +50,17 @@ export default function GameOver() {
               You might want to skip town... the loan shark is looking for you
             </div>
           )}
-          <Continue
-            onContinue={() => {
-              dispatch(resetPlayer());
-              dispatch(resetShark());
-              dispatch(resetStash());
-              dispatch(resetBank());
-              dispatch(setPrices());
-            }}
-          />
         </div>
       )}
+      <Continue
+        onContinue={() => {
+          dispatch(resetPlayer());
+          dispatch(resetShark());
+          dispatch(resetStash());
+          dispatch(resetBank());
+          dispatch(setPrices());
+        }}
+      />
     </div>
   );
 }
