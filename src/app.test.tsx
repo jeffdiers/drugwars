@@ -2,9 +2,8 @@ import { fireEvent, screen } from "@testing-library/react";
 import { renderWithProviders } from "./utils/test-utils";
 import App from "./app.component";
 import { setupStore } from "./store/store";
-import { GameStage, updateStage } from "./store/main/main.slice";
-import { changeArea } from "./store/player/player.slice";
-import { Areas } from "./store/player/player.types";
+import { changeArea, updateActionEvent } from "./store/player/player.slice";
+import { ActionEvents, Areas } from "./store/player/player.types";
 import { hitPlayer } from "./store/player/player.slice";
 
 describe("main component", () => {
@@ -20,7 +19,7 @@ describe("main component", () => {
 
   test("render main page and not ask shark if not in bronx", () => {
     const store = setupStore();
-    store.dispatch(updateStage(GameStage.MAIN));
+    store.dispatch(updateActionEvent(ActionEvents.Main));
     store.dispatch(changeArea(Areas.Brooklyn));
 
     renderWithProviders(<App />, { store });
@@ -154,7 +153,7 @@ describe("main component", () => {
       { input: "j", expected: /Where you gonna go/i },
     ])("input: $input, expected: $expected", ({ input, expected }) => {
       const store = setupStore();
-      const action = updateStage(GameStage.MAIN);
+      const action = updateActionEvent(ActionEvents.Main);
       store.dispatch(changeArea(Areas.Brooklyn));
 
       store.dispatch(action);
@@ -181,7 +180,7 @@ describe("main component", () => {
         { input: "p", expected: /Enter the first letter of a drug to choose/i },
       ])("input: $input, expected: $expected", ({ input, expected }) => {
         const store = setupStore();
-        const action = updateStage(GameStage.BUY);
+        const action = updateActionEvent(ActionEvents.Buy);
 
         store.dispatch(action);
         renderWithProviders(<App />, { store });
@@ -208,7 +207,7 @@ describe("main component", () => {
         { input: "p", expected: /Enter the first letter of a drug to choose/i },
       ])("input: $input, expected: $expected", ({ input, expected }) => {
         const store = setupStore();
-        const action = updateStage(GameStage.SELL);
+        const action = updateActionEvent(ActionEvents.Sell);
 
         store.dispatch(action);
         renderWithProviders(<App />, { store });
@@ -230,7 +229,7 @@ describe("main component", () => {
         { input: "2", expected: /area: ghetto/i },
       ])("input: $input, expected: $expected", ({ input, expected }) => {
         const store = setupStore();
-        const action = updateStage(GameStage.JET);
+        const action = updateActionEvent(ActionEvents.Jet);
 
         store.dispatch(action);
         renderWithProviders(<App />, { store });
@@ -247,7 +246,7 @@ describe("main component", () => {
 
   test("if player health reaches 0 game over", () => {
     const store = setupStore();
-    store.dispatch(updateStage(GameStage.MAIN));
+    store.dispatch(updateActionEvent(ActionEvents.Main));
     store.dispatch(hitPlayer(100));
     renderWithProviders(<App />, { store });
 

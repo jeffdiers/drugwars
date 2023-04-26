@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { playerReducers } from "./player.reducers";
-import { PlayerState, Areas } from "./player.types";
+import { PlayerState, Areas, ActionEvents } from "./player.types";
 
 const initialState: PlayerState = {
   area: Areas.Bronx,
@@ -10,6 +10,7 @@ const initialState: PlayerState = {
   money: 2000,
   maxTrench: 100,
   guns: 0,
+  cops: 0,
   cocaine: 0,
   heroin: 0,
   acid: 0,
@@ -17,8 +18,7 @@ const initialState: PlayerState = {
   speed: 0,
   ludes: 0,
   events: [],
-  eventAction: undefined,
-  cops: 0,
+  actionEvent: ActionEvents.Start,
 };
 
 const playerSlice = createSlice({
@@ -41,8 +41,8 @@ export const {
   healPlayer,
   addPlayerEvent,
   removePlayerEvent,
-  removePlayerEventAction,
   askHealPlayer,
+  updateActionEvent,
 } = playerSlice.actions;
 
 export default playerSlice.reducer;

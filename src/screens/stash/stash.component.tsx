@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { GameStage, updateStage } from "../../store/main/main.slice";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+
 import {
   depositStash,
   withdrawStash,
   selectStashBalance,
 } from "../../store/stash/stash.slice";
-import { buy, sell } from "../../store/player/player.slice";
-import { Drugs } from "../../store/player/player.types";
-import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { buy, sell, updateActionEvent } from "../../store/player/player.slice";
+import { ActionEvents, Drugs } from "../../store/player/player.types";
 
 import YesNo from "../../components/action/yes-no.component";
 import InputAmount from "../../components/action/input-amount.component";
@@ -66,7 +66,7 @@ export default function Shark() {
         <YesNo
           text="Would you like to stash any drugs?"
           onYes={() => setCurrentAsk(CurrentAsk.ASK_SELECT_DRUG)}
-          onNo={() => dispatch(updateStage(GameStage.MAIN))}
+          onNo={() => dispatch(updateActionEvent(ActionEvents.Main))}
         />
       )}
       {currentAsk === CurrentAsk.ASK_SELECT_DRUG && (

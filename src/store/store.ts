@@ -2,7 +2,6 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import type { PreloadedState } from "@reduxjs/toolkit";
 import logger from "redux-logger";
 
-import mainReducer from "./main/main.slice";
 import playerReducer from "./player/player.slice";
 import priceSlice from "./price/price.slice";
 import sharkSlice from "./shark/shark.slice";
@@ -10,7 +9,6 @@ import bankSlice from "./bank/bank.slice";
 import stashSlice from "./stash/stash.slice";
 
 const rootReducer = combineReducers({
-  main: mainReducer,
   player: playerReducer,
   price: priceSlice,
   shark: sharkSlice,

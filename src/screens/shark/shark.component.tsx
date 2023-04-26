@@ -1,16 +1,20 @@
 import { useState } from "react";
-import { GameStage, updateStage } from "../../store/main/main.slice";
 import {
   depositShark,
   withdrawShark,
   selectSharkBalance,
 } from "../../store/shark/shark.slice";
-import { depositPlayer, withdrawPlayer } from "../../store/player/player.slice";
+import {
+  depositPlayer,
+  withdrawPlayer,
+  updateActionEvent,
+} from "../../store/player/player.slice";
 import { selectPlayerMoney } from "../../store/player/player.selectors";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
 import YesNo from "../../components/action/yes-no.component";
 import InputAmount from "../../components/action/input-amount.component";
+import { ActionEvents } from "../../store/player/player.types";
 
 export enum CurrentAsk {
   ASK_VISIT,
@@ -56,7 +60,7 @@ export default function Shark() {
       setInfo("");
       dispatch(withdrawShark(amount));
       dispatch(depositPlayer(amount));
-      dispatch(updateStage(GameStage.BANK));
+      dispatch(updateActionEvent(ActionEvents.Bank));
     }
   };
 
@@ -66,7 +70,7 @@ export default function Shark() {
         <YesNo
           text="Would you like to visit the loan shark?"
           onYes={() => setCurrentAsk(CurrentAsk.ASK_DEPOSIT)}
-          onNo={() => dispatch(updateStage(GameStage.BANK))}
+          onNo={() => dispatch(updateActionEvent(ActionEvents.Bank))}
         />
       )}
       {currentAsk === CurrentAsk.ASK_DEPOSIT && (

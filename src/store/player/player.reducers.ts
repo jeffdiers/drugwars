@@ -5,8 +5,8 @@ import {
   PlayerState,
   Areas,
   Drugs,
-  EventActions,
   BuyAndSellPayloadAction,
+  ActionEvents,
 } from "./player.types";
 
 export const playerReducers = {
@@ -78,16 +78,16 @@ export const playerReducers = {
         break;
 
       case 4 || 5:
-        return { ...state, eventAction: EventActions.UpgradeCoat };
+        return { ...state, actionEvent: ActionEvents.BuyCoat };
 
       case 6 || 7:
-        return { ...state, eventAction: EventActions.BuyGun };
+        return { ...state, actionEvent: ActionEvents.BuyGun };
 
       case 8 || 9:
         return {
           ...state,
           cops: randomInteger(1, 4),
-          eventAction: EventActions.CopsChase,
+          actionEvent: ActionEvents.CopsChase,
         };
 
       default:
@@ -134,10 +134,10 @@ export const playerReducers = {
   removePlayerEvent(state: PlayerState, _action: PayloadAction) {
     return { ...state, events: state.events.slice(1) };
   },
-  removePlayerEventAction(state: PlayerState, _action: PayloadAction) {
-    return { ...state, eventAction: undefined };
-  },
   askHealPlayer(state: PlayerState, _action: PayloadAction) {
-    return { ...state, eventAction: EventActions.AskHeal };
+    return { ...state, actionEvent: ActionEvents.Heal };
+  },
+  updateActionEvent(state: PlayerState, action: PayloadAction<ActionEvents>) {
+    return { ...state, actionEvent: action.payload };
   },
 };

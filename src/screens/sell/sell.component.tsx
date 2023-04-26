@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { GameStage, updateStage } from "../../store/main/main.slice";
-import { sell } from "../../store/player/player.slice";
-import { Drugs } from "../../store/player/player.types";
+import { sell, updateActionEvent } from "../../store/player/player.slice";
+import { ActionEvents, Drugs } from "../../store/player/player.types";
 import { selectPlayerInventory } from "../../store/player/player.selectors";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
@@ -36,7 +35,7 @@ export default function Sell() {
     } else {
       setInfo("");
       dispatch(sell({ drug: currentDrug, amount, price }));
-      dispatch(updateStage(GameStage.MAIN));
+      dispatch(updateActionEvent(ActionEvents.Main));
     }
   };
 

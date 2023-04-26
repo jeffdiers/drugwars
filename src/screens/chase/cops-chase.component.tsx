@@ -4,24 +4,25 @@ import {
   hitPlayer,
   addPlayerEvent,
   depositPlayer,
-  removePlayerEventAction,
   askHealPlayer,
+  updateActionEvent,
 } from "../../store/player/player.slice";
 import {
   selectPlayerCops,
   selectPlayerHealth,
   selectPlayerGuns,
 } from "../../store/player/player.selectors";
-import { GameStage, updateStage } from "../../store/main/main.slice";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { randomInteger } from "../../utils/helpers";
 
 import RunFight from "../../components/action/run-fight.component";
 import Continue from "../../components/action/continue.component";
+import { ActionEvents } from "../../store/player/player.types";
 
 export default function CopsChase() {
   const dispatch = useAppDispatch();
 
+  const [startChase, setStartChase] = useState(true);
   const [gotAway, setGotaway] = useState(false);
   const [winByFight, setWinByFight] = useState(false);
 
@@ -64,8 +65,7 @@ export default function CopsChase() {
       dispatch(depositPlayer(foundMoney));
       dispatch(addPlayerEvent(`You found $${foundMoney} while getting away!`));
     }
-    dispatch(removePlayerEventAction());
-    dispatch(updateStage(GameStage.MAIN));
+    dispatch(updateActionEvent(ActionEvents.Main));
     dispatch(askHealPlayer());
   };
 
@@ -77,6 +77,11 @@ export default function CopsChase() {
     <>
       {gotAway ? (
         <Continue text="You got away!" onContinue={handleGotAway} />
+      ) : startChase ? (
+        <Continue
+          text={`Officer Hardass and ${playerCops} of his deputies are chasing you !!!!!`}
+          onContinue={() => setStartChase(false)}
+        />
       ) : (
         <div>
           <div>Health: {playerHealth}</div>

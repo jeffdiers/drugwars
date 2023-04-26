@@ -2,7 +2,7 @@ import { createSelector } from "@reduxjs/toolkit";
 
 import { RootState } from "../store";
 
-import { PlayerState, Drugs, DrugsMap } from "./player.types";
+import { PlayerState, Drugs, DrugsMap, ActionEvents } from "./player.types";
 
 export const inventoryHelper = (playerState: PlayerState) => {
   let total = playerState.guns * 5;
@@ -38,11 +38,6 @@ export const selectPlayerEvents = createSelector(
   (player) => player.events
 );
 
-export const selectPlayerEventAction = createSelector(
-  selectPlayer,
-  (player) => player.eventAction
-);
-
 export const selectPlayerCops = createSelector(
   selectPlayer,
   (player) => player.cops + 1
@@ -61,4 +56,13 @@ export const selectPlayerGuns = createSelector(
 export const selectPlayerDaysEnd = createSelector(
   selectPlayer,
   (player) => player.daysEnd
+);
+
+export const selectPlayerActionEvent = createSelector(
+  selectPlayer,
+  (player) => {
+    if (player.health <= 0 || player.daysEnd === 0)
+      return ActionEvents.GameOver;
+    return player.actionEvent;
+  }
 );

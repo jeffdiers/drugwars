@@ -1,15 +1,20 @@
-import { selectProfit, selectDealerRank } from "../../store/main/main.slice";
 import { useAppSelector } from "../../utils/hooks";
 import { selectSharkBalance } from "../../store/shark/shark.slice";
 
-import { selectPlayerHealth } from "../../store/player/player.selectors";
+import {
+  selectPlayerHealth,
+  selectPlayerMoney,
+} from "../../store/player/player.selectors";
+import { selectBankBalance } from "../../store/bank/bank.slice";
 
 export default function GameOver() {
   const playerHealth = useAppSelector(selectPlayerHealth);
-
-  const profit = useAppSelector(selectProfit);
-  const rank = useAppSelector(selectDealerRank);
+  const playerMoney = useAppSelector(selectPlayerMoney);
+  const bankBalance = useAppSelector(selectBankBalance);
   const sharkBalance = useAppSelector(selectSharkBalance);
+
+  const profit = playerMoney + bankBalance - sharkBalance;
+  const rank = profit > 0 ? Math.floor((profit / 10000000) * 100) : 0;
 
   const dealerRank = () => {
     if (rank >= 0 && rank <= 30) return "Small Time Pusha... WEAK";

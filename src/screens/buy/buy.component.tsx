@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
-import { GameStage, updateStage } from "../../store/main/main.slice";
-import { buy } from "../../store/player/player.slice";
+import { buy, updateActionEvent } from "../../store/player/player.slice";
 import {
   selectPlayerCoatSpace,
   selectPlayerMoney,
 } from "../../store/player/player.selectors";
-import { Drugs } from "../../store/player/player.types";
+import { ActionEvents, Drugs } from "../../store/player/player.types";
 import { selectPriceDrugs } from "../../store/price/price.selectors";
 
 import InputAmount from "../../components/action/input-amount.component";
@@ -40,7 +39,7 @@ export default function Buy() {
     } else {
       setInfo("");
       dispatch(buy({ drug: currentDrug, amount, price }));
-      dispatch(updateStage(GameStage.MAIN));
+      dispatch(updateActionEvent(ActionEvents.Main));
     }
   };
 

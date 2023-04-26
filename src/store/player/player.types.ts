@@ -20,18 +20,26 @@ export type DrugsMap = {
   [key: string]: number;
 };
 
-export enum EventActions {
-  UpgradeCoat,
-  BuyGun,
-  CopsChase,
-  HealPlayer,
-  AskHeal,
-}
-
 export interface BuyAndSellPayloadAction {
   drug: Drugs;
   amount: number;
   price: number;
+}
+
+export enum ActionEvents {
+  Start,
+  Shark,
+  Bank,
+  Stash,
+  Main,
+  Buy,
+  Sell,
+  Jet,
+  CopsChase,
+  BuyCoat,
+  BuyGun,
+  Heal,
+  GameOver,
 }
 
 export type PlayerState = {
@@ -41,6 +49,7 @@ export type PlayerState = {
   readonly money: number;
   readonly maxTrench: number;
   readonly guns: number;
+  readonly cops: number;
   readonly cocaine: number;
   readonly heroin: number;
   readonly acid: number;
@@ -48,6 +57,5 @@ export type PlayerState = {
   readonly speed: number;
   readonly ludes: number;
   readonly events: string[];
-  readonly eventAction: EventActions | undefined;
-  readonly cops: number;
+  readonly actionEvent: ActionEvents;
 };

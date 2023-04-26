@@ -1,4 +1,3 @@
-import { GameStage, selectStage } from "./store/main/main.slice";
 import { useAppSelector } from "./utils/hooks";
 
 import Start from "./screens/start/start.component";
@@ -10,28 +9,66 @@ import Buy from "./screens/buy/buy.component";
 import Sell from "./screens/sell/sell.component";
 import Jet from "./screens/jet/jet.component";
 import CopsChase from "./screens/chase/cops-chase.component";
+import BuyCoat from "./screens/buy-coat/buy-coat.component";
+import BuyGun from "./screens/buy-gun/buy-gun.component";
+import Heal from "./screens/heal/heal.component";
 import GameOver from "./screens/end/game-over.component";
-
 import GameStats from "./components/game-stats.component";
 
+import { selectPlayerActionEvent } from "./store/player/player.selectors";
+import { ActionEvents } from "./store/player/player.types";
+
 export default function App() {
-  const stage = useAppSelector(selectStage);
+  const playerActionEvent = useAppSelector(selectPlayerActionEvent);
+
+  const renderGameStats = () => {
+    if (
+      playerActionEvent !== ActionEvents.Start &&
+      playerActionEvent !== ActionEvents.CopsChase &&
+      playerActionEvent !== ActionEvents.GameOver
+    ) {
+      return <GameStats />;
+    }
+  };
+
+  const renderScreens = () => {
+    switch (playerActionEvent) {
+      case ActionEvents.Start:
+        return <Start />;
+      case ActionEvents.Shark:
+        return <Shark />;
+      case ActionEvents.Bank:
+        return <Bank />;
+      case ActionEvents.Stash:
+        return <Stash />;
+      case ActionEvents.Main:
+        return <Main />;
+      case ActionEvents.Buy:
+        return <Buy />;
+      case ActionEvents.Sell:
+        return <Sell />;
+      case ActionEvents.Jet:
+        return <Jet />;
+      case ActionEvents.CopsChase:
+        return <CopsChase />;
+      case ActionEvents.BuyCoat:
+        return <BuyCoat />;
+      case ActionEvents.BuyGun:
+        return <BuyGun />;
+      case ActionEvents.Heal:
+        return <Heal />;
+      case ActionEvents.GameOver:
+        return <GameOver />;
+
+      default:
+        break;
+    }
+  };
 
   return (
     <div>
-      {stage === GameStage.START && <Start />}
-      {stage !== GameStage.START &&
-        stage !== GameStage.COPS_CHASE &&
-        stage !== GameStage.GAME_OVER && <GameStats />}
-      {stage === GameStage.SHARK && <Shark />}
-      {stage === GameStage.BANK && <Bank />}
-      {stage === GameStage.STASH && <Stash />}
-      {stage === GameStage.MAIN && <Main />}
-      {stage === GameStage.BUY && <Buy />}
-      {stage === GameStage.SELL && <Sell />}
-      {stage === GameStage.JET && <Jet />}
-      {stage === GameStage.COPS_CHASE && <CopsChase />}
-      {stage === GameStage.GAME_OVER && <GameOver />}
+      {renderGameStats()}
+      {renderScreens()}
     </div>
   );
 }

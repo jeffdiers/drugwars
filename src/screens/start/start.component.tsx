@@ -1,7 +1,9 @@
-import { GameStage, updateStage } from "../../store/main/main.slice";
 import { useAppDispatch } from "../../utils/hooks";
 
+import { updateActionEvent } from "../../store/player/player.slice";
+
 import Continue from "../../components/action/continue.component";
+import { ActionEvents } from "../../store/player/player.types";
 
 export default function Start() {
   const dispatch = useAppDispatch();
@@ -9,7 +11,7 @@ export default function Start() {
   return (
     <Continue
       text="New Game"
-      onContinue={() => dispatch(updateStage(GameStage.SHARK))}
+      onContinue={() => dispatch(updateActionEvent(ActionEvents.Shark))}
     />
   );
 }

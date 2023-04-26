@@ -4,7 +4,7 @@ import reducer, {
   sell,
   rollPlayerEvents,
 } from "./player.slice";
-import { Areas, Drugs, EventActions } from "./player.types";
+import { ActionEvents, Areas, Drugs } from "./player.types";
 import { setupStore } from "../store";
 import { randomInteger } from "../../utils/helpers";
 
@@ -24,6 +24,7 @@ describe("player slice", () => {
       money: 2000,
       maxTrench: 100,
       guns: 0,
+      cops: 0,
       cocaine: 0,
       heroin: 0,
       acid: 0,
@@ -31,8 +32,7 @@ describe("player slice", () => {
       speed: 0,
       ludes: 0,
       events: [],
-      eventAction: undefined,
-      cops: 0,
+      actionEvent: ActionEvents.Start,
     };
 
     const actual = reducer(undefined, { type: undefined });
@@ -167,7 +167,7 @@ describe("player slice", () => {
       const { state, action } = setupRollPlayerEvents(0.3);
       const expected = {
         ...state,
-        eventAction: EventActions.UpgradeCoat,
+        actionEvent: ActionEvents.BuyCoat,
       };
 
       const actual = reducer(state, action);
@@ -179,7 +179,7 @@ describe("player slice", () => {
       const { state, action } = setupRollPlayerEvents(0.45);
       const expected = {
         ...state,
-        eventAction: EventActions.BuyGun,
+        actionEvent: ActionEvents.BuyGun,
       };
 
       const actual = reducer(state, action);
@@ -192,7 +192,7 @@ describe("player slice", () => {
       const expected = {
         ...state,
         cops: 3,
-        eventAction: EventActions.CopsChase,
+        actionEvent: ActionEvents.CopsChase,
       };
 
       const actual = reducer(state, action);
