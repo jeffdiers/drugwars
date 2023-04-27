@@ -1,7 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
-const initialState = {
+export type SharkState = {
+  readonly balance: number;
+  readonly interest: 1.08;
+};
+
+const initialState: SharkState = {
   balance: 5500,
   interest: 1.08,
 };
@@ -10,14 +15,24 @@ const sharkSlice = createSlice({
   name: "shark",
   initialState,
   reducers: {
-    addInterest(state, _action: PayloadAction) {
-      return { ...state, balance: state.balance * state.interest };
+    addInterestShark(state: SharkState, _action: PayloadAction) {
+      return { ...state, balance: Math.floor(state.balance * state.interest) };
+    },
+    depositShark(state: SharkState, action: PayloadAction<number>) {
+      return { ...state, balance: state.balance - action.payload };
+    },
+    withdrawShark(state: SharkState, action: PayloadAction<number>) {
+      return { ...state, balance: state.balance + action.payload };
+    },
+    resetShark(_state: SharkState, _action: PayloadAction) {
+      return { ...initialState };
     },
   },
 });
 
 export const selectSharkBalance = (state: RootState) => state.shark.balance;
 
-export const { addInterest } = sharkSlice.actions;
+export const { addInterestShark, depositShark, withdrawShark, resetShark } =
+  sharkSlice.actions;
 
 export default sharkSlice.reducer;

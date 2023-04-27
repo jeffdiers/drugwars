@@ -1,88 +1,49 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../store";
+import { createSlice } from "@reduxjs/toolkit";
 
-export enum Areas {
-  Bronx = "bronx",
-  Ghetto = "ghetto",
-  CentralPark = "central park",
-  Manhattan = "manhattan",
-  ConeyIsland = "coney island",
-  Brooklyn = "brooklyn",
-}
+import { playerReducers } from "./player.reducers";
+import { PlayerState, Areas, ActionEvents } from "./player.types";
 
-export enum Drugs {
-  Cocaine = "cocaine",
-  Heroin = "heroin",
-  Acid = "acid",
-  Weed = "weed",
-  Speed = "speed",
-  Ludes = "ludes",
-}
-
-export interface BuyAndSellPayloadAction {
-  drug: Drugs;
-  amount: number;
-  price: number;
-}
-
-const initialState = {
+export const initialState: PlayerState = {
   area: Areas.Bronx,
   daysEnd: 30,
+  health: 100,
   money: 2000,
   maxTrench: 100,
+  guns: 0,
+  cops: 0,
   cocaine: 0,
   heroin: 0,
   acid: 0,
   weed: 0,
   speed: 0,
   ludes: 0,
+  events: [],
+  actionEvent: ActionEvents.Start,
 };
 
 const playerSlice = createSlice({
   name: "player",
   initialState,
-  reducers: {
-    changeArea(state, action: PayloadAction<Areas>) {
-      return { ...state, area: action.payload, daysEnd: state.daysEnd - 1 };
-    },
-    buy(state, action: PayloadAction<BuyAndSellPayloadAction>) {
-      const { drug, amount, price } = action.payload;
-      const totalPrice = price * amount;
-      const money = state.money - totalPrice;
-      return { ...state, money, [drug]: state[drug] + amount };
-    },
-    sell(state, action: PayloadAction<BuyAndSellPayloadAction>) {
-      const { drug, amount, price } = action.payload;
-      const totalPrice = price * amount;
-      const money = state.money + totalPrice;
-      return { ...state, money, [drug]: state[drug] - amount };
-    },
-  },
+  reducers: playerReducers,
 });
 
-export const selectPlayer = (state: RootState) => state.player;
-export const selectArea = (state: RootState) => state.player.area;
-export const selectTotalInventory = (state: RootState) => {
-  return (
-    state.player.cocaine +
-    state.player.heroin +
-    state.player.acid +
-    state.player.weed +
-    state.player.speed +
-    state.player.ludes
-  );
-};
-export const selectMaxBuy = (state: RootState, drug: Drugs) => {
-  const price = state.price[drug];
-  const maxAmount = Math.floor(state.player.money / price);
-  const coatSpace = state.player.maxTrench - selectTotalInventory(state);
-  if (maxAmount > coatSpace) return coatSpace;
-  return maxAmount;
-};
-export const selectMaxSell = (state: RootState, drug: Drugs) => {
-  return state.player[drug];
-};
-
-export const { changeArea, buy, sell } = playerSlice.actions;
+export const {
+  changeArea,
+  buy,
+  sell,
+  depositPlayer,
+  withdrawPlayer,
+  rollPlayerEvents,
+  upgradeCoat,
+  buyGun,
+  hitCop,
+  hitPlayer,
+  healPlayer,
+  addPlayerEvent,
+  removePlayerEvent,
+  askHealPlayer,
+  updateActionEvent,
+  resetPlayer,
+} = playerSlice.actions;
 
 export default playerSlice.reducer;

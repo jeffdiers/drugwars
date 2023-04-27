@@ -1,42 +1,28 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../store";
-import { Drugs } from "../player/player.slice";
+import { createSlice } from "@reduxjs/toolkit";
+import { randomInteger } from "../../utils/helpers";
 
-const randomInteger = (min: number, max: number) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
+import { priceReducers } from "./price.reducers";
+import { PriceState } from "./price.types";
 
-const initialState = {
+const initialState: PriceState = {
   cocaine: randomInteger(15000, 29999),
   heroin: randomInteger(5000, 13999),
   acid: randomInteger(1000, 4999),
   weed: randomInteger(300, 899),
   speed: randomInteger(90, 249),
   ludes: randomInteger(10, 89),
+  coat: randomInteger(150, 250),
+  gun: randomInteger(200, 400),
+  heal: randomInteger(1000, 3000),
+  events: [],
 };
 
 const priceSlice = createSlice({
   name: "price",
   initialState,
-  reducers: {
-    setPrices(state, _action: PayloadAction) {
-      return {
-        ...state,
-        cocaine: randomInteger(15000, 29999),
-        heroin: randomInteger(5000, 13999),
-        acid: randomInteger(1000, 4999),
-        weed: randomInteger(300, 899),
-        speed: randomInteger(90, 249),
-        ludes: randomInteger(10, 89),
-      };
-    },
-  },
+  reducers: priceReducers,
 });
 
-export const selectPrices = (state: RootState) => state.price;
-export const selectDrugPrice = (state: RootState, drug: Drugs) =>
-  state.price[drug];
-
-export const { setPrices } = priceSlice.actions;
+export const { setPrices, rollEvents, removePriceEvent } = priceSlice.actions;
 
 export default priceSlice.reducer;

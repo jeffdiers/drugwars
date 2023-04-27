@@ -2,24 +2,26 @@ import { fireEvent, screen } from "@testing-library/react";
 import { renderWithProviders } from "./utils/test-utils";
 import App from "./app.component";
 import { setupStore } from "./store/store";
-import { GameStage, updateStage } from "./store/main/main.slice";
+import { changeArea, updateActionEvent } from "./store/player/player.slice";
+import { ActionEvents, Areas } from "./store/player/player.types";
+import { hitPlayer } from "./store/player/player.slice";
 
 describe("main component", () => {
   test("render with default state", () => {
     renderWithProviders(<App />);
 
-    const expected = /Press ENTER to Play/i;
+    const expected = /New game/i;
 
     const actual = screen.getByText(expected);
 
     expect(actual).toBeInTheDocument();
   });
 
-  test("render main page with state change", () => {
+  test("render main page and not ask shark if not in bronx", () => {
     const store = setupStore();
-    const action = updateStage(GameStage.MAIN);
+    store.dispatch(updateActionEvent(ActionEvents.Main));
+    store.dispatch(changeArea(Areas.Brooklyn));
 
-    store.dispatch(action);
     renderWithProviders(<App />, { store });
 
     const expected = /Are you going to/i;
@@ -29,13 +31,115 @@ describe("main component", () => {
     expect(actual).toBeInTheDocument();
   });
 
-  test("state changes with Enter key press", () => {
+  test("render shark with Enter key press from start", () => {
     renderWithProviders(<App />);
-    const element = screen.getByRole("input");
+    const element = screen.getByRole("dialog");
+
+    const expected = /Would you like to visit the loan shark/i;
+
+    fireEvent.keyDown(element, { key: "Enter", keyCode: 13 });
+
+    const actual = screen.getByText(expected);
+
+    expect(actual).toBeInTheDocument();
+  });
+
+  test("ask to visit bank when player selects not to visit shark", () => {
+    renderWithProviders(<App />);
+
+    const expected = /Would you like to visit the bank/i;
+
+    fireEvent.keyDown(screen.getByRole("dialog"), {
+      key: "Enter",
+      keyCode: 13,
+    });
+    fireEvent.keyDown(screen.getByRole("dialog"), { key: "n", keyCode: 13 });
+
+    const actual = screen.getByText(expected);
+
+    expect(actual).toBeInTheDocument();
+  });
+
+  test("ask to visit stash when player selects not to visit bank", () => {
+    renderWithProviders(<App />);
+
+    const expected = /Would you like to stash any drugs/i;
+
+    fireEvent.keyDown(screen.getByRole("dialog"), {
+      key: "Enter",
+      keyCode: 13,
+    });
+    fireEvent.keyDown(screen.getByRole("dialog"), { key: "n", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("dialog"), { key: "n", keyCode: 13 });
+
+    const actual = screen.getByText(expected);
+
+    expect(actual).toBeInTheDocument();
+  });
+
+  test("go to main when player selects not to visit stash", () => {
+    renderWithProviders(<App />);
 
     const expected = /Are you going to/i;
 
-    fireEvent.keyDown(element, { key: "Enter", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("dialog"), {
+      key: "Enter",
+      keyCode: 13,
+    });
+    fireEvent.keyDown(screen.getByRole("dialog"), { key: "n", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("dialog"), { key: "n", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("dialog"), { key: "n", keyCode: 13 });
+
+    const actual = screen.getByText(expected);
+
+    expect(actual).toBeInTheDocument();
+  });
+
+  test("go to shark when player selects to visit shark", () => {
+    renderWithProviders(<App />);
+
+    const expected = /How much would you like to repay/i;
+
+    fireEvent.keyDown(screen.getByRole("dialog"), {
+      key: "Enter",
+      keyCode: 13,
+    });
+    fireEvent.keyDown(screen.getByRole("dialog"), { key: "y", keyCode: 13 });
+
+    const actual = screen.getByText(expected);
+
+    expect(actual).toBeInTheDocument();
+  });
+
+  test("go to bank when player selects to visit bank", () => {
+    renderWithProviders(<App />);
+
+    const expected = /How much would you like to deposit/i;
+
+    fireEvent.keyDown(screen.getByRole("dialog"), {
+      key: "Enter",
+      keyCode: 13,
+    });
+    fireEvent.keyDown(screen.getByRole("dialog"), { key: "n", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("dialog"), { key: "y", keyCode: 13 });
+
+    const actual = screen.getByText(expected);
+
+    expect(actual).toBeInTheDocument();
+  });
+
+  test("go to stash when player selects to visit stash", () => {
+    renderWithProviders(<App />);
+
+    const expected = /Which drug do you want to stash/i;
+
+    fireEvent.keyDown(screen.getByRole("dialog"), {
+      key: "Enter",
+      keyCode: 13,
+    });
+    fireEvent.keyDown(screen.getByRole("dialog"), { key: "n", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("dialog"), { key: "n", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("dialog"), { key: "y", keyCode: 13 });
 
     const actual = screen.getByText(expected);
 
@@ -49,11 +153,12 @@ describe("main component", () => {
       { input: "j", expected: /Where you gonna go/i },
     ])("input: $input, expected: $expected", ({ input, expected }) => {
       const store = setupStore();
-      const action = updateStage(GameStage.MAIN);
+      const action = updateActionEvent(ActionEvents.Main);
+      store.dispatch(changeArea(Areas.Brooklyn));
 
       store.dispatch(action);
       renderWithProviders(<App />, { store });
-      const element = screen.getByRole("input");
+      const element = screen.getByRole("dialog");
 
       fireEvent.keyDown(element, { key: input, keyCode: 66 });
 
@@ -75,11 +180,11 @@ describe("main component", () => {
         { input: "p", expected: /Enter the first letter of a drug to choose/i },
       ])("input: $input, expected: $expected", ({ input, expected }) => {
         const store = setupStore();
-        const action = updateStage(GameStage.BUY);
+        const action = updateActionEvent(ActionEvents.Buy);
 
         store.dispatch(action);
         renderWithProviders(<App />, { store });
-        const element = screen.getByRole("input");
+        const element = screen.getByRole("dialog");
 
         fireEvent.keyDown(element, { key: input, keyCode: 66 });
 
@@ -102,11 +207,11 @@ describe("main component", () => {
         { input: "p", expected: /Enter the first letter of a drug to choose/i },
       ])("input: $input, expected: $expected", ({ input, expected }) => {
         const store = setupStore();
-        const action = updateStage(GameStage.SELL);
+        const action = updateActionEvent(ActionEvents.Sell);
 
         store.dispatch(action);
         renderWithProviders(<App />, { store });
-        const element = screen.getByRole("input");
+        const element = screen.getByRole("dialog");
 
         fireEvent.keyDown(element, { key: input, keyCode: 66 });
 
@@ -124,11 +229,11 @@ describe("main component", () => {
         { input: "2", expected: /area: ghetto/i },
       ])("input: $input, expected: $expected", ({ input, expected }) => {
         const store = setupStore();
-        const action = updateStage(GameStage.JET);
+        const action = updateActionEvent(ActionEvents.Jet);
 
         store.dispatch(action);
         renderWithProviders(<App />, { store });
-        const element = screen.getByRole("input");
+        const element = screen.getByRole("dialog");
 
         fireEvent.keyDown(element, { key: input, keyCode: 66 });
 
@@ -137,5 +242,18 @@ describe("main component", () => {
         expect(actual).toBeInTheDocument();
       });
     });
+  });
+
+  test("if player health reaches 0 game over", () => {
+    const store = setupStore();
+    store.dispatch(updateActionEvent(ActionEvents.Main));
+    store.dispatch(hitPlayer(100));
+    renderWithProviders(<App />, { store });
+
+    const expected = /Game over/i;
+
+    const actual = screen.getByText(expected);
+
+    expect(actual).toBeInTheDocument();
   });
 });
