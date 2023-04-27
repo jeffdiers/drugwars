@@ -226,7 +226,7 @@ describe("main component", () => {
     describe("select drug", () => {
       test.each([
         { input: "1", expected: /area: bronx/i },
-        { input: "2", expected: /area: ghetto/i },
+        { input: "2", expected: /area: queens/i },
       ])("input: $input, expected: $expected", ({ input, expected }) => {
         const store = setupStore();
         const action = updateActionEvent(ActionEvents.Jet);

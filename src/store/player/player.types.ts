@@ -1,6 +1,6 @@
 export enum Areas {
   Bronx = "bronx",
-  Ghetto = "ghetto",
+  Queens = "queens",
   CentralPark = "central park",
   Manhattan = "manhattan",
   ConeyIsland = "coney island",

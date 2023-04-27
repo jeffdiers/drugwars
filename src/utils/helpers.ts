@@ -14,7 +14,7 @@ export const getDrugByKey = (key: string) => {
 
 export const getAreaByKey = (key: string) => {
   if (key === "1") return Areas.Bronx;
-  if (key === "2") return Areas.Ghetto;
+  if (key === "2") return Areas.Queens;
   if (key === "3") return Areas.CentralPark;
   if (key === "4") return Areas.Manhattan;
   if (key === "5") return Areas.ConeyIsland;

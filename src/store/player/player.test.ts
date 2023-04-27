@@ -43,11 +43,11 @@ describe("player slice", () => {
   test("should handle area being updated ", () => {
     const store = setupStore();
     const state = store.getState().player;
-    const action = changeArea(Areas.Ghetto);
+    const action = changeArea(Areas.Queens);
 
     const expected = {
       ...state,
-      area: Areas.Ghetto,
+      area: Areas.Queens,
       daysEnd: 29,
       actionEvent: ActionEvents.Main,
     };
