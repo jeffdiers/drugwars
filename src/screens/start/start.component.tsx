@@ -10,7 +10,7 @@ export default function Start() {
 
   return (
     <Continue
-      text="helloNew Game"
+      text="New Game"
       onContinue={() => dispatch(updateActionEvent(ActionEvents.Shark))}
     />
   );
