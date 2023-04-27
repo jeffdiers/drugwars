@@ -42,6 +42,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint", "npm:8.39.0"],\
             ["eslint-config-react-app", "virtual:a97b1cd16736de5e3ab46d7800570488e6d7940f6f8e3d9e205ce3bbbb5c0e0a2a225e9de87504ff91a2c7bb47586a56fdd3441e0cda6c057ee9ebda252eeaad#npm:7.0.1"],\
             ["husky", "npm:8.0.3"],\
+            ["pinst", "npm:3.0.0"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:a97b1cd16736de5e3ab46d7800570488e6d7940f6f8e3d9e205ce3bbbb5c0e0a2a225e9de87504ff91a2c7bb47586a56fdd3441e0cda6c057ee9ebda252eeaad#npm:18.2.0"],\
             ["react-redux", "virtual:a97b1cd16736de5e3ab46d7800570488e6d7940f6f8e3d9e205ce3bbbb5c0e0a2a225e9de87504ff91a2c7bb47586a56fdd3441e0cda6c057ee9ebda252eeaad#npm:8.0.5"],\
@@ -7841,6 +7842,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint", "npm:8.39.0"],\
             ["eslint-config-react-app", "virtual:a97b1cd16736de5e3ab46d7800570488e6d7940f6f8e3d9e205ce3bbbb5c0e0a2a225e9de87504ff91a2c7bb47586a56fdd3441e0cda6c057ee9ebda252eeaad#npm:7.0.1"],\
             ["husky", "npm:8.0.3"],\
+            ["pinst", "npm:3.0.0"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:a97b1cd16736de5e3ab46d7800570488e6d7940f6f8e3d9e205ce3bbbb5c0e0a2a225e9de87504ff91a2c7bb47586a56fdd3441e0cda6c057ee9ebda252eeaad#npm:18.2.0"],\
             ["react-redux", "virtual:a97b1cd16736de5e3ab46d7800570488e6d7940f6f8e3d9e205ce3bbbb5c0e0a2a225e9de87504ff91a2c7bb47586a56fdd3441e0cda6c057ee9ebda252eeaad#npm:8.0.5"],\
@@ -12703,6 +12705,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/pify-npm-2.3.0-8b63310934-9503aaeaf4.zip/node_modules/pify/",\
           "packageDependencies": [\
             ["pify", "npm:2.3.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["pinst", [\
+        ["npm:3.0.0", {\
+          "packageLocation": "./.yarn/cache/pinst-npm-3.0.0-5d2b6c1dda-4ae48a6a60.zip/node_modules/pinst/",\
+          "packageDependencies": [\
+            ["pinst", "npm:3.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\

@@ -6,7 +6,10 @@
   "scripts": {
     "build": "react-scripts build",
     "start": "react-scripts start",
-    "test": "react-scripts test"
+    "test": "react-scripts test",
+    "postinstall": "husky install",
+    "prepack": "pinst --disable",
+    "postpack": "pinst --enable"
   },
   "eslintConfig": {
     "extends": [
@@ -29,7 +32,8 @@
     "@types/testing-library__jest-dom": "^5.14.5",
     "eslint": "^8.39.0",
     "eslint-config-react-app": "^7.0.1",
-    "husky": "^8.0.3",
+    "husky": "^8.0.0",
+    "pinst": "^3.0.0",
     "typescript": "5.0.4"
   },
   "dependencies": {
@@ -55,7 +59,7 @@
   "packageManager": "yarn@3.5.0",
   "husky": {
     "hooks": {
-       "pre-commit": "echo ”[Husky] pre-commit”"
+      "pre-commit": "echo ”[Husky] pre-commit”"
     }
- }
+  }
 }
