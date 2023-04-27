@@ -1,6 +1,7 @@
 import { FC } from "react";
 
 import ActionContainer from "./action-container.component";
+import Button from "../button.component";
 
 type YesNoProps = {
   text: string;
@@ -25,6 +26,9 @@ const YesNo: FC<YesNoProps> = ({ text, onYes, onNo }) => {
       {text}
       <br />
       Press y or n
+      <br />
+      <Button onClick={() => onYes()}>yes</Button>
+      <Button onClick={() => onNo()}>no</Button>
     </ActionContainer>
   );
 };

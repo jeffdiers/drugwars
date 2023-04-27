@@ -3,6 +3,7 @@ import { Drugs } from "../../store/player/player.types";
 import { getDrugByKey } from "../../utils/helpers";
 
 import ActionContainer from "./action-container.component";
+import Button from "../button.component";
 
 type SelectDrugProps = {
   text: string;
@@ -20,6 +21,14 @@ const SelectDrug: FC<SelectDrugProps> = ({ text, onSelect }) => {
       {text}
       <br />
       Enter the first letter of a drug to choose!
+      <br />
+      <ul>
+        {Object.values(Drugs).map((drug, i) => (
+          <li key={i}>
+            <Button onClick={() => onSelect(drug)}>{drug}</Button>
+          </li>
+        ))}
+      </ul>
     </ActionContainer>
   );
 };

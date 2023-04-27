@@ -1,4 +1,5 @@
 import { FC, FormEvent } from "react";
+import Button from "../button.component";
 
 type InputAmountProps = {
   name: string;
@@ -27,6 +28,7 @@ const InputAmount: FC<InputAmountProps> = ({
         {labelText}
         <br />
         <input autoFocus name={name} />
+        <Button type="submit">submit</Button>
       </label>
     </form>
   );

@@ -1,6 +1,7 @@
 import { FC } from "react";
 
 import ActionContainer from "./action-container.component";
+import Button from "../button.component";
 
 type BuySellJetProps = {
   onBuy: Function;
@@ -24,6 +25,10 @@ const BuySellJet: FC<BuySellJetProps> = ({ onBuy, onSell, onJet }) => {
   return (
     <ActionContainer onKeyDown={handleOnKeyDown}>
       Are you going to (B)uy, (S)ell, or (J)et?
+      <br />
+      <Button onClick={() => onBuy()}>buy</Button>
+      <Button onClick={() => onSell()}>sell</Button>
+      <Button onClick={() => onJet()}>jet</Button>
     </ActionContainer>
   );
 };

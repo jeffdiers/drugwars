@@ -1,5 +1,6 @@
 import { FC } from "react";
 
+import Button from "../button.component";
 import ActionContainer from "./action-container.component";
 
 type ContinueProps = {
@@ -15,6 +16,8 @@ const Continue: FC<ContinueProps> = ({ text, onContinue }) => {
   return (
     <ActionContainer onKeyDown={handleOnKeyDown}>
       {text}
+      <br />
+      <Button onClick={() => onContinue()}>ok</Button>
       <br />
       Press ENTER to Continue
     </ActionContainer>

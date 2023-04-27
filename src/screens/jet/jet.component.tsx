@@ -24,17 +24,5 @@ export default function Jet() {
     }
   };
 
-  return (
-    <>
-      <SelectArea onSelect={handleOnSelect} />
-      <ul>
-        <li>1: {Areas.Bronx}</li>
-        <li>2: {Areas.Ghetto}</li>
-        <li>3: {Areas.CentralPark}</li>
-        <li>4: {Areas.Manhattan}</li>
-        <li>5: {Areas.ConeyIsland}</li>
-        <li>6: {Areas.Brooklyn}</li>
-      </ul>
-    </>
-  );
+  return <SelectArea onSelect={handleOnSelect} />;
 }
