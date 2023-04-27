@@ -17,17 +17,21 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^29.1.1",
-    "typescript": "^4.8.4"
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/jest": "^29.5.1",
+    "@types/node": "^18.16.1",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.1",
+    "@types/redux-logger": "^3.0.9",
+    "@types/testing-library__jest-dom": "^5.14.5",
+    "eslint": "^8.39.0",
+    "eslint-config-react-app": "^7.0.1",
+    "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^1.9.3",
-    "@types/react": "^18.0.33",
-    "@types/react-dom": "^18.0.11",
-    "@types/redux-logger": "^3.0.9",
+    "@reduxjs/toolkit": "^1.9.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
@@ -45,5 +49,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "packageManager": "yarn@3.5.0"
 }
