@@ -173,10 +173,10 @@ describe("main component", () => {
       test.each([
         { input: "c", expected: /How much cocaine would you like to buy/i },
         { input: "h", expected: /How much heroin would you like to buy/i },
-        { input: "a", expected: /How much acid would you like to buy/i },
+        { input: "m", expected: /How much molly would you like to buy/i },
+        { input: "l", expected: /How much lsd would you like to buy/i },
+        { input: "s", expected: /How much shrooms would you like to buy/i },
         { input: "w", expected: /How much weed would you like to buy/i },
-        { input: "s", expected: /How much speed would you like to buy/i },
-        { input: "l", expected: /How much ludes would you like to buy/i },
         { input: "p", expected: /Enter the first letter of a drug to choose/i },
       ])("input: $input, expected: $expected", ({ input, expected }) => {
         const store = setupStore();
@@ -200,10 +200,10 @@ describe("main component", () => {
       test.each([
         { input: "c", expected: /How much cocaine would you like to sell/i },
         { input: "h", expected: /How much heroin would you like to sell/i },
-        { input: "a", expected: /How much acid would you like to sell/i },
+        { input: "m", expected: /How much molly would you like to sell/i },
+        { input: "l", expected: /How much lsd would you like to sell/i },
+        { input: "s", expected: /How much shrooms would you like to sell/i },
         { input: "w", expected: /How much weed would you like to sell/i },
-        { input: "s", expected: /How much speed would you like to sell/i },
-        { input: "l", expected: /How much ludes would you like to sell/i },
         { input: "p", expected: /Enter the first letter of a drug to choose/i },
       ])("input: $input, expected: $expected", ({ input, expected }) => {
         const store = setupStore();

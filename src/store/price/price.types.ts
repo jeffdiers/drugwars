@@ -1,10 +1,12 @@
+import { Drugs } from "../player/player.types";
+
 export type PriceState = {
-  readonly cocaine: number;
-  readonly heroin: number;
-  readonly acid: number;
-  readonly weed: number;
-  readonly speed: number;
-  readonly ludes: number;
+  readonly [Drugs.One]: number;
+  readonly [Drugs.Two]: number;
+  readonly [Drugs.Three]: number;
+  readonly [Drugs.Four]: number;
+  readonly [Drugs.Five]: number;
+  readonly [Drugs.Six]: number;
   readonly coat: number;
   readonly gun: number;
   readonly heal: number;

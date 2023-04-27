@@ -9,21 +9,21 @@ export interface StashPayloadAction {
 }
 
 export type StashState = {
-  readonly cocaine: number;
-  readonly heroin: number;
-  readonly acid: number;
-  readonly weed: number;
-  readonly speed: number;
-  readonly ludes: number;
+  readonly [Drugs.One]: number;
+  readonly [Drugs.Two]: number;
+  readonly [Drugs.Three]: number;
+  readonly [Drugs.Four]: number;
+  readonly [Drugs.Five]: number;
+  readonly [Drugs.Six]: number;
 };
 
 const initialState: StashState = {
-  cocaine: 0,
-  heroin: 0,
-  acid: 0,
-  weed: 0,
-  speed: 0,
-  ludes: 0,
+  [Drugs.One]: 0,
+  [Drugs.Two]: 0,
+  [Drugs.Three]: 0,
+  [Drugs.Four]: 0,
+  [Drugs.Five]: 0,
+  [Drugs.Six]: 0,
 };
 
 const stashSlice = createSlice({

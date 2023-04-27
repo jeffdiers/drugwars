@@ -8,12 +8,12 @@ export enum Areas {
 }
 
 export enum Drugs {
-  Cocaine = "cocaine",
-  Heroin = "heroin",
-  Acid = "acid",
-  Weed = "weed",
-  Speed = "speed",
-  Ludes = "ludes",
+  One = "cocaine",
+  Two = "heroin",
+  Three = "molly",
+  Four = "lsd",
+  Five = "shrooms",
+  Six = "weed",
 }
 
 export type DrugsMap = {
@@ -50,12 +50,12 @@ export type PlayerState = {
   readonly maxTrench: number;
   readonly guns: number;
   readonly cops: number;
-  readonly cocaine: number;
-  readonly heroin: number;
-  readonly acid: number;
-  readonly weed: number;
-  readonly speed: number;
-  readonly ludes: number;
+  readonly [Drugs.One]: number;
+  readonly [Drugs.Two]: number;
+  readonly [Drugs.Three]: number;
+  readonly [Drugs.Four]: number;
+  readonly [Drugs.Five]: number;
+  readonly [Drugs.Six]: number;
   readonly events: string[];
   readonly actionEvent: ActionEvents;
 };

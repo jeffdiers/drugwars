@@ -23,7 +23,7 @@ export enum CurrentAsk {
 
 export default function Shark() {
   const [currentAsk, setCurrentAsk] = useState(CurrentAsk.ASK_VISIT);
-  const [currentDrug, setCurrentDrug] = useState<Drugs>(Drugs.Cocaine);
+  const [currentDrug, setCurrentDrug] = useState<Drugs>(Drugs.One);
   const [info, setInfo] = useState("");
 
   const stash = useAppSelector(selectStashBalance);

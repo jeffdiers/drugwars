@@ -15,7 +15,7 @@ enum AskSell {
 
 export default function Sell() {
   const [currentAsk, setCurrentAsk] = useState(AskSell.ASK_SELECT);
-  const [currentDrug, setCurrentDrug] = useState(Drugs.Cocaine);
+  const [currentDrug, setCurrentDrug] = useState(Drugs.One);
   const [maxSell, setMaxSell] = useState(0);
   const [info, setInfo] = useState("");
 

@@ -1,12 +1,14 @@
 import { Drugs, Areas } from "../store/player/player.types";
 
+const getFirstLetter = (string: string) => Array.from(string)[0];
+
 export const getDrugByKey = (key: string) => {
-  if (key === "c") return Drugs.Cocaine;
-  if (key === "h") return Drugs.Heroin;
-  if (key === "a") return Drugs.Acid;
-  if (key === "w") return Drugs.Weed;
-  if (key === "s") return Drugs.Speed;
-  if (key === "l") return Drugs.Ludes;
+  if (key === getFirstLetter(Drugs.One)) return Drugs.One;
+  if (key === getFirstLetter(Drugs.Two)) return Drugs.Two;
+  if (key === getFirstLetter(Drugs.Three)) return Drugs.Three;
+  if (key === getFirstLetter(Drugs.Four)) return Drugs.Four;
+  if (key === getFirstLetter(Drugs.Five)) return Drugs.Five;
+  if (key === getFirstLetter(Drugs.Six)) return Drugs.Six;
   return undefined;
 };
 
