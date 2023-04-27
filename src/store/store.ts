@@ -1,5 +1,9 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import type { PreloadedState } from "@reduxjs/toolkit";
+import {
+  combineReducers,
+  configureStore,
+  PreloadedState,
+} from "@reduxjs/toolkit";
+import { CurriedGetDefaultMiddleware } from "@reduxjs/toolkit/dist/getDefaultMiddleware";
 import logger from "redux-logger";
 
 import playerReducer from "./player/player.slice";
@@ -16,11 +20,21 @@ const rootReducer = combineReducers({
   stash: stashSlice,
 });
 
+const configMiddleware = (
+  getDefaultMiddleware: CurriedGetDefaultMiddleware
+) => {
+  if (process.env.NODE_ENV === `development`) {
+    return getDefaultMiddleware().concat(logger);
+  }
+  return getDefaultMiddleware();
+};
+
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
   return configureStore({
     reducer: rootReducer,
     preloadedState,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+    middleware: (getDefaultMiddleware) =>
+      configMiddleware(getDefaultMiddleware),
   });
 };
 
