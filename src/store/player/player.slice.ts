@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { playerReducers } from "./player.reducers";
-import { PlayerState, Areas, ActionEvents } from "./player.types";
+import { PlayerState, Drugs, Areas, ActionEvents } from "./player.types";
 
 export const initialState: PlayerState = {
   area: Areas.Bronx,
@@ -11,12 +11,12 @@ export const initialState: PlayerState = {
   maxTrench: 100,
   guns: 0,
   cops: 0,
-  cocaine: 0,
-  heroin: 0,
-  acid: 0,
-  weed: 0,
-  speed: 0,
-  ludes: 0,
+  [Drugs.One]: 0,
+  [Drugs.Two]: 0,
+  [Drugs.Three]: 0,
+  [Drugs.Four]: 0,
+  [Drugs.Five]: 0,
+  [Drugs.Six]: 0,
   events: [],
   actionEvent: ActionEvents.Start,
 };

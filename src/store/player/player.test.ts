@@ -27,10 +27,10 @@ describe("player slice", () => {
       cops: 0,
       cocaine: 0,
       heroin: 0,
-      acid: 0,
+      molly: 0,
+      lsd: 0,
+      shrooms: 0,
       weed: 0,
-      speed: 0,
-      ludes: 0,
       events: [],
       actionEvent: ActionEvents.Start,
     };
@@ -43,11 +43,11 @@ describe("player slice", () => {
   test("should handle area being updated ", () => {
     const store = setupStore();
     const state = store.getState().player;
-    const action = changeArea(Areas.Ghetto);
+    const action = changeArea(Areas.Queens);
 
     const expected = {
       ...state,
-      area: Areas.Ghetto,
+      area: Areas.Queens,
       daysEnd: 29,
       actionEvent: ActionEvents.Main,
     };
@@ -57,11 +57,11 @@ describe("player slice", () => {
     expect(actual).toEqual(expected);
   });
 
-  test("player can buy cocaine", () => {
+  test("player can buy", () => {
     const state = setupStore().getState().player;
-    const input = { drug: Drugs.Cocaine, amount: 1, price: 1000 };
+    const input = { drug: Drugs.One, amount: 1, price: 1000 };
     const action = buy(input);
-    const expected = { ...state, cocaine: 1, money: 1000 };
+    const expected = { ...state, [Drugs.One]: 1, money: 1000 };
 
     const actual = reducer(state, action);
 
@@ -70,11 +70,11 @@ describe("player slice", () => {
 
   test("player can buy cocaine twice", () => {
     const state = setupStore().getState().player;
-    const input1 = { drug: Drugs.Cocaine, amount: 1, price: 100 };
-    const input2 = { drug: Drugs.Cocaine, amount: 1, price: 100 };
+    const input1 = { drug: Drugs.One, amount: 1, price: 100 };
+    const input2 = { drug: Drugs.One, amount: 1, price: 100 };
     const action1 = buy(input1);
     const action2 = buy(input2);
-    const expected = { ...state, cocaine: 2, money: 1800 };
+    const expected = { ...state, [Drugs.One]: 2, money: 1800 };
 
     const actual1 = reducer(state, action1);
     const actual = reducer(actual1, action2);
@@ -84,11 +84,11 @@ describe("player slice", () => {
 
   test("player can sell cocaine", () => {
     const state = setupStore().getState().player;
-    const input1 = { drug: Drugs.Cocaine, amount: 1, price: 1000 };
+    const input1 = { drug: Drugs.One, amount: 1, price: 1000 };
     const action1 = buy(input1);
-    const input2 = { drug: Drugs.Cocaine, amount: 1, price: 1000 };
+    const input2 = { drug: Drugs.One, amount: 1, price: 1000 };
     const action2 = sell(input2);
-    const expected = { ...state, cocaine: 0, money: 2000 };
+    const expected = { ...state, [Drugs.One]: 0, money: 2000 };
 
     const actual1 = reducer(state, action1);
     const actual = reducer(actual1, action2);
@@ -151,10 +151,7 @@ describe("player slice", () => {
 
     test("player dropped drugs", () => {
       let { state, action } = setupRollPlayerEvents(0.2);
-      state = reducer(
-        state,
-        buy({ drug: Drugs.Cocaine, amount: 10, price: 0 })
-      );
+      state = reducer(state, buy({ drug: Drugs.One, amount: 10, price: 0 }));
       const expected = {
         ...state,
         cocaine: 8,

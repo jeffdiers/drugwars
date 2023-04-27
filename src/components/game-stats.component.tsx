@@ -39,66 +39,27 @@ export default function GameStats() {
       <div>guns: {playerGuns}</div>
       <div>stash: </div>
       <ul>
-        <li>
-          {Drugs.Cocaine}: {stash.cocaine}
-        </li>
-        <li>
-          {Drugs.Heroin}: {stash.heroin}
-        </li>
-        <li>
-          {Drugs.Acid}: {stash.acid}
-        </li>
-        <li>
-          {Drugs.Weed}: {stash.weed}
-        </li>
-        <li>
-          {Drugs.Speed}: {stash.speed}
-        </li>
-        <li>
-          {Drugs.Ludes}: {stash.ludes}
-        </li>
+        {Object.values(Drugs).map((drug, i) => (
+          <li key={i}>
+            {drug}: {stash[drug]}
+          </li>
+        ))}
       </ul>
       <div>prices: </div>
       <ul>
-        <li>
-          {Drugs.Cocaine}: {priceDrugs.cocaine}
-        </li>
-        <li>
-          {Drugs.Heroin}: {priceDrugs.heroin}
-        </li>
-        <li>
-          {Drugs.Acid}: {priceDrugs.acid}
-        </li>
-        <li>
-          {Drugs.Weed}: {priceDrugs.weed}
-        </li>
-        <li>
-          {Drugs.Speed}: {priceDrugs.speed}
-        </li>
-        <li>
-          {Drugs.Ludes}: {priceDrugs.ludes}
-        </li>
+        {Object.values(Drugs).map((drug, i) => (
+          <li key={i}>
+            {drug}: {priceDrugs[drug]}
+          </li>
+        ))}
       </ul>
       <div>trench: </div>
       <ul>
-        <li>
-          {Drugs.Cocaine}: {playerInventory.cocaine}
-        </li>
-        <li>
-          {Drugs.Heroin}: {playerInventory.heroin}
-        </li>
-        <li>
-          {Drugs.Acid}: {playerInventory.acid}
-        </li>
-        <li>
-          {Drugs.Weed}: {playerInventory.weed}
-        </li>
-        <li>
-          {Drugs.Speed}: {playerInventory.speed}
-        </li>
-        <li>
-          {Drugs.Ludes}: {playerInventory.ludes}
-        </li>
+        {Object.values(Drugs).map((drug, i) => (
+          <li key={i}>
+            {drug}: {playerInventory[drug]}
+          </li>
+        ))}
       </ul>
     </div>
   );

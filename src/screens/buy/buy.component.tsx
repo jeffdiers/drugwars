@@ -20,7 +20,7 @@ export default function Buy() {
   const dispatch = useAppDispatch();
 
   const [currentAsk, setCurrentAsk] = useState(AskBuy.ASK_SELECT);
-  const [currentDrug, setCurrentDrug] = useState(Drugs.Cocaine);
+  const [currentDrug, setCurrentDrug] = useState(Drugs.One);
   const [maxBuy, setMaxBuy] = useState(0);
   const [info, setInfo] = useState("");
 
