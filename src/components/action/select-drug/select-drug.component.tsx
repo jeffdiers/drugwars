@@ -5,7 +5,7 @@ import { getDrugByKey } from "../../../utils/helpers";
 import ActionContainer from "../action-container.component";
 import Button from "../../button/button.component";
 
-import { SelectDrugContainer } from "./select-drug.styles";
+import { SelectDrugContainer, SelectDrugButtons } from "./select-drug.styles";
 
 type SelectDrugProps = {
   text: string;
@@ -22,11 +22,13 @@ const SelectDrug: FC<SelectDrugProps> = ({ text, onSelect }) => {
     <ActionContainer onKeyDown={handleOnKeyDown}>
       <SelectDrugContainer>
         <span>{text}</span>
-        {Object.values(Drugs).map((drug, i) => (
-          <Button key={i} onClick={() => onSelect(drug)}>
-            {drug}
-          </Button>
-        ))}
+        <SelectDrugButtons>
+          {Object.values(Drugs).map((drug, i) => (
+            <Button key={i} onClick={() => onSelect(drug)}>
+              {drug}
+            </Button>
+          ))}
+        </SelectDrugButtons>
       </SelectDrugContainer>
     </ActionContainer>
   );
