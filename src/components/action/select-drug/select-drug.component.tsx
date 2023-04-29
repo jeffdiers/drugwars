@@ -1,9 +1,11 @@
 import { FC } from "react";
-import { Drugs } from "../../store/player/player.types";
-import { getDrugByKey } from "../../utils/helpers";
+import { Drugs } from "../../../store/player/player.types";
+import { getDrugByKey } from "../../../utils/helpers";
 
-import ActionContainer from "./action-container.component";
-import Button from "../button/button.component";
+import ActionContainer from "../action-container.component";
+import Button from "../../button/button.component";
+
+import { SelectDrugContainer } from "./select-drug.styles";
 
 type SelectDrugProps = {
   text: string;
@@ -18,17 +20,14 @@ const SelectDrug: FC<SelectDrugProps> = ({ text, onSelect }) => {
 
   return (
     <ActionContainer onKeyDown={handleOnKeyDown}>
-      {text}
-      <br />
-      Enter the first letter of a drug to choose!
-      <br />
-      <ul>
+      <SelectDrugContainer>
+        <span>{text}</span>
         {Object.values(Drugs).map((drug, i) => (
-          <li key={i}>
-            <Button onClick={() => onSelect(drug)}>{drug}</Button>
-          </li>
+          <Button key={i} onClick={() => onSelect(drug)}>
+            {drug}
+          </Button>
         ))}
-      </ul>
+      </SelectDrugContainer>
     </ActionContainer>
   );
 };

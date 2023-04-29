@@ -1,7 +1,9 @@
 import { FC } from "react";
 
-import Button from "../button/button.component";
-import ActionContainer from "./action-container.component";
+import Button from "../../button/button.component";
+import ActionContainer from "../action-container.component";
+
+import { ContinueContainer } from "./continue.styles";
 
 type ContinueProps = {
   text?: string;
@@ -16,10 +18,12 @@ const Continue: FC<ContinueProps> = ({ text, buttonText, onContinue }) => {
 
   return (
     <ActionContainer onKeyDown={handleOnKeyDown}>
-      {text}
-      <Button onClick={() => onContinue()}>
-        {buttonText ? buttonText : "continue"}
-      </Button>
+      <ContinueContainer>
+        <span>{text}</span>
+        <Button onClick={() => onContinue()}>
+          {buttonText ? buttonText : "continue"}
+        </Button>
+      </ContinueContainer>
     </ActionContainer>
   );
 };

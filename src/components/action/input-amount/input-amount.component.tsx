@@ -1,5 +1,8 @@
 import { FC, FormEvent } from "react";
-import Button from "../button/button.component";
+import Button from "../../button/button.component";
+import Input from "../../input/input.component";
+
+import { InputForm } from "./input-amount.styles";
 
 type InputAmountProps = {
   name: string;
@@ -23,14 +26,11 @@ const InputAmount: FC<InputAmountProps> = ({
   };
 
   return (
-    <form onSubmit={handleOnSubmit}>
-      <label>
-        {labelText}
-        <br />
-        <input autoFocus name={name} />
-        <Button type="submit">submit</Button>
-      </label>
-    </form>
+    <InputForm onSubmit={handleOnSubmit}>
+      <label>{labelText}</label>
+      <Input type="tel" autoFocus name={name} />
+      <Button type="submit">submit</Button>
+    </InputForm>
   );
 };
 

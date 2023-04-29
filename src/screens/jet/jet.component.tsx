@@ -6,7 +6,7 @@ import { addInterestShark } from "../../store/shark/shark.slice";
 import { addInterestBank } from "../../store/bank/bank.slice";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
-import SelectArea from "../../components/action/select-area.component";
+import SelectArea from "../../components/action/select-area/select-area.component";
 
 export default function Jet() {
   const dispatch = useAppDispatch();

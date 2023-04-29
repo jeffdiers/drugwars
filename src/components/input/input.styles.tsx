@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ButtonBase = styled.button`
+export const InputBase = styled.input`
   text-transform: uppercase;
   padding: 0.25em 1em;
   border-radius: 2px;

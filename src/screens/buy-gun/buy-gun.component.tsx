@@ -11,7 +11,7 @@ import {
 } from "../../store/player/player.selectors";
 import { selectPriceGun } from "../../store/price/price.selectors";
 
-import YesNo from "../../components/action/yes-no.component";
+import YesNo from "../../components/action/yes-no/yes-no.component";
 import { ActionEvents } from "../../store/player/player.types";
 
 export default function BuyGun() {

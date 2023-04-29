@@ -9,9 +9,9 @@ import {
 import { buy, sell, updateActionEvent } from "../../store/player/player.slice";
 import { ActionEvents, Drugs } from "../../store/player/player.types";
 
-import YesNo from "../../components/action/yes-no.component";
-import InputAmount from "../../components/action/input-amount.component";
-import SelectDrug from "../../components/action/select-drug.component";
+import YesNo from "../../components/action/yes-no/yes-no.component";
+import InputAmount from "../../components/action/input-amount/input-amount.component";
+import SelectDrug from "../../components/action/select-drug/select-drug.component";
 import { selectPlayerInventory } from "../../store/player/player.selectors";
 
 export enum CurrentAsk {
