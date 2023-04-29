@@ -22,13 +22,7 @@ const SelectArea: FC<SelectAreaProps> = ({ onSelect }) => {
       <SelectAreaContainer>
         <span>Where you gonna go?</span>
         {Object.values(Areas).map((area, i) => (
-          <Button
-            key={i}
-            onClick={(e) => {
-              e.preventDefault();
-              onSelect(area);
-            }}
-          >
+          <Button key={i} onClick={() => onSelect(area)}>
             {area}
           </Button>
         ))}
