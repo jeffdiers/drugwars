@@ -1,10 +1,12 @@
 import { FC, ButtonHTMLAttributes } from "react";
 
+import { ButtonBase } from "./button.styles";
+
 const Button: FC<ButtonHTMLAttributes<HTMLButtonElement>> = ({
   children,
   ...otherProps
 }) => {
-  return <button {...otherProps}>{children}</button>;
+  return <ButtonBase {...otherProps}>{children}</ButtonBase>;
 };
 
 export default Button;

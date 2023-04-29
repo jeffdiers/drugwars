@@ -25,3 +25,12 @@ export const getAreaByKey = (key: string) => {
 export const randomInteger = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
+
+export const moneyFormatter = (number: number) => {
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  });
+  return formatter.format(number);
+};

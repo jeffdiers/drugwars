@@ -13,10 +13,12 @@ import BuyCoat from "./screens/buy-coat/buy-coat.component";
 import BuyGun from "./screens/buy-gun/buy-gun.component";
 import Heal from "./screens/heal/heal.component";
 import GameOver from "./screens/end/game-over.component";
-import GameStats from "./components/game-stats.component";
+import GameStats from "./components/game-stats/game-stats.component";
 
 import { selectPlayerActionEvent } from "./store/player/player.selectors";
 import { ActionEvents } from "./store/player/player.types";
+
+import { AppContainer, GameScreen } from "./app.styles";
 
 export default function App() {
   const playerActionEvent = useAppSelector(selectPlayerActionEvent);
@@ -66,9 +68,11 @@ export default function App() {
   };
 
   return (
-    <div>
-      {renderGameStats()}
-      {renderScreens()}
-    </div>
+    <AppContainer>
+      <GameScreen>
+        {renderGameStats()}
+        {renderScreens()}
+      </GameScreen>
+    </AppContainer>
   );
 }

@@ -1,14 +1,15 @@
 import { FC } from "react";
 
-import Button from "../button.component";
+import Button from "../button/button.component";
 import ActionContainer from "./action-container.component";
 
 type ContinueProps = {
   text?: string;
+  buttonText?: string;
   onContinue: Function;
 };
 
-const Continue: FC<ContinueProps> = ({ text, onContinue }) => {
+const Continue: FC<ContinueProps> = ({ text, buttonText, onContinue }) => {
   const handleOnKeyDown = (key: string) => {
     if (key === "Enter") onContinue();
   };
@@ -16,10 +17,9 @@ const Continue: FC<ContinueProps> = ({ text, onContinue }) => {
   return (
     <ActionContainer onKeyDown={handleOnKeyDown}>
       {text}
-      <br />
-      <Button onClick={() => onContinue()}>ok</Button>
-      <br />
-      Press ENTER to Continue
+      <Button onClick={() => onContinue()}>
+        {buttonText ? buttonText : "continue"}
+      </Button>
     </ActionContainer>
   );
 };

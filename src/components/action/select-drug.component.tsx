@@ -3,7 +3,7 @@ import { Drugs } from "../../store/player/player.types";
 import { getDrugByKey } from "../../utils/helpers";
 
 import ActionContainer from "./action-container.component";
-import Button from "../button.component";
+import Button from "../button/button.component";
 
 type SelectDrugProps = {
   text: string;
