@@ -5,12 +5,13 @@ import { ButtonBase } from "./button.styles";
 const Button: FC<ButtonHTMLAttributes<HTMLButtonElement>> = ({
   children,
   onClick,
+  type,
   ...otherProps
 }) => {
   return (
     <ButtonBase
       onClick={(event) => {
-        event.preventDefault();
+        type !== "submit" && event.preventDefault();
         onClick && onClick(event);
       }}
       {...otherProps}
