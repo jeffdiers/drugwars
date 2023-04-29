@@ -25,8 +25,9 @@ import {
   CoatTitle,
   Coat,
   PriceTitle,
-  Price,
   Item,
+  Price,
+  PriceItem,
 } from "./game-stats.styles";
 
 export default function GameStats() {
@@ -51,31 +52,47 @@ export default function GameStats() {
       <StashTitle>stash</StashTitle>
       <Stash>
         {Object.values(Drugs).map((drug, i) => (
-          <div key={i}>
-            {drug}: {stash[drug]}
-          </div>
+          <Item key={i}>
+            <div>{drug}</div>
+            <div>{stash[drug]}</div>
+          </Item>
         ))}
-        <div>bank: {bankBalance}</div>
-        <div>debt: {sharkBalance}</div>
+        <br />
+        <Item>
+          <div>bank</div>
+          <div>{moneyFormatter(bankBalance)}</div>
+        </Item>
+        <Item>
+          <div>debt</div>
+          <div>{moneyFormatter(sharkBalance)}</div>
+        </Item>
       </Stash>
       <CoatTitle>trench coat</CoatTitle>
       <Coat>
         {Object.values(Drugs).map((drug, i) => (
-          <div key={i}>
-            {drug}: {playerInventory[drug]}
-          </div>
+          <Item key={i}>
+            <div>{drug}</div>
+            <div>{playerInventory[drug]}</div>
+          </Item>
         ))}
-        <div>guns: {playerGuns}</div>
-        <div>cash: {playerMoney}</div>
+        <br />
+        <Item>
+          <div>guns</div>
+          <div>{playerGuns}</div>
+        </Item>
+        <Item>
+          <div>cash</div>
+          <div>{moneyFormatter(playerMoney)}</div>
+        </Item>
       </Coat>
       <PriceTitle>hey dude, the prices of drugs are: </PriceTitle>
       <Price>
         {Object.values(Drugs).map((drug, i) => (
-          <Item key={i}>
+          <PriceItem key={i}>
             <div>{drug}</div>
             <div>{""}</div>
             <div>{moneyFormatter(priceDrugs[drug])}</div>
-          </Item>
+          </PriceItem>
         ))}
       </Price>
     </GameStatsContainer>

@@ -1,7 +1,9 @@
 import { FC } from "react";
 
-import ActionContainer from "./action-container.component";
-import Button from "../button/button.component";
+import ActionContainer from "../action-container.component";
+import Button from "../../button/button.component";
+
+import { YesNoContainer } from "./yes-no.styles";
 
 type YesNoProps = {
   text: string;
@@ -23,10 +25,11 @@ const YesNo: FC<YesNoProps> = ({ text, onYes, onNo }) => {
 
   return (
     <ActionContainer onKeyDown={handleOnKeyDown}>
-      {text}
-      <br />
-      <Button onClick={() => onYes()}>yes</Button>
-      <Button onClick={() => onNo()}>no</Button>
+      <YesNoContainer>
+        <span>{text}</span>
+        <Button onClick={() => onYes()}>yes</Button>
+        <Button onClick={() => onNo()}>no</Button>
+      </YesNoContainer>
     </ActionContainer>
   );
 };

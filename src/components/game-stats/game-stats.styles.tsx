@@ -72,6 +72,11 @@ export const Coat = styled.div`
   margin-bottom: ${marginBottom};
 `;
 
+export const Item = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const PriceTitle = styled.div`
   grid-area: price-title;
   margin-bottom: ${marginBottom};
@@ -82,7 +87,7 @@ export const Price = styled.div`
   margin-bottom: ${marginBottom};
 `;
 
-export const Item = styled.div`
+export const PriceItem = styled.div`
   display: flex;
   justify-content: space-between;
   div:nth-child(2) {

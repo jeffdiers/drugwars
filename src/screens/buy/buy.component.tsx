@@ -8,8 +8,8 @@ import {
 import { ActionEvents, Drugs } from "../../store/player/player.types";
 import { selectPriceDrugs } from "../../store/price/price.selectors";
 
-import InputAmount from "../../components/action/input-amount.component";
-import SelectDrug from "../../components/action/select-drug.component";
+import InputAmount from "../../components/action/input-amount/input-amount.component";
+import SelectDrug from "../../components/action/select-drug/select-drug.component";
 
 enum AskBuy {
   ASK_SELECT,

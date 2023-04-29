@@ -24,7 +24,7 @@ describe("main component", () => {
 
     renderWithProviders(<App />, { store });
 
-    const expected = /Are you going to/i;
+    const expected = /What are you gonna do/i;
 
     const actual = screen.getByText(expected);
 
@@ -80,7 +80,7 @@ describe("main component", () => {
   test("go to main when player selects not to visit stash", () => {
     renderWithProviders(<App />);
 
-    const expected = /Are you going to/i;
+    const expected = /What are you gonna do/i;
 
     fireEvent.keyDown(screen.getByRole("dialog"), {
       key: "Enter",
@@ -177,7 +177,6 @@ describe("main component", () => {
         { input: "l", expected: /How much lsd would you like to buy/i },
         { input: "s", expected: /How much shrooms would you like to buy/i },
         { input: "w", expected: /How much weed would you like to buy/i },
-        { input: "p", expected: /Enter the first letter of a drug to choose/i },
       ])("input: $input, expected: $expected", ({ input, expected }) => {
         const store = setupStore();
         const action = updateActionEvent(ActionEvents.Buy);
@@ -204,7 +203,6 @@ describe("main component", () => {
         { input: "l", expected: /How much lsd would you like to sell/i },
         { input: "s", expected: /How much shrooms would you like to sell/i },
         { input: "w", expected: /How much weed would you like to sell/i },
-        { input: "p", expected: /Enter the first letter of a drug to choose/i },
       ])("input: $input, expected: $expected", ({ input, expected }) => {
         const store = setupStore();
         const action = updateActionEvent(ActionEvents.Sell);

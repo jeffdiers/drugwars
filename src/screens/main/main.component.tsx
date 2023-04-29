@@ -8,8 +8,8 @@ import {
 import { ActionEvents } from "../../store/player/player.types";
 import { selectPlayerEvents } from "../../store/player/player.selectors";
 
-import Continue from "../../components/action/continue.component";
-import BuySellJet from "../../components/action/buy-sell-jet.component";
+import Continue from "../../components/action/continue/continue.component";
+import BuySellJet from "../../components/action/buy-sell-jet/buy-sell-jet.component";
 
 export default function Main() {
   const dispatch = useAppDispatch();

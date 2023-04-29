@@ -12,8 +12,8 @@ import {
 import { selectPlayerMoney } from "../../store/player/player.selectors";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
-import YesNo from "../../components/action/yes-no.component";
-import InputAmount from "../../components/action/input-amount.component";
+import YesNo from "../../components/action/yes-no/yes-no.component";
+import InputAmount from "../../components/action/input-amount/input-amount.component";
 import { ActionEvents } from "../../store/player/player.types";
 
 export enum CurrentAsk {

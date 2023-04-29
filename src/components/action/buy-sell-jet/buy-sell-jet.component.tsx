@@ -1,7 +1,9 @@
 import { FC } from "react";
 
-import ActionContainer from "./action-container.component";
-import Button from "../button/button.component";
+import ActionContainer from "../action-container.component";
+import Button from "../../button/button.component";
+
+import { BuySellJetContainer } from "./buy-sell-jet.styles";
 
 type BuySellJetProps = {
   onBuy: Function;
@@ -24,11 +26,12 @@ const BuySellJet: FC<BuySellJetProps> = ({ onBuy, onSell, onJet }) => {
 
   return (
     <ActionContainer onKeyDown={handleOnKeyDown}>
-      Are you going to (B)uy, (S)ell, or (J)et?
-      <br />
-      <Button onClick={() => onBuy()}>buy</Button>
-      <Button onClick={() => onSell()}>sell</Button>
-      <Button onClick={() => onJet()}>jet</Button>
+      <BuySellJetContainer>
+        <span>what are you gonna do?</span>
+        <Button onClick={() => onBuy()}>buy</Button>
+        <Button onClick={() => onSell()}>sell</Button>
+        <Button onClick={() => onJet()}>jet</Button>
+      </BuySellJetContainer>
     </ActionContainer>
   );
 };

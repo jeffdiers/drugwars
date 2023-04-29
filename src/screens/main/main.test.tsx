@@ -55,7 +55,7 @@ describe("Main Screen", () => {
       const actual = store.getState().player;
 
       expect(actual).toEqual(expected);
-      expect(screen.getByText(/Are you going/i)).toBeInTheDocument();
+      expect(screen.getByText(/What are you gonna do/i)).toBeInTheDocument();
     });
   });
 
@@ -102,7 +102,7 @@ describe("Main Screen", () => {
       const actual = store.getState().player;
 
       expect(actual).toEqual(expected);
-      expect(screen.getByText(/Are you going/i)).toBeInTheDocument();
+      expect(screen.getByText(/What are you gonna do/i)).toBeInTheDocument();
     });
   });
 });

@@ -15,8 +15,8 @@ import {
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { randomInteger } from "../../utils/helpers";
 
-import RunFight from "../../components/action/run-fight.component";
-import Continue from "../../components/action/continue.component";
+import RunFight from "../../components/action/run-fight/run-fight.component";
+import Continue from "../../components/action/continue/continue.component";
 import { ActionEvents } from "../../store/player/player.types";
 
 export default function CopsChase() {

@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { selectSharkBalance } from "../../store/shark/shark.slice";
 
-import Continue from "../../components/action/continue.component";
+import Continue from "../../components/action/continue/continue.component";
 
 import {
   selectPlayerHealth,

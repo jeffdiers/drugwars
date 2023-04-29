@@ -1,7 +1,9 @@
 import { FC } from "react";
 
-import ActionContainer from "./action-container.component";
-import Button from "../button/button.component";
+import ActionContainer from "../action-container.component";
+import Button from "../../button/button.component";
+
+import { RunFightContainer } from "./run-fight.styles";
 
 type RunFightProps = {
   onRun: Function;
@@ -23,9 +25,11 @@ const RunFight: FC<RunFightProps> = ({ onRun, onFight, canFight }) => {
 
   return (
     <ActionContainer onKeyDown={handleOnKeyDown}>
-      {canFight ? `Will you run or fight?` : `Will you run?`}
-      {canFight && <Button onClick={() => onFight()}>fight</Button>}
-      <Button onClick={() => onRun()}>run</Button>
+      <RunFightContainer>
+        <span>{canFight ? `Will you run or fight?` : `Will you run?`}</span>
+        {canFight && <Button onClick={() => onFight()}>fight</Button>}
+        <Button onClick={() => onRun()}>run</Button>
+      </RunFightContainer>
     </ActionContainer>
   );
 };
