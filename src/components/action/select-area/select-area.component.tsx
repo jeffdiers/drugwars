@@ -5,7 +5,7 @@ import { getAreaByKey } from "../../../utils/helpers";
 import ActionContainer from "../action-container.component";
 import Button from "../../button/button.component";
 
-import { SelectAreaContainer } from "./select-area.styles";
+import { SelectAreaContainer, SelectAreaButtons } from "./select-area.styles";
 
 type SelectAreaProps = {
   onSelect: (key: Areas) => void;
@@ -21,11 +21,13 @@ const SelectArea: FC<SelectAreaProps> = ({ onSelect }) => {
     <ActionContainer onKeyDown={handleOnKeyDown}>
       <SelectAreaContainer>
         <span>Where you gonna go?</span>
-        {Object.values(Areas).map((area, i) => (
-          <Button key={i} onClick={() => onSelect(area)}>
-            {area}
-          </Button>
-        ))}
+        <SelectAreaButtons>
+          {Object.values(Areas).map((area, i) => (
+            <Button key={i} onClick={() => onSelect(area)}>
+              {area}
+            </Button>
+          ))}
+        </SelectAreaButtons>
       </SelectAreaContainer>
     </ActionContainer>
   );
