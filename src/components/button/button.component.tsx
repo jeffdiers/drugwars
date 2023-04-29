@@ -4,9 +4,20 @@ import { ButtonBase } from "./button.styles";
 
 const Button: FC<ButtonHTMLAttributes<HTMLButtonElement>> = ({
   children,
+  onClick,
   ...otherProps
 }) => {
-  return <ButtonBase {...otherProps}>{children}</ButtonBase>;
+  return (
+    <ButtonBase
+      onClick={(event) => {
+        event.preventDefault();
+        onClick && onClick(event);
+      }}
+      {...otherProps}
+    >
+      {children}
+    </ButtonBase>
+  );
 };
 
 export default Button;
