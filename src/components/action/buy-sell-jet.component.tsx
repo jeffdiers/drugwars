@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 import ActionContainer from "./action-container.component";
-import Button from "../button.component";
+import Button from "../button/button.component";
 
 type BuySellJetProps = {
   onBuy: Function;

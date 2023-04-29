@@ -1,10 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
+import { Provider } from "react-redux";
 import { setupStore } from "./store/store";
 
+import { ThemeProvider } from "styled-components";
+import { theme } from "./theme/theme";
+
+import "./index.css";
 import App from "./app.component";
-import { Provider } from "react-redux";
 
 const store = setupStore();
 
@@ -12,7 +16,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
     </Provider>
   </React.StrictMode>
 );

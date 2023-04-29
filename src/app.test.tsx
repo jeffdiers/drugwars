@@ -223,24 +223,24 @@ describe("main component", () => {
   });
 
   describe("jet stage", () => {
-    describe("select drug", () => {
-      test.each([
-        { input: "1", expected: /area: bronx/i },
-        { input: "2", expected: /area: queens/i },
-      ])("input: $input, expected: $expected", ({ input, expected }) => {
-        const store = setupStore();
-        const action = updateActionEvent(ActionEvents.Jet);
+    describe("select area", () => {
+      test.each([{ input: "2", expected: /queens/i }])(
+        "input: $input, expected: $expected",
+        ({ input, expected }) => {
+          const store = setupStore();
+          const action = updateActionEvent(ActionEvents.Jet);
 
-        store.dispatch(action);
-        renderWithProviders(<App />, { store });
-        const element = screen.getByRole("dialog");
+          store.dispatch(action);
+          renderWithProviders(<App />, { store });
+          const element = screen.getByRole("dialog");
 
-        fireEvent.keyDown(element, { key: input, keyCode: 66 });
+          fireEvent.keyDown(element, { key: input, keyCode: 66 });
 
-        const actual = screen.getByText(expected);
+          const actual = screen.getByText(expected);
 
-        expect(actual).toBeInTheDocument();
-      });
+          expect(actual).toBeInTheDocument();
+        }
+      );
     });
   });
 

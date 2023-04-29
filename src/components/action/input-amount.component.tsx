@@ -1,5 +1,5 @@
 import { FC, FormEvent } from "react";
-import Button from "../button.component";
+import Button from "../button/button.component";
 
 type InputAmountProps = {
   name: string;
