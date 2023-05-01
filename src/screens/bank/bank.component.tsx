@@ -72,6 +72,7 @@ export default function Shark() {
       {currentAsk === CurrentAsk.ASK_DEPOSIT && (
         <InputAmount
           name="amount"
+          type="currency"
           labelText={`How much would you like to deposit? Bank: ${bankBalance} | Wallet: ${playerMoney}`}
           handleValue={handleValueDeposit}
         />
@@ -79,6 +80,7 @@ export default function Shark() {
       {currentAsk === CurrentAsk.ASK_WITHDRAW && (
         <InputAmount
           name="amount"
+          type="currency"
           labelText={`How much would you like to withdraw? Bank: ${bankBalance} | Wallet: ${playerMoney}`}
           handleValue={handleValueWithdraw}
         />

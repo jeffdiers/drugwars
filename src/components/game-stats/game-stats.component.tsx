@@ -85,7 +85,7 @@ export default function GameStats() {
           <div>{moneyFormatter(playerMoney)}</div>
         </Item>
       </Coat>
-      <PriceTitle>hey dude, the prices of drugs are: </PriceTitle>
+      <PriceTitle>Hey dude, the prices of drugs are:</PriceTitle>
       <Price>
         {Object.values(Drugs).map((drug, i) => (
           <PriceItem key={i}>

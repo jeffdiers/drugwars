@@ -5468,6 +5468,7 @@ __metadata:
     husky: ^8.0.0
     pinst: ^3.0.0
     react: ^18.2.0
+    react-currency-input-field: ^3.6.10
     react-dom: ^18.2.0
     react-is: ^18.2.0
     react-redux: ^8.0.5
@@ -10816,6 +10817,15 @@ __metadata:
     regenerator-runtime: ^0.13.9
     whatwg-fetch: ^3.6.2
   checksum: 1bb031080af15397d6eb9c69a0c2e93799991f7197a086e4409ba719398f1256b542a3d6c9a34673d516c684eef3e8226c99b335982593851f58f65f6e43571b
+  languageName: node
+  linkType: hard
+
+"react-currency-input-field@npm:^3.6.10":
+  version: 3.6.10
+  resolution: "react-currency-input-field@npm:3.6.10"
+  peerDependencies:
+    react: ^16.9.0 || ^17.0.0 || ^18.0.0
+  checksum: d2f9884de65bcd89b0f80862f75c0ade715242bdcad5474195bd79460e950e2bbae99c93e309eaecb73102442ebd293f4e5dda3e31e2a34647ac590217cb9852
   languageName: node
   linkType: hard
 

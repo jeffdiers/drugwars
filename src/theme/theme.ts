@@ -8,7 +8,7 @@ export const theme: DefaultTheme = {
     primary: "#1B998B",
   },
   fonts: {
-    primary: "Helvetica Neue, Helvetica, Roboto, sans-serif",
+    primary: "Share Tech Mono",
   },
   fontSize: {
     regular: "16pt",

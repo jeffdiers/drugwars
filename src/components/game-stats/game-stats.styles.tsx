@@ -17,6 +17,7 @@ export const GameStatsContainer = styled.div`
 
 export const Title = styled.div`
   grid-area: title;
+  text-transform: uppercase;
   margin-bottom: ${marginBottom};
   font-size: ${({ theme }) => theme.fontSize.large};
 `;
@@ -34,6 +35,7 @@ export const Hold = styled.div`
 
 export const StashTitle = styled.div`
   grid-area: stash-title;
+  text-transform: uppercase;
   padding: 5px;
   text-align: center;
   border-top-left-radius: ${({ theme }) => theme.borderRadius};
@@ -55,6 +57,7 @@ export const Stash = styled.div`
 
 export const CoatTitle = styled.div`
   grid-area: coat-title;
+  text-transform: uppercase;
   padding: 5px;
   text-align: center;
   border-top-right-radius: ${({ theme }) => theme.borderRadius};
