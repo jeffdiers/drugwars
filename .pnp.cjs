@@ -45,6 +45,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["husky", "npm:8.0.3"],\
             ["pinst", "npm:3.0.0"],\
             ["react", "npm:18.2.0"],\
+            ["react-currency-input-field", "virtual:a97b1cd16736de5e3ab46d7800570488e6d7940f6f8e3d9e205ce3bbbb5c0e0a2a225e9de87504ff91a2c7bb47586a56fdd3441e0cda6c057ee9ebda252eeaad#npm:3.6.10"],\
             ["react-dom", "virtual:a97b1cd16736de5e3ab46d7800570488e6d7940f6f8e3d9e205ce3bbbb5c0e0a2a225e9de87504ff91a2c7bb47586a56fdd3441e0cda6c057ee9ebda252eeaad#npm:18.2.0"],\
             ["react-is", "npm:18.2.0"],\
             ["react-redux", "virtual:a97b1cd16736de5e3ab46d7800570488e6d7940f6f8e3d9e205ce3bbbb5c0e0a2a225e9de87504ff91a2c7bb47586a56fdd3441e0cda6c057ee9ebda252eeaad#npm:8.0.5"],\
@@ -7963,6 +7964,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["husky", "npm:8.0.3"],\
             ["pinst", "npm:3.0.0"],\
             ["react", "npm:18.2.0"],\
+            ["react-currency-input-field", "virtual:a97b1cd16736de5e3ab46d7800570488e6d7940f6f8e3d9e205ce3bbbb5c0e0a2a225e9de87504ff91a2c7bb47586a56fdd3441e0cda6c057ee9ebda252eeaad#npm:3.6.10"],\
             ["react-dom", "virtual:a97b1cd16736de5e3ab46d7800570488e6d7940f6f8e3d9e205ce3bbbb5c0e0a2a225e9de87504ff91a2c7bb47586a56fdd3441e0cda6c057ee9ebda252eeaad#npm:18.2.0"],\
             ["react-is", "npm:18.2.0"],\
             ["react-redux", "virtual:a97b1cd16736de5e3ab46d7800570488e6d7940f6f8e3d9e205ce3bbbb5c0e0a2a225e9de87504ff91a2c7bb47586a56fdd3441e0cda6c057ee9ebda252eeaad#npm:8.0.5"],\
@@ -14833,6 +14835,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["raf", "npm:3.4.1"],\
             ["regenerator-runtime", "npm:0.13.11"],\
             ["whatwg-fetch", "npm:3.6.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["react-currency-input-field", [\
+        ["npm:3.6.10", {\
+          "packageLocation": "./.yarn/cache/react-currency-input-field-npm-3.6.10-df7a2cf241-d2f9884de6.zip/node_modules/react-currency-input-field/",\
+          "packageDependencies": [\
+            ["react-currency-input-field", "npm:3.6.10"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:a97b1cd16736de5e3ab46d7800570488e6d7940f6f8e3d9e205ce3bbbb5c0e0a2a225e9de87504ff91a2c7bb47586a56fdd3441e0cda6c057ee9ebda252eeaad#npm:3.6.10", {\
+          "packageLocation": "./.yarn/__virtual__/react-currency-input-field-virtual-08381d961d/0/cache/react-currency-input-field-npm-3.6.10-df7a2cf241-d2f9884de6.zip/node_modules/react-currency-input-field/",\
+          "packageDependencies": [\
+            ["react-currency-input-field", "virtual:a97b1cd16736de5e3ab46d7800570488e6d7940f6f8e3d9e205ce3bbbb5c0e0a2a225e9de87504ff91a2c7bb47586a56fdd3441e0cda6c057ee9ebda252eeaad#npm:3.6.10"],\
+            ["@types/react", "npm:18.2.0"],\
+            ["react", "npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\

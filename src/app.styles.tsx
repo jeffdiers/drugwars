@@ -5,8 +5,6 @@ export const AppContainer = styled.div`
   height: 100vh;
   width: 100vw;
 
-  text-transform: uppercase;
-
   font-family: ${({ theme }) => theme.fonts.primary};
   font-size: ${({ theme }) => theme.fontSize.regular};
   color: ${({ theme }) => theme.colors.primary};
@@ -19,7 +17,7 @@ export const AppContainer = styled.div`
 `;
 
 export const GameScreen = styled.div`
-  padding: 24px;
+  padding: 14px;
   background-color: ${({ theme }) => theme.colors.black};
 
   ${({ theme }) =>

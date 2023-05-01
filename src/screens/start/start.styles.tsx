@@ -10,6 +10,7 @@ export const StartContainer = styled.div`
 
 export const TitleContainer = styled.div`
   margin-bottom: 5px;
+  text-transform: uppercase;
 
   font-size: ${({ theme }) => theme.fontSize.large};
 `;

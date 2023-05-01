@@ -11,6 +11,7 @@ import {
 } from "../../store/player/player.slice";
 import { selectPlayerMoney } from "../../store/player/player.selectors";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { moneyFormatter } from "../../utils/helpers";
 
 import YesNo from "../../components/action/yes-no/yes-no.component";
 import InputAmount from "../../components/action/input-amount/input-amount.component";
@@ -49,6 +50,7 @@ export default function Shark() {
   };
 
   const handleValueWithdraw = (value: string) => {
+    console.log(value);
     const amount = Number(value);
     if (Number.isNaN(amount)) {
       setInfo("That isn't a number!");
@@ -76,14 +78,20 @@ export default function Shark() {
       {currentAsk === CurrentAsk.ASK_DEPOSIT && (
         <InputAmount
           name="amount"
-          labelText={`How much would you like to repay? Debt: ${debt} | Wallet: ${playerMoney}`}
+          type="currency"
+          labelText={`How much would you like to repay? Debt: ${moneyFormatter(
+            debt
+          )} | Wallet: ${moneyFormatter(playerMoney)}`}
           handleValue={handleValueDeposit}
         />
       )}
       {currentAsk === CurrentAsk.ASK_WITHDRAW && (
         <InputAmount
           name="amount"
-          labelText={`How much would you like to borrow? Debt: ${debt} | Wallet: ${playerMoney}`}
+          type="currency"
+          labelText={`How much would you like to borrow? Debt: ${moneyFormatter(
+            debt
+          )} | Wallet: ${moneyFormatter(playerMoney)}`}
           handleValue={handleValueWithdraw}
         />
       )}

@@ -27,7 +27,7 @@ const BuySellJet: FC<BuySellJetProps> = ({ onBuy, onSell, onJet }) => {
   return (
     <ActionContainer onKeyDown={handleOnKeyDown}>
       <BuySellJetContainer>
-        <span>what are you gonna do?</span>
+        <span>What are you gonna do?</span>
         <Button onClick={() => onBuy()}>buy</Button>
         <Button onClick={() => onSell()}>sell</Button>
         <Button onClick={() => onJet()}>jet</Button>
