@@ -123,92 +123,67 @@ describe("player slice", () => {
   });
 
   describe("rollPlayerEvents", () => {
-    test("player gets mugged", () => {
-      const { state, action } = setupRollPlayerEvents(0);
-      const expected = {
-        ...state,
-        money: 1600,
-        events: ["You got mugged!! You lost $400!!"],
-      };
+    test.each([
+      {
+        input: 0,
+        expectedState: {
+          money: 1600,
+          events: ["You got mugged!! You lost $400!!"],
+        },
+      },
+      {
+        input: 0.1,
+        expectedState: {
+          cocaine: 12,
+          events: ["You found 2 bags of cocaine on the ground!! FUCK YEAH"],
+        },
+      },
+      {
+        input: 0.2,
+        expectedState: {
+          cocaine: 8,
+          events: [
+            "Police dogs chase you for 2 blocks! You dropped 2 cocaine! That's a drag man...",
+          ],
+        },
+      },
+      {
+        input: 0.3,
+        expectedState: {
+          actionEvent: ActionEvents.BuyCoat,
+        },
+      },
+      {
+        input: 0.45,
+        expectedState: {
+          actionEvent: ActionEvents.BuyGun,
+        },
+      },
+      {
+        input: 0.6,
+        expectedState: {
+          cops: 3,
+          actionEvent: ActionEvents.CopsChase,
+        },
+      },
+      {
+        input: 0.95,
+        expectedState: {},
+      },
+    ])(
+      "input: $input, expectedState: $expectedState",
+      ({ input, expectedState }) => {
+        let { state, action } = setupRollPlayerEvents(input);
+        state = reducer(state, buy({ drug: Drugs.One, amount: 10, price: 0 }));
+        const expected = {
+          ...state,
+          ...expectedState,
+        };
 
-      const actual = reducer(state, action);
+        const actual = reducer(state, action);
 
-      expect(actual).toEqual(expected);
-    });
-
-    test("player finds drugs", () => {
-      const { state, action } = setupRollPlayerEvents(0.1);
-      const expected = {
-        ...state,
-        cocaine: 2,
-        events: ["You found 2 bags of cocaine on the ground!! FUCK YEAH"],
-      };
-
-      const actual = reducer(state, action);
-
-      expect(actual).toEqual(expected);
-    });
-
-    test("player dropped drugs", () => {
-      let { state, action } = setupRollPlayerEvents(0.2);
-      state = reducer(state, buy({ drug: Drugs.One, amount: 10, price: 0 }));
-      const expected = {
-        ...state,
-        cocaine: 8,
-        events: [
-          "Police dogs chase you for 2 blocks! You dropped 2 cocaine! That's a drag man...",
-        ],
-      };
-
-      const actual = reducer(state, action);
-
-      expect(actual).toEqual(expected);
-    });
-
-    test("player can upgrade coat", () => {
-      const { state, action } = setupRollPlayerEvents(0.3);
-      const expected = {
-        ...state,
-        actionEvent: ActionEvents.BuyCoat,
-      };
-
-      const actual = reducer(state, action);
-
-      expect(actual).toEqual(expected);
-    });
-
-    test("player can buy gun", () => {
-      const { state, action } = setupRollPlayerEvents(0.45);
-      const expected = {
-        ...state,
-        actionEvent: ActionEvents.BuyGun,
-      };
-
-      const actual = reducer(state, action);
-
-      expect(actual).toEqual(expected);
-    });
-
-    test("player can get chased by cops", () => {
-      const { state, action } = setupRollPlayerEvents(0.6);
-      const expected = {
-        ...state,
-        cops: 3,
-        actionEvent: ActionEvents.CopsChase,
-      };
-
-      const actual = reducer(state, action);
-
-      expect(actual).toEqual(expected);
-    });
-
-    test("nothing can happen", () => {
-      const { state, action } = setupRollPlayerEvents(0.95);
-      const expected = state;
-
-      const actual = reducer(state, action);
-
-      expect(actual).toEqual(expected);
-    });
+        expect(actual).toEqual(expected);
+      }
+    );
   });
 });
