@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../store";
+import type { RootState } from "../root-reducer";
 
 export type SharkState = {
   readonly balance: number;

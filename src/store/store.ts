@@ -1,32 +1,34 @@
+import { configureStore, PreloadedState } from "@reduxjs/toolkit";
 import {
-  combineReducers,
-  configureStore,
-  PreloadedState,
-} from "@reduxjs/toolkit";
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
 import { CurriedGetDefaultMiddleware } from "@reduxjs/toolkit/dist/getDefaultMiddleware";
 import logger from "redux-logger";
 
-import playerReducer from "./player/player.slice";
-import priceSlice from "./price/price.slice";
-import sharkSlice from "./shark/shark.slice";
-import bankSlice from "./bank/bank.slice";
-import stashSlice from "./stash/stash.slice";
+import rootReducer, { RootState } from "./root-reducer";
 
-const rootReducer = combineReducers({
-  player: playerReducer,
-  price: priceSlice,
-  shark: sharkSlice,
-  bank: bankSlice,
-  stash: stashSlice,
-});
+export type AppStore = ReturnType<typeof setupStore>;
+export type AppDispatch = AppStore["dispatch"];
 
 const configMiddleware = (
   getDefaultMiddleware: CurriedGetDefaultMiddleware
 ) => {
+  const defaultMiddle = () =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    });
   if (process.env.NODE_ENV === `development`) {
-    return getDefaultMiddleware().concat(logger);
+    return defaultMiddle().concat(logger);
   }
-  return getDefaultMiddleware();
+  return defaultMiddle();
 };
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
@@ -38,6 +40,4 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
   });
 };
 
-export type RootState = ReturnType<typeof rootReducer>;
-export type AppStore = ReturnType<typeof setupStore>;
-export type AppDispatch = AppStore["dispatch"];
+export const persistor = persistStore(setupStore());
