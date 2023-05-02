@@ -11,6 +11,7 @@ import { selectPriceDrugs } from "../../store/price/price.selectors";
 
 import InputAmount from "../../components/action/input-amount/input-amount.component";
 import SelectDrug from "../../components/action/select-drug/select-drug.component";
+import PriceBox from "../../components/price-box/price-box.component";
 
 enum AskBuy {
   ASK_SELECT,
@@ -54,13 +55,16 @@ export default function Buy() {
   return (
     <>
       {currentAsk === AskBuy.ASK_SELECT && (
-        <SelectDrug
-          text="What would you like to buy?"
-          onSelect={(drugKey) => {
-            setCurrentDrug(drugKey);
-            setCurrentAsk(AskBuy.ASK_BUY);
-          }}
-        />
+        <>
+          <PriceBox />
+          <SelectDrug
+            text="What would you like to buy?"
+            onSelect={(drugKey) => {
+              setCurrentDrug(drugKey);
+              setCurrentAsk(AskBuy.ASK_BUY);
+            }}
+          />
+        </>
       )}
       {currentAsk === AskBuy.ASK_BUY && (
         <InputAmount
