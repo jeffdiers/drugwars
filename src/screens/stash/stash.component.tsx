@@ -56,7 +56,7 @@ export default function Shark() {
       setInfo("");
       dispatch(buy({ drug: currentDrug, amount, price: 0 }));
       dispatch(withdrawStash({ drug: currentDrug, amount }));
-      setCurrentAsk(CurrentAsk.ASK_SELECT_DRUG);
+      dispatch(updateActionEvent(ActionEvents.Main));
     }
   };
 
