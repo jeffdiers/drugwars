@@ -4,7 +4,6 @@ import {
   hitPlayer,
   addPlayerEvent,
   depositPlayer,
-  askHealPlayer,
   updateActionEvent,
 } from "../../store/player/player.slice";
 import {
@@ -65,8 +64,7 @@ export default function CopsChase() {
       dispatch(depositPlayer(foundMoney));
       dispatch(addPlayerEvent(`You found $${foundMoney} while getting away!`));
     }
-    dispatch(updateActionEvent(ActionEvents.Main));
-    dispatch(askHealPlayer());
+    dispatch(updateActionEvent(ActionEvents.Heal));
   };
 
   useEffect(() => {

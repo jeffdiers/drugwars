@@ -5,17 +5,27 @@ import {
   addPlayerEvent,
   updateActionEvent,
 } from "../../store/player/player.slice";
-import { selectPlayerMoney } from "../../store/player/player.selectors";
+import {
+  selectPlayerArea,
+  selectPlayerMoney,
+} from "../../store/player/player.selectors";
 import { selectPriceCoat } from "../../store/price/price.selectors";
 
 import YesNo from "../../components/action/yes-no/yes-no.component";
-import { ActionEvents } from "../../store/player/player.types";
+import { ActionEvents, Areas } from "../../store/player/player.types";
 
 export default function BuyCoat() {
   const dispatch = useAppDispatch();
 
   const playerMoney = useAppSelector(selectPlayerMoney);
+  const playerArea = useAppSelector(selectPlayerArea);
   const priceCoat = useAppSelector(selectPriceCoat);
+
+  const handleUpdateActionEvent = () => {
+    playerArea === Areas.Bronx
+      ? dispatch(updateActionEvent(ActionEvents.Shark))
+      : dispatch(updateActionEvent(ActionEvents.Main));
+  };
 
   return (
     <YesNo
@@ -28,9 +38,9 @@ export default function BuyCoat() {
             addPlayerEvent("You don't have enough money to buy a coat!")
           );
         }
-        dispatch(updateActionEvent(ActionEvents.Main));
+        handleUpdateActionEvent();
       }}
-      onNo={() => dispatch(updateActionEvent(ActionEvents.Main))}
+      onNo={() => handleUpdateActionEvent()}
     />
   );
 }

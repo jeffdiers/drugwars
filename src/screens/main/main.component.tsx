@@ -16,7 +16,6 @@ export default function Main() {
   const dispatch = useAppDispatch();
 
   const playerEvents = useAppSelector(selectPlayerEvents);
-
   const priceEvents = useAppSelector(selectPriceEvents);
 
   return (

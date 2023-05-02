@@ -6,20 +6,28 @@ import {
   updateActionEvent,
 } from "../../store/player/player.slice";
 import {
+  selectPlayerArea,
   selectPlayerCoatSpace,
   selectPlayerMoney,
 } from "../../store/player/player.selectors";
 import { selectPriceGun } from "../../store/price/price.selectors";
 
 import YesNo from "../../components/action/yes-no/yes-no.component";
-import { ActionEvents } from "../../store/player/player.types";
+import { ActionEvents, Areas } from "../../store/player/player.types";
 
 export default function BuyGun() {
   const dispatch = useAppDispatch();
 
   const playerMoney = useAppSelector(selectPlayerMoney);
   const playerCoatSpace = useAppSelector(selectPlayerCoatSpace);
+  const playerArea = useAppSelector(selectPlayerArea);
   const priceGun = useAppSelector(selectPriceGun);
+
+  const handleUpdateActionEvent = () => {
+    playerArea === Areas.Bronx
+      ? dispatch(updateActionEvent(ActionEvents.Shark))
+      : dispatch(updateActionEvent(ActionEvents.Main));
+  };
 
   return (
     <YesNo
@@ -34,9 +42,9 @@ export default function BuyGun() {
             )
           );
         }
-        dispatch(updateActionEvent(ActionEvents.Main));
+        handleUpdateActionEvent();
       }}
-      onNo={() => dispatch(updateActionEvent(ActionEvents.Main))}
+      onNo={() => handleUpdateActionEvent()}
     />
   );
 }
