@@ -13,7 +13,6 @@ import {
   selectPlayerInventory,
   selectPlayerMoney,
 } from "../../store/player/player.selectors";
-import { selectPriceDrugs } from "../../store/price/price.selectors";
 
 import {
   GameStatsContainer,
@@ -24,10 +23,7 @@ import {
   Stash,
   CoatTitle,
   Coat,
-  PriceTitle,
   Item,
-  Price,
-  PriceItem,
 } from "./game-stats.styles";
 
 export default function GameStats() {
@@ -41,8 +37,6 @@ export default function GameStats() {
   const playerMoney = useAppSelector(selectPlayerMoney);
   const playerGuns = useAppSelector(selectPlayerGuns);
   const playerDaysEnd = useAppSelector(selectPlayerDaysEnd);
-
-  const priceDrugs = useAppSelector(selectPriceDrugs);
 
   return (
     <GameStatsContainer>
@@ -85,16 +79,6 @@ export default function GameStats() {
           <div>{moneyFormatter(playerMoney)}</div>
         </Item>
       </Coat>
-      <PriceTitle>Hey dude, the prices of drugs are:</PriceTitle>
-      <Price>
-        {Object.values(Drugs).map((drug, i) => (
-          <PriceItem key={i}>
-            <div>{drug}</div>
-            <div>{""}</div>
-            <div>{moneyFormatter(priceDrugs[drug])}</div>
-          </PriceItem>
-        ))}
-      </Price>
     </GameStatsContainer>
   );
 }

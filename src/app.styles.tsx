@@ -17,7 +17,7 @@ export const AppContainer = styled.div`
 `;
 
 export const GameScreen = styled.div`
-  padding: 14px;
+  padding: 7px;
   background-color: ${({ theme }) => theme.colors.black};
 
   ${({ theme }) =>

@@ -128,7 +128,7 @@ describe("player slice", () => {
       const expected = {
         ...state,
         money: 1600,
-        events: ["** You got mugged!! You lost 400 dollars!! **"],
+        events: ["You got mugged!! You lost $400!!"],
       };
 
       const actual = reducer(state, action);
@@ -141,7 +141,7 @@ describe("player slice", () => {
       const expected = {
         ...state,
         cocaine: 2,
-        events: ["** You found 2 bags of cocaine on the ground!! FUCK YEAH **"],
+        events: ["You found 2 bags of cocaine on the ground!! FUCK YEAH"],
       };
 
       const actual = reducer(state, action);
@@ -156,7 +156,7 @@ describe("player slice", () => {
         ...state,
         cocaine: 8,
         events: [
-          "** Police dogs chase you for 2 blocks! You dropped 2 cocaine! That's a drag man **",
+          "Police dogs chase you for 2 blocks! You dropped 2 cocaine! That's a drag man...",
         ],
       };
 

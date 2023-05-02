@@ -27,19 +27,19 @@ export const priceReducers = {
     if (1 === randomInteger(1, 40)) {
       updateState[Drugs.One] = Math.floor(updateState[Drugs.One] / 4);
       updateState.events = updateState.events.concat(
-        "** Holy shit! You found a time machine to the 80s. Coke is cheap! **"
+        "Holy shit! You found a time machine to the 80s. Coke is cheap!"
       );
     }
     if (1 === randomInteger(1, 35)) {
       updateState[Drugs.One] = Math.floor(updateState[Drugs.One] * 2);
       updateState.events = updateState.events.concat(
-        "** Cops made a huge cocaine bust! Prices are rising!!! **"
+        "Cops made a huge cocaine bust! Prices are rising!!!"
       );
     }
     if (1 === randomInteger(1, 35)) {
       updateState[Drugs.One] = Math.floor(updateState[Drugs.One] * 4);
       updateState.events = updateState.events.concat(
-        "** Some pure cocaine just hit the market. Prices are skyrocketing!! **"
+        "Some pure cocaine just hit the market. Prices are skyrocketing!!"
       );
     }
     //
@@ -48,19 +48,19 @@ export const priceReducers = {
     if (1 === randomInteger(1, 35)) {
       updateState[Drugs.Two] = Math.floor(updateState[Drugs.Two] / 4);
       updateState.events = updateState.events.concat(
-        "** Heroin markets are flooded! Prices have dropped!! **"
+        "Heroin markets are flooded! Prices have dropped!!"
       );
     }
     if (1 === randomInteger(1, 25)) {
       updateState[Drugs.Two] = Math.floor(updateState[Drugs.Two] * 2);
       updateState.events = updateState.events.concat(
-        "** Cops raided a heroin kingpin's warehouse! Prices are rising!!! **"
+        "Cops raided a heroin kingpin's warehouse! Prices are rising!!!"
       );
     }
     if (1 === randomInteger(1, 25)) {
       updateState[Drugs.Two] = Math.floor(updateState[Drugs.Two] * 4);
       updateState.events = updateState.events.concat(
-        "** Trump finished the wall. Prices are skyrocketing!! **"
+        "Trump finished the wall. Heroin prices are skyrocketing!!"
       );
     }
     //
@@ -69,7 +69,7 @@ export const priceReducers = {
     if (1 === randomInteger(1, 25)) {
       updateState[Drugs.Three] = Math.floor(updateState[Drugs.Three] / 4);
       updateState.events = updateState.events.concat(
-        "** Somebody found a reliable method for making molly. It's super cheap! **"
+        "Somebody found a reliable method for making molly. It's super cheap!"
       );
     }
     //
@@ -78,7 +78,7 @@ export const priceReducers = {
     if (1 === randomInteger(1, 20)) {
       updateState[Drugs.Four] = Math.floor(updateState[Drugs.Four] / 4);
       updateState.events = updateState.events.concat(
-        "** The Grateful Dead are in town! The market is flooded with LSD **"
+        "The Grateful Dead are in town! The market is flooded with LSD!!"
       );
     }
     //
@@ -87,7 +87,7 @@ export const priceReducers = {
     if (1 === randomInteger(1, 20)) {
       updateState[Drugs.Five] = Math.floor(updateState[Drugs.Five] / 4);
       updateState.events = updateState.events.concat(
-        "** Shroomfest time! Mushrooms are basically being handed out! **"
+        "Shroomfest time!! Mushrooms are basically being handed out!"
       );
     }
     //
@@ -96,7 +96,7 @@ export const priceReducers = {
     if (1 === randomInteger(1, 20)) {
       updateState[Drugs.Six] = Math.floor(updateState[Drugs.Six] / 4);
       updateState.events = updateState.events.concat(
-        "** 420 blaze it! Prices are dropping! **"
+        "420 blaze it! Prices are dropping!"
       );
     }
     return { ...state, ...updateState };

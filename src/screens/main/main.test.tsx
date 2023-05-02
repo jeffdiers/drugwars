@@ -23,7 +23,7 @@ describe("Main Screen", () => {
         ...state,
         maxTrench: 115,
         money: 1820,
-        events: ["** You bought more trench pockets for $180 **"],
+        events: ["You bought more trench pockets for $180"],
         actionEvent: ActionEvents.Main,
       };
 

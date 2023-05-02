@@ -3,6 +3,7 @@ import Button from "../../button/button.component";
 import Input from "../../input/input.component";
 
 import CurrencyInput from "react-currency-input-field";
+import DialogBox from "../../dialog-box/dialog-box.component";
 
 import { InputForm } from "./input-amount.styles";
 
@@ -33,17 +34,19 @@ const InputAmount: FC<InputAmountProps> = ({
 
   return (
     <InputForm onSubmit={handleOnSubmit}>
-      <label>{labelText}</label>
-      {type === "currency" ? (
-        <CurrencyInput
-          prefix="$"
-          name={name}
-          onValueChange={(value) => setinputValue(value)}
-        />
-      ) : (
-        <Input type="tel" autoFocus name={name} />
-      )}
-      <Button type="submit">submit</Button>
+      <DialogBox>
+        <label>{labelText}</label>
+        {type === "currency" ? (
+          <CurrencyInput
+            prefix="$"
+            name={name}
+            onValueChange={(value) => setinputValue(value)}
+          />
+        ) : (
+          <Input type="tel" autoFocus name={name} />
+        )}
+        <Button type="submit">submit</Button>
+      </DialogBox>
     </InputForm>
   );
 };
