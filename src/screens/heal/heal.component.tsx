@@ -1,22 +1,32 @@
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { moneyFormatter } from "../../utils/helpers";
 
 import {
   healPlayer,
   addPlayerEvent,
   updateActionEvent,
 } from "../../store/player/player.slice";
-import { selectPlayerMoney } from "../../store/player/player.selectors";
+import {
+  selectPlayerArea,
+  selectPlayerMoney,
+} from "../../store/player/player.selectors";
 import { selectPriceHeal } from "../../store/price/price.selectors";
 
 import YesNo from "../../components/action/yes-no/yes-no.component";
-import { ActionEvents } from "../../store/player/player.types";
-import { moneyFormatter } from "../../utils/helpers";
+import { ActionEvents, Areas } from "../../store/player/player.types";
 
 export default function Heal() {
   const dispatch = useAppDispatch();
 
   const playerMoney = useAppSelector(selectPlayerMoney);
+  const playerArea = useAppSelector(selectPlayerArea);
   const priceHeal = useAppSelector(selectPriceHeal);
+
+  const handleUpdateActionEvent = () => {
+    playerArea === Areas.Bronx
+      ? dispatch(updateActionEvent(ActionEvents.Shark))
+      : dispatch(updateActionEvent(ActionEvents.Main));
+  };
 
   return (
     <YesNo
@@ -27,9 +37,9 @@ export default function Heal() {
         } else {
           dispatch(addPlayerEvent("You don't have enough money to heal!"));
         }
-        dispatch(updateActionEvent(ActionEvents.Main));
+        handleUpdateActionEvent();
       }}
-      onNo={() => dispatch(updateActionEvent(ActionEvents.Main))}
+      onNo={() => handleUpdateActionEvent()}
     />
   );
 }

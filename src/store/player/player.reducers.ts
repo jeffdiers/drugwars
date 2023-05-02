@@ -117,7 +117,7 @@ export const playerReducers = {
       guns: state.guns + 1,
       money: state.money - action.payload,
       events: state.events.concat(
-        `** You bought a gun for $${action.payload} **`
+        `You bought a gun for ${moneyFormatter(action.payload)}!`
       ),
     };
   },
@@ -140,9 +140,6 @@ export const playerReducers = {
   },
   removePlayerEvent(state: PlayerState, _action: PayloadAction) {
     return { ...state, events: state.events.slice(1) };
-  },
-  askHealPlayer(state: PlayerState, _action: PayloadAction) {
-    return { ...state, actionEvent: ActionEvents.Heal };
   },
   updateActionEvent(state: PlayerState, action: PayloadAction<ActionEvents>) {
     return { ...state, actionEvent: action.payload };

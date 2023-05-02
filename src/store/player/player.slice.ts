@@ -41,7 +41,6 @@ export const {
   healPlayer,
   addPlayerEvent,
   removePlayerEvent,
-  askHealPlayer,
   updateActionEvent,
   resetPlayer,
 } = playerSlice.actions;
