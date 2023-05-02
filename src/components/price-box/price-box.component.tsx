@@ -6,7 +6,7 @@ import { selectPriceDrugs } from "../../store/price/price.selectors";
 
 import DialogBox from "../dialog-box/dialog-box.component";
 
-import { PriceItem } from "./price-box.styles";
+import { PriceItem, PriceItemDottedLine } from "./price-box.styles";
 
 export default function PriceBox() {
   const priceDrugs = useAppSelector(selectPriceDrugs);
@@ -18,7 +18,7 @@ export default function PriceBox() {
         {Object.values(Drugs).map((drug, i) => (
           <PriceItem key={i}>
             <div>{drug}</div>
-            <div>{""}</div>
+            <PriceItemDottedLine />
             <div>{moneyFormatter(priceDrugs[drug])}</div>
           </PriceItem>
         ))}
