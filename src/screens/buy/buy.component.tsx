@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { moneyFormatter } from "../../utils/helpers";
 import { buy, updateActionEvent } from "../../store/player/player.slice";
 import {
   selectPlayerCoatSpace,
@@ -64,7 +65,9 @@ export default function Buy() {
       {currentAsk === AskBuy.ASK_BUY && (
         <InputAmount
           name={currentDrug}
-          labelText={`How much ${currentDrug} would you like to buy? Max Allowed: ${maxBuy}`}
+          labelText={`How much ${currentDrug} would you like to buy? Price: ${moneyFormatter(
+            priceDrugs[currentDrug]
+          )} | Max allowed: ${maxBuy}`}
           handleValue={handleValueBuy}
         />
       )}

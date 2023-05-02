@@ -10,6 +10,7 @@ import { selectPlayerEvents } from "../../store/player/player.selectors";
 
 import Continue from "../../components/action/continue/continue.component";
 import BuySellJet from "../../components/action/buy-sell-jet/buy-sell-jet.component";
+import PriceBox from "../../components/price-box/price-box.component";
 
 export default function Main() {
   const dispatch = useAppDispatch();
@@ -31,11 +32,14 @@ export default function Main() {
           onContinue={() => dispatch(removePriceEvent())}
         />
       ) : (
-        <BuySellJet
-          onBuy={() => dispatch(updateActionEvent(ActionEvents.Buy))}
-          onSell={() => dispatch(updateActionEvent(ActionEvents.Sell))}
-          onJet={() => dispatch(updateActionEvent(ActionEvents.Jet))}
-        />
+        <>
+          <PriceBox />
+          <BuySellJet
+            onBuy={() => dispatch(updateActionEvent(ActionEvents.Buy))}
+            onSell={() => dispatch(updateActionEvent(ActionEvents.Sell))}
+            onJet={() => dispatch(updateActionEvent(ActionEvents.Jet))}
+          />
+        </>
       )}
     </>
   );

@@ -4,8 +4,9 @@ import { getDrugByKey } from "../../../utils/helpers";
 
 import ActionContainer from "../action-container.component";
 import Button from "../../button/button.component";
+import DialogBox from "../../dialog-box/dialog-box.component";
 
-import { SelectDrugContainer, SelectDrugButtons } from "./select-drug.styles";
+import { SelectDrugButtons } from "./select-drug.styles";
 
 type SelectDrugProps = {
   text: string;
@@ -20,7 +21,7 @@ const SelectDrug: FC<SelectDrugProps> = ({ text, onSelect }) => {
 
   return (
     <ActionContainer onKeyDown={handleOnKeyDown}>
-      <SelectDrugContainer>
+      <DialogBox>
         <span>{text}</span>
         <SelectDrugButtons>
           {Object.values(Drugs).map((drug, i) => (
@@ -29,7 +30,7 @@ const SelectDrug: FC<SelectDrugProps> = ({ text, onSelect }) => {
             </Button>
           ))}
         </SelectDrugButtons>
-      </SelectDrugContainer>
+      </DialogBox>
     </ActionContainer>
   );
 };

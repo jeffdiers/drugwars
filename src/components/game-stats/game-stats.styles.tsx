@@ -3,6 +3,7 @@ import styled from "styled-components";
 const marginBottom = "7px";
 
 export const GameStatsContainer = styled.div`
+  padding: 0 12px 12px 12px;
   display: grid;
   grid-template-columns: 50% 50%;
   grid-template-rows: auto;
@@ -78,26 +79,4 @@ export const Coat = styled.div`
 export const Item = styled.div`
   display: flex;
   justify-content: space-between;
-`;
-
-export const PriceTitle = styled.div`
-  grid-area: price-title;
-  margin-bottom: ${marginBottom};
-`;
-
-export const Price = styled.div`
-  grid-area: price;
-  margin-bottom: ${marginBottom};
-`;
-
-export const PriceItem = styled.div`
-  display: flex;
-  justify-content: space-between;
-  div:nth-child(2) {
-    flex: 1;
-    border-bottom: 2px dotted ${({ theme }) => theme.colors.primary};
-    border-radius: 1px;
-    position: relative;
-    top: -2px;
-  }
 `;

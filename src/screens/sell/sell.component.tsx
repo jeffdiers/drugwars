@@ -6,7 +6,9 @@ import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
 import InputAmount from "../../components/action/input-amount/input-amount.component";
 import SelectDrug from "../../components/action/select-drug/select-drug.component";
+
 import { selectPriceDrugs } from "../../store/price/price.selectors";
+import { moneyFormatter } from "../../utils/helpers";
 
 enum AskSell {
   ASK_SELECT,
@@ -58,7 +60,9 @@ export default function Sell() {
       {currentAsk === AskSell.ASK_SELL && (
         <InputAmount
           name={currentDrug}
-          labelText={`How much ${currentDrug} would you like to sell? Max Allowed: ${maxSell}`}
+          labelText={`How much ${currentDrug} would you like to sell? Price: ${moneyFormatter(
+            priceDrugs[currentDrug]
+          )} | Max allowed: ${maxSell}`}
           handleValue={handleValueSell}
         />
       )}

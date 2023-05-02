@@ -10,6 +10,7 @@ import { selectPriceHeal } from "../../store/price/price.selectors";
 
 import YesNo from "../../components/action/yes-no/yes-no.component";
 import { ActionEvents } from "../../store/player/player.types";
+import { moneyFormatter } from "../../utils/helpers";
 
 export default function Heal() {
   const dispatch = useAppDispatch();
@@ -19,7 +20,7 @@ export default function Heal() {
 
   return (
     <YesNo
-      text={`Do you want to heal for $${priceHeal}?`}
+      text={`Do you want to heal for ${moneyFormatter(priceHeal)}?`}
       onYes={() => {
         if (priceHeal <= playerMoney) {
           dispatch(healPlayer(priceHeal));

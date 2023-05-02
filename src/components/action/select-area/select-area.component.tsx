@@ -4,8 +4,9 @@ import { getAreaByKey } from "../../../utils/helpers";
 
 import ActionContainer from "../action-container.component";
 import Button from "../../button/button.component";
+import DialogBox from "../../dialog-box/dialog-box.component";
 
-import { SelectAreaContainer, SelectAreaButtons } from "./select-area.styles";
+import { SelectAreaButtons } from "./select-area.styles";
 
 type SelectAreaProps = {
   onSelect: (key: Areas) => void;
@@ -19,7 +20,7 @@ const SelectArea: FC<SelectAreaProps> = ({ onSelect }) => {
 
   return (
     <ActionContainer onKeyDown={handleOnKeyDown}>
-      <SelectAreaContainer>
+      <DialogBox>
         <span>Where you gonna go?</span>
         <SelectAreaButtons>
           {Object.values(Areas).map((area, i) => (
@@ -28,7 +29,7 @@ const SelectArea: FC<SelectAreaProps> = ({ onSelect }) => {
             </Button>
           ))}
         </SelectAreaButtons>
-      </SelectAreaContainer>
+      </DialogBox>
     </ActionContainer>
   );
 };

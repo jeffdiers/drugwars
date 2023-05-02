@@ -2,8 +2,7 @@ import { FC } from "react";
 
 import ActionContainer from "../action-container.component";
 import Button from "../../button/button.component";
-
-import { YesNoContainer } from "./yes-no.styles";
+import DialogBox from "../../dialog-box/dialog-box.component";
 
 type YesNoProps = {
   text: string;
@@ -25,11 +24,11 @@ const YesNo: FC<YesNoProps> = ({ text, onYes, onNo }) => {
 
   return (
     <ActionContainer onKeyDown={handleOnKeyDown}>
-      <YesNoContainer>
+      <DialogBox>
         <span>{text}</span>
         <Button onClick={() => onYes()}>yes</Button>
         <Button onClick={() => onNo()}>no</Button>
-      </YesNoContainer>
+      </DialogBox>
     </ActionContainer>
   );
 };

@@ -1,5 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { randomInteger } from "../../utils/helpers";
+import { moneyFormatter, randomInteger } from "../../utils/helpers";
 
 import { initialState } from "./player.slice";
 import {
@@ -47,7 +47,7 @@ export const playerReducers = {
           ...state,
           money: state.money - lostMoney,
           events: state.events.concat(
-            `** You got mugged!! You lost ${lostMoney} dollars!! **`
+            `You got mugged!! You lost ${moneyFormatter(lostMoney)}!!`
           ),
         };
 
@@ -61,7 +61,7 @@ export const playerReducers = {
           ...state,
           [drug]: state[drug] + amount,
           events: state.events.concat(
-            `** You found ${amount} bags of ${drug} on the ground!! FUCK YEAH **`
+            `You found ${amount} bags of ${drug} on the ground!! FUCK YEAH`
           ),
         };
 
@@ -77,7 +77,7 @@ export const playerReducers = {
             ...state,
             [drug]: state[drug] - amount,
             events: state.events.concat(
-              `** Police dogs chase you for ${blocks} blocks! You dropped ${amount} ${drug}! That's a drag man **`
+              `Police dogs chase you for ${blocks} blocks! You dropped ${amount} ${drug}! That's a drag man...`
             ),
           };
         }
@@ -107,7 +107,7 @@ export const playerReducers = {
       maxTrench: state.maxTrench + 15,
       money: state.money - action.payload,
       events: state.events.concat(
-        `** You bought more trench pockets for $${action.payload} **`
+        `You bought more trench pockets for ${moneyFormatter(action.payload)}`
       ),
     };
   },
@@ -126,7 +126,7 @@ export const playerReducers = {
       ...state,
       health: 100,
       money: state.money - action.payload,
-      events: state.events.concat(`** You're back to full health! **`),
+      events: state.events.concat(`You're back to full health!`),
     };
   },
   hitCop(state: PlayerState, _action: PayloadAction) {
