@@ -7,6 +7,7 @@
     "build": "react-scripts build",
     "start": "react-scripts start",
     "test": "react-scripts test",
+    "test:clearCache": "react-scripts test --clearCache",
     "postinstall": "husky install",
     "prepack": "pinst --disable",
     "postpack": "pinst --enable"
@@ -45,7 +46,9 @@
     "react-is": "^18.2.0",
     "react-redux": "^8.0.5",
     "react-scripts": "^5.0.1",
+    "redux": "^4.2.1",
     "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
     "styled-components": "^5.3.10"
   },
   "browserslist": {

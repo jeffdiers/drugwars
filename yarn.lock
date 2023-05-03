@@ -5441,7 +5441,9 @@ __metadata:
     react-is: ^18.2.0
     react-redux: ^8.0.5
     react-scripts: ^5.0.1
+    redux: ^4.2.1
     redux-logger: ^3.0.6
+    redux-persist: ^6.0.0
     styled-components: ^5.3.10
     typescript: 5.0.4
   languageName: unknown
@@ -10987,6 +10989,15 @@ __metadata:
   dependencies:
     deep-diff: ^0.3.5
   checksum: c40f63c44c6475cf6374ae0eaa810d913f142614cb80692a0beacaf135c5dc3eb3e2cdd4296f01446ba48cb69b82e81363b84d829f1f6659382c991022a814ac
+  languageName: node
+  linkType: hard
+
+"redux-persist@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "redux-persist@npm:6.0.0"
+  peerDependencies:
+    redux: ">4.0.0"
+  checksum: edaf10dbf17351ce8058d0802357adae8665b3a1ff39371834e37838ddbe1a79cccbc717b8ba54acb5307651ccf51d0f7dc1cbc8dbae0726ff952d11ef61c6b8
   languageName: node
   linkType: hard
 

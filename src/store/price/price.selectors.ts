@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-import { RootState } from "../store";
+import type { RootState } from "../root-reducer";
 import { Drugs, DrugsMap } from "../player/player.types";
 
 import { PriceState } from "./price.types";

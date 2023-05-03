@@ -5,7 +5,8 @@ import type { PreloadedState } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 
 import { setupStore } from "../store/store";
-import type { AppStore, RootState } from "../store/store";
+import type { AppStore } from "../store/store";
+import type { RootState } from "../store/root-reducer";
 
 import { ThemeProvider } from "styled-components";
 import { theme } from "../theme/theme";

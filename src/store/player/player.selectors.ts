@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-import { RootState } from "../store";
+import type { RootState } from "../root-reducer";
 
 import { PlayerState, Drugs, DrugsMap, ActionEvents } from "./player.types";
 
