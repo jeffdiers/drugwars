@@ -1,25 +1,56 @@
-import { useAppDispatch } from "../../utils/redux-hooks";
+import { useAppDispatch, useAppSelector } from "../../utils/redux-hooks";
 import { useKeyDown } from "../../utils/hooks";
 
-import { updateActionEvent } from "../../store/player/player.slice";
+import {
+  updateActionEvent,
+  resetPlayer,
+} from "../../store/player/player.slice";
+import { resetBank } from "../../store/bank/bank.slice";
+import { resetShark } from "../../store/shark/shark.slice";
+import { resetStash } from "../../store/stash/stash.slice";
+import { setPrices } from "../../store/price/price.slice";
 
 import Button from "../../components/button/button.component";
 
-import { ActionEvents } from "../../store/player/player.types";
+import { ActionEvents, Areas } from "../../store/player/player.types";
 
 import { StartContainer, TitleContainer } from "./start.styles";
+import {
+  selectPlayerArea,
+  selectPlayerDaysEnd,
+} from "../../store/player/player.selectors";
 
 export default function Start() {
   const dispatch = useAppDispatch();
 
-  useKeyDown(() => dispatch(updateActionEvent(ActionEvents.Shark)), ["Enter"]);
+  const playerArea = useAppSelector(selectPlayerArea);
+  const playerDaysEnd = useAppSelector(selectPlayerDaysEnd);
+
+  const newGame = () => {
+    dispatch(resetPlayer());
+    dispatch(resetShark());
+    dispatch(resetStash());
+    dispatch(resetBank());
+    dispatch(setPrices());
+    dispatch(updateActionEvent(ActionEvents.Shark));
+  };
+
+  const contnueGame = () => {
+    playerArea === Areas.Bronx
+      ? dispatch(updateActionEvent(ActionEvents.Shark))
+      : dispatch(updateActionEvent(ActionEvents.Main));
+  };
+
+  useKeyDown(() => newGame(), ["Enter"]);
+  useKeyDown(() => playerDaysEnd < 30 && contnueGame(), ["c"]);
 
   return (
     <StartContainer>
       <TitleContainer>drug wars</TitleContainer>
-      <Button onClick={() => dispatch(updateActionEvent(ActionEvents.Shark))}>
-        New Game
-      </Button>
+      <Button onClick={() => newGame()}>New Game</Button>
+      {playerDaysEnd < 30 && (
+        <Button onClick={() => contnueGame()}>Continue Game</Button>
+      )}
     </StartContainer>
   );
 }

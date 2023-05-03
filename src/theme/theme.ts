@@ -12,6 +12,7 @@ export const theme: DefaultTheme = {
   },
   fontSize: {
     regular: "14pt",
+    medium: "16pt",
     large: "24pt",
   },
   borderRadius: "3px",
