@@ -4,6 +4,7 @@ export const AppContainer = styled.div`
   display: grid;
   height: 100vh;
   width: 100vw;
+  background-color: ${({ theme }) => theme.colors.black};
 
   font-family: ${({ theme }) => theme.fonts.primary};
   font-size: ${({ theme }) => theme.fontSize.regular};
@@ -12,13 +13,12 @@ export const AppContainer = styled.div`
   ${({ theme }) =>
     theme.media.sm(css`
       grid-template-columns: auto minmax(auto, 720px) auto;
-      grid-template-rows: auto minmax(auto, 480px) auto;
+      grid-template-rows: 24px auto auto;
     `)}
 `;
 
 export const GameScreen = styled.div`
   padding: 7px;
-  background-color: ${({ theme }) => theme.colors.black};
 
   ${({ theme }) =>
     theme.media.sm(css`
