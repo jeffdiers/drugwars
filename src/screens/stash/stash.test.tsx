@@ -2,28 +2,25 @@ import { screen, fireEvent } from "@testing-library/dom";
 import { renderWithProviders } from "../../utils/test-utils";
 import App from "../../app.component";
 
+const setUpStash = () => {
+  renderWithProviders(<App />);
+
+  const container = screen.getByTestId("app-container");
+
+  fireEvent.keyDown(container, { key: "Enter" });
+  fireEvent.keyDown(container, { key: "n" });
+  fireEvent.keyDown(container, { key: "n" });
+
+  return container;
+};
+
 describe("Stash Screen", () => {
   test("player goes to main when selects not to visit stash", () => {
-    renderWithProviders(<App />);
+    const container = setUpStash();
 
     const expected = /What are you gonna do/i;
 
-    fireEvent.keyDown(screen.getByTestId("app-container"), {
-      key: "Enter",
-      keyCode: 13,
-    });
-    fireEvent.keyDown(screen.getByTestId("app-container"), {
-      key: "n",
-      keyCode: 13,
-    });
-    fireEvent.keyDown(screen.getByTestId("app-container"), {
-      key: "n",
-      keyCode: 13,
-    });
-    fireEvent.keyDown(screen.getByTestId("app-container"), {
-      key: "n",
-      keyCode: 13,
-    });
+    fireEvent.keyDown(container, { key: "n" });
 
     const actual = screen.getByText(expected);
 
@@ -31,26 +28,11 @@ describe("Stash Screen", () => {
   });
 
   test("go to stash when player selects to visit stash", () => {
-    renderWithProviders(<App />);
+    const container = setUpStash();
 
     const expected = /Which drug do you want to stash/i;
 
-    fireEvent.keyDown(screen.getByTestId("app-container"), {
-      key: "Enter",
-      keyCode: 13,
-    });
-    fireEvent.keyDown(screen.getByTestId("app-container"), {
-      key: "n",
-      keyCode: 13,
-    });
-    fireEvent.keyDown(screen.getByTestId("app-container"), {
-      key: "n",
-      keyCode: 13,
-    });
-    fireEvent.keyDown(screen.getByTestId("app-container"), {
-      key: "y",
-      keyCode: 13,
-    });
+    fireEvent.keyDown(container, { key: "y" });
 
     const actual = screen.getByText(expected);
 
@@ -58,30 +40,27 @@ describe("Stash Screen", () => {
   });
 
   test("player can exit stash screen and continue to main (buy, sell, jet) screen", () => {
-    renderWithProviders(<App />);
+    const container = setUpStash();
 
     const expected = /What are you gonna do/i;
 
-    fireEvent.keyDown(screen.getByTestId("app-container"), {
-      key: "Enter",
-      keyCode: 13,
-    });
-    fireEvent.keyDown(screen.getByTestId("app-container"), {
-      key: "n",
-      keyCode: 13,
-    });
-    fireEvent.keyDown(screen.getByTestId("app-container"), {
-      key: "n",
-      keyCode: 13,
-    });
-    fireEvent.keyDown(screen.getByTestId("app-container"), {
-      key: "y",
-      keyCode: 13,
-    });
-    fireEvent.keyDown(screen.getByTestId("app-container"), {
-      key: "x",
-      keyCode: 13,
-    });
+    fireEvent.keyDown(container, { key: "y" });
+    fireEvent.keyDown(container, { key: "x" });
+
+    const actual = screen.getByText(expected);
+
+    expect(actual).toBeInTheDocument();
+  });
+
+  test("player can return to stash to stash more drugs", () => {
+    const container = setUpStash();
+
+    const expected = /Which drug do you want to stash/i;
+
+    fireEvent.keyDown(container, { key: "y" });
+    fireEvent.keyDown(container, { key: "c" });
+    fireEvent.submit(screen.getByRole("textbox"));
+    fireEvent.submit(screen.getByRole("textbox"));
 
     const actual = screen.getByText(expected);
 
