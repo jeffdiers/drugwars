@@ -76,6 +76,7 @@ export default function Shark() {
             setCurrentDrug(drugKey);
             setCurrentAsk(CurrentAsk.ASK_DEPOSIT);
           }}
+          onExit={() => dispatch(updateActionEvent(ActionEvents.Main))}
         />
       )}
       {currentAsk === CurrentAsk.ASK_DEPOSIT && (

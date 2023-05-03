@@ -11,12 +11,14 @@ import { SelectDrugButtons } from "./select-drug.styles";
 type SelectDrugProps = {
   text: string;
   onSelect: (key: Drugs) => void;
+  onExit: () => void;
 };
 
-const SelectDrug: FC<SelectDrugProps> = ({ text, onSelect }) => {
+const SelectDrug: FC<SelectDrugProps> = ({ text, onSelect, onExit }) => {
   const handleOnKeyDown = (key: string) => {
     const drugKey = getDrugByKey(key);
     if (drugKey) onSelect(drugKey);
+    if (key === "x") onExit();
   };
 
   return (
@@ -30,6 +32,7 @@ const SelectDrug: FC<SelectDrugProps> = ({ text, onSelect }) => {
             </Button>
           ))}
         </SelectDrugButtons>
+        <Button onClick={() => onExit()}>exit</Button>
       </DialogBox>
     </ActionContainer>
   );
