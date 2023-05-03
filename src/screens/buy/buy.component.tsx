@@ -63,6 +63,7 @@ export default function Buy() {
               setCurrentDrug(drugKey);
               setCurrentAsk(AskBuy.ASK_BUY);
             }}
+            onExit={() => dispatch(updateActionEvent(ActionEvents.Main))}
           />
         </>
       )}

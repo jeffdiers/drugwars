@@ -38,4 +38,23 @@ describe("Stash Screen", () => {
 
     expect(actual).toBeInTheDocument();
   });
+
+  test("player can exit stash screen and continue to main (buy, sell, jet) screen", () => {
+    renderWithProviders(<App />);
+
+    const expected = /What are you gonna do/i;
+
+    fireEvent.keyDown(screen.getByRole("dialog"), {
+      key: "Enter",
+      keyCode: 13,
+    });
+    fireEvent.keyDown(screen.getByRole("dialog"), { key: "n", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("dialog"), { key: "n", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("dialog"), { key: "y", keyCode: 13 });
+    fireEvent.keyDown(screen.getByRole("dialog"), { key: "x", keyCode: 13 });
+
+    const actual = screen.getByText(expected);
+
+    expect(actual).toBeInTheDocument();
+  });
 });

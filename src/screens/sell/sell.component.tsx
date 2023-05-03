@@ -58,6 +58,7 @@ export default function Sell() {
               setCurrentDrug(drugKey);
               setCurrentAsk(AskSell.ASK_SELL);
             }}
+            onExit={() => dispatch(updateActionEvent(ActionEvents.Main))}
           />
         </>
       )}
