@@ -60,7 +60,7 @@ export const priceReducers = {
     if (1 === randomInteger(1, 25)) {
       updateState[Drugs.Two] = Math.floor(updateState[Drugs.Two] * 4);
       updateState.events = updateState.events.concat(
-        "Trump finished the wall. Heroin prices are skyrocketing!!"
+        "Heroin prices are skyrocketing!!"
       );
     }
     //
