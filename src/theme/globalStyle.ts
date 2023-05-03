@@ -13,6 +13,13 @@ const GlobalStyle = createGlobalStyle`
       url(${ShareTechMonoTTF}) format("truetype");
     font-weight: 400;
     font-style: normal;
+  }
+  
+  body {
+    background-color: ${({ theme }) => theme.colors.black};
+    font-family: ${({ theme }) => theme.fonts.primary};
+    font-size: ${({ theme }) => theme.fontSize.regular};
+    color: ${({ theme }) => theme.colors.primary};
   }`;
 
 export default GlobalStyle;
