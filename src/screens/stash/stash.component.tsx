@@ -54,9 +54,9 @@ export default function Shark() {
       setInfo(`You don't have that much ${currentDrug} in your stash!`);
     } else {
       setInfo("");
+      setCurrentAsk(CurrentAsk.ASK_SELECT_DRUG);
       dispatch(buy({ drug: currentDrug, amount, price: 0 }));
       dispatch(withdrawStash({ drug: currentDrug, amount }));
-      dispatch(updateActionEvent(ActionEvents.Main));
     }
   };
 
