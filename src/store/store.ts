@@ -35,9 +35,12 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
   return configureStore({
     reducer: rootReducer,
     preloadedState,
+    devTools: process.env.NODE_ENV !== "production",
     middleware: (getDefaultMiddleware) =>
       configMiddleware(getDefaultMiddleware),
   });
 };
 
-export const persistor = persistStore(setupStore());
+export const store = setupStore();
+
+export const persistor = persistStore(store);
