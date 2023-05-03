@@ -7,4 +7,5 @@ export const SelectAreaButtons = styled.div`
   column-gap: 5px;
   justify-items: stretch;
   justify-content: center;
+  padding: 0 3px;
 `;
