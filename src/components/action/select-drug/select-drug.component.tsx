@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { Drugs } from "../../../store/player/player.types";
-import { getDrugByKey } from "../../../utils/helpers";
+import { getFirstLetter } from "../../../utils/helpers";
+import { useKeyDown } from "../../../utils/hooks";
 
-import ActionContainer from "../action-container.component";
 import Button from "../../button/button.component";
 import DialogBox from "../../dialog-box/dialog-box.component";
 
@@ -15,26 +15,26 @@ type SelectDrugProps = {
 };
 
 const SelectDrug: FC<SelectDrugProps> = ({ text, onSelect, onExit }) => {
-  const handleOnKeyDown = (key: string) => {
-    const drugKey = getDrugByKey(key);
-    if (drugKey) onSelect(drugKey);
-    if (key === "x") onExit();
-  };
+  useKeyDown(() => onSelect(Drugs.One), [getFirstLetter(Drugs.One)]);
+  useKeyDown(() => onSelect(Drugs.Two), [getFirstLetter(Drugs.Two)]);
+  useKeyDown(() => onSelect(Drugs.Three), [getFirstLetter(Drugs.Three)]);
+  useKeyDown(() => onSelect(Drugs.Four), [getFirstLetter(Drugs.Four)]);
+  useKeyDown(() => onSelect(Drugs.Five), [getFirstLetter(Drugs.Five)]);
+  useKeyDown(() => onSelect(Drugs.Six), [getFirstLetter(Drugs.Six)]);
+  useKeyDown(() => onExit(), ["x"]);
 
   return (
-    <ActionContainer onKeyDown={handleOnKeyDown}>
-      <DialogBox>
-        <span>{text}</span>
-        <SelectDrugButtons>
-          {Object.values(Drugs).map((drug, i) => (
-            <Button key={i} onClick={() => onSelect(drug)}>
-              {drug}
-            </Button>
-          ))}
-        </SelectDrugButtons>
-        <Button onClick={() => onExit()}>exit</Button>
-      </DialogBox>
-    </ActionContainer>
+    <DialogBox>
+      <span>{text}</span>
+      <SelectDrugButtons>
+        {Object.values(Drugs).map((drug, i) => (
+          <Button key={i} onClick={() => onSelect(drug)}>
+            {drug}
+          </Button>
+        ))}
+      </SelectDrugButtons>
+      <Button onClick={() => onExit()}>exit</Button>
+    </DialogBox>
   );
 };
 

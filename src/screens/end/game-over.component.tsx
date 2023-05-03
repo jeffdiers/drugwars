@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { useAppDispatch, useAppSelector } from "../../utils/redux-hooks";
 import { moneyFormatter } from "../../utils/helpers";
 import { selectSharkBalance } from "../../store/shark/shark.slice";
 

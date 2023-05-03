@@ -1,4 +1,4 @@
-import { useAppSelector } from "../../utils/hooks";
+import { useAppSelector } from "../../utils/redux-hooks";
 import { moneyFormatter } from "../../utils/helpers";
 
 import { Drugs } from "../../store/player/player.types";

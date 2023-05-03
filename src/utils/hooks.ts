@@ -1,6 +1,16 @@
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import type { RootState } from "../store/root-reducer";
-import type { AppDispatch } from "../store/store";
-// Use throughout your app instead of plain `useDispatch` and `useSelector`
-export const useAppDispatch: () => AppDispatch = useDispatch;
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+import { useEffect } from "react";
+
+export const useKeyDown = (callback: () => void, keys: string[]) => {
+  const onKeyDown = (event: KeyboardEvent) => {
+    const wasAnyKeyPressed = keys.some((key) => event.key === key);
+    if (wasAnyKeyPressed) {
+      event.preventDefault();
+      callback();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  });
+};

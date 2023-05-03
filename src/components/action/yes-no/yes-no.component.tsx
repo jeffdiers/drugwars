@@ -1,6 +1,6 @@
 import { FC } from "react";
+import { useKeyDown } from "../../../utils/hooks";
 
-import ActionContainer from "../action-container.component";
 import Button from "../../button/button.component";
 import DialogBox from "../../dialog-box/dialog-box.component";
 
@@ -11,25 +11,15 @@ type YesNoProps = {
 };
 
 const YesNo: FC<YesNoProps> = ({ text, onYes, onNo }) => {
-  const isYesNo = (key: string) => {
-    return key === "y" || key === "n";
-  };
-
-  const handleOnKeyDown = (key: string) => {
-    if (isYesNo(key)) {
-      if (key === "y") onYes();
-      if (key === "n") onNo();
-    }
-  };
+  useKeyDown(() => onYes(), ["y"]);
+  useKeyDown(() => onNo(), ["n"]);
 
   return (
-    <ActionContainer onKeyDown={handleOnKeyDown}>
-      <DialogBox>
-        <span>{text}</span>
-        <Button onClick={() => onYes()}>yes</Button>
-        <Button onClick={() => onNo()}>no</Button>
-      </DialogBox>
-    </ActionContainer>
+    <DialogBox>
+      <span>{text}</span>
+      <Button onClick={() => onYes()}>yes</Button>
+      <Button onClick={() => onNo()}>no</Button>
+    </DialogBox>
   );
 };
 

@@ -11,7 +11,7 @@ import {
   selectPlayerHealth,
   selectPlayerGuns,
 } from "../../store/player/player.selectors";
-import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { useAppDispatch, useAppSelector } from "../../utils/redux-hooks";
 import { moneyFormatter, randomInteger } from "../../utils/helpers";
 
 import RunFight from "../../components/action/run-fight/run-fight.component";

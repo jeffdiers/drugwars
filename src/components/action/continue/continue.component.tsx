@@ -1,7 +1,7 @@
 import { FC } from "react";
+import { useKeyDown } from "../../../utils/hooks";
 
 import Button from "../../button/button.component";
-import ActionContainer from "../action-container.component";
 import DialogBox from "../../dialog-box/dialog-box.component";
 
 type ContinueProps = {
@@ -11,19 +11,15 @@ type ContinueProps = {
 };
 
 const Continue: FC<ContinueProps> = ({ text, buttonText, onContinue }) => {
-  const handleOnKeyDown = (key: string) => {
-    if (key === "Enter") onContinue();
-  };
+  useKeyDown(() => onContinue(), ["Enter"]);
 
   return (
-    <ActionContainer onKeyDown={handleOnKeyDown}>
-      <DialogBox>
-        <span>{text}</span>
-        <Button onClick={() => onContinue()}>
-          {buttonText ? buttonText : "continue"}
-        </Button>
-      </DialogBox>
-    </ActionContainer>
+    <DialogBox>
+      <span>{text}</span>
+      <Button onClick={() => onContinue()}>
+        {buttonText ? buttonText : "continue"}
+      </Button>
+    </DialogBox>
   );
 };
 

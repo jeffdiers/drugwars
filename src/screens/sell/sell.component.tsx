@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { sell, updateActionEvent } from "../../store/player/player.slice";
 import { ActionEvents, Drugs } from "../../store/player/player.types";
 import { selectPlayerInventory } from "../../store/player/player.selectors";
-import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { useAppDispatch, useAppSelector } from "../../utils/redux-hooks";
 
 import InputAmount from "../../components/action/input-amount/input-amount.component";
 import SelectDrug from "../../components/action/select-drug/select-drug.component";

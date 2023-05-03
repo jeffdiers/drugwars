@@ -67,7 +67,7 @@ describe("Buy Coat Screen", () => {
         ...expectedState,
       };
 
-      fireEvent.keyDown(screen.getByRole("dialog"), {
+      fireEvent.keyDown(screen.getByTestId("app-container"), {
         key: inputKey,
         keyCode: 13,
       });

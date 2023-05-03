@@ -1,8 +1,7 @@
 import { FC } from "react";
 import { Areas } from "../../../store/player/player.types";
-import { getAreaByKey } from "../../../utils/helpers";
+import { useKeyDown } from "../../../utils/hooks";
 
-import ActionContainer from "../action-container.component";
 import Button from "../../button/button.component";
 import DialogBox from "../../dialog-box/dialog-box.component";
 
@@ -13,24 +12,24 @@ type SelectAreaProps = {
 };
 
 const SelectArea: FC<SelectAreaProps> = ({ onSelect }) => {
-  const handleOnKeyDown = (key: string) => {
-    const areaKey = getAreaByKey(key);
-    if (areaKey) onSelect(areaKey);
-  };
+  useKeyDown(() => onSelect(Areas.Bronx), ["1"]);
+  useKeyDown(() => onSelect(Areas.Queens), ["2"]);
+  useKeyDown(() => onSelect(Areas.CentralPark), ["3"]);
+  useKeyDown(() => onSelect(Areas.Manhattan), ["4"]);
+  useKeyDown(() => onSelect(Areas.ConeyIsland), ["5"]);
+  useKeyDown(() => onSelect(Areas.Brooklyn), ["6"]);
 
   return (
-    <ActionContainer onKeyDown={handleOnKeyDown}>
-      <DialogBox>
-        <span>Where you gonna go?</span>
-        <SelectAreaButtons>
-          {Object.values(Areas).map((area, i) => (
-            <Button key={i} onClick={() => onSelect(area)}>
-              {area}
-            </Button>
-          ))}
-        </SelectAreaButtons>
-      </DialogBox>
-    </ActionContainer>
+    <DialogBox>
+      <span>Where you gonna go?</span>
+      <SelectAreaButtons>
+        {Object.values(Areas).map((area, i) => (
+          <Button key={i} onClick={() => onSelect(area)}>
+            {area}
+          </Button>
+        ))}
+      </SelectAreaButtons>
+    </DialogBox>
   );
 };
 

@@ -8,11 +8,14 @@ describe("Start Screen", () => {
 
     const expected = /Would you like to visit the bank/i;
 
-    fireEvent.keyDown(screen.getByRole("dialog"), {
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
       key: "Enter",
       keyCode: 13,
     });
-    fireEvent.keyDown(screen.getByRole("dialog"), { key: "n", keyCode: 13 });
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
+      key: "n",
+      keyCode: 13,
+    });
 
     const actual = screen.getByText(expected);
 
@@ -24,11 +27,14 @@ describe("Start Screen", () => {
 
     const expected = /How much would you like to repay/i;
 
-    fireEvent.keyDown(screen.getByRole("dialog"), {
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
       key: "Enter",
       keyCode: 13,
     });
-    fireEvent.keyDown(screen.getByRole("dialog"), { key: "y", keyCode: 13 });
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
+      key: "y",
+      keyCode: 13,
+    });
 
     const actual = screen.getByText(expected);
 

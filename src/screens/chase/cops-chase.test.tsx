@@ -14,7 +14,7 @@ describe("Cops Chase", () => {
     const store = setupStore();
     store.dispatch(updateActionEvent(ActionEvents.CopsChase));
     renderWithProviders(<App />, { store });
-    fireEvent.keyDown(screen.getByRole("dialog"), {
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
       key: "Enter",
       keyCode: 13,
     });
@@ -31,7 +31,7 @@ describe("Cops Chase", () => {
     store.dispatch(buyGun(0));
     store.dispatch(updateActionEvent(ActionEvents.CopsChase));
     renderWithProviders(<App />, { store });
-    fireEvent.keyDown(screen.getByRole("dialog"), {
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
       key: "Enter",
       keyCode: 13,
     });
@@ -48,11 +48,14 @@ describe("Cops Chase", () => {
     store.dispatch(updateActionEvent(ActionEvents.CopsChase));
     global.Math.random = () => 0.5;
     renderWithProviders(<App />, { store });
-    fireEvent.keyDown(screen.getByRole("dialog"), {
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
       key: "Enter",
       keyCode: 13,
     });
-    fireEvent.keyDown(screen.getByRole("dialog"), { key: "r", keyCode: 13 });
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
+      key: "r",
+      keyCode: 13,
+    });
 
     const expected = /You got away/i;
 
@@ -67,11 +70,14 @@ describe("Cops Chase", () => {
     store.dispatch(hitPlayer(97));
     global.Math.random = () => 0;
     renderWithProviders(<App />, { store });
-    fireEvent.keyDown(screen.getByRole("dialog"), {
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
       key: "Enter",
       keyCode: 13,
     });
-    fireEvent.keyDown(screen.getByRole("dialog"), { key: "r", keyCode: 13 });
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
+      key: "r",
+      keyCode: 13,
+    });
 
     const expected = /Game over/i;
 
@@ -85,11 +91,14 @@ describe("Cops Chase", () => {
     store.dispatch(updateActionEvent(ActionEvents.CopsChase));
     global.Math.random = () => 0;
     renderWithProviders(<App />, { store });
-    fireEvent.keyDown(screen.getByRole("dialog"), {
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
       key: "Enter",
       keyCode: 13,
     });
-    fireEvent.keyDown(screen.getByRole("dialog"), { key: "f", keyCode: 13 });
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
+      key: "f",
+      keyCode: 13,
+    });
 
     const expected = "Will you run?";
 
@@ -104,11 +113,14 @@ describe("Cops Chase", () => {
     store.dispatch(buyGun(0));
     global.Math.random = () => 0;
     renderWithProviders(<App />, { store });
-    fireEvent.keyDown(screen.getByRole("dialog"), {
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
       key: "Enter",
       keyCode: 13,
     });
-    fireEvent.keyDown(screen.getByRole("dialog"), { key: "f", keyCode: 13 });
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
+      key: "f",
+      keyCode: 13,
+    });
 
     const expected = /You got away/i;
 
@@ -124,11 +136,14 @@ describe("Cops Chase", () => {
     store.dispatch(hitPlayer(94));
     global.Math.random = () => 0.5;
     renderWithProviders(<App />, { store });
-    fireEvent.keyDown(screen.getByRole("dialog"), {
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
       key: "Enter",
       keyCode: 13,
     });
-    fireEvent.keyDown(screen.getByRole("dialog"), { key: "f", keyCode: 13 });
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
+      key: "f",
+      keyCode: 13,
+    });
 
     const expected = /Game over/i;
 
@@ -143,11 +158,14 @@ describe("Cops Chase", () => {
     store.dispatch(buyGun(0));
     global.Math.random = () => 0;
     renderWithProviders(<App />, { store });
-    fireEvent.keyDown(screen.getByRole("dialog"), {
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
       key: "Enter",
       keyCode: 13,
     });
-    fireEvent.keyDown(screen.getByRole("dialog"), { key: "f", keyCode: 13 });
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
+      key: "f",
+      keyCode: 13,
+    });
 
     const expected = /You got away/i;
 
