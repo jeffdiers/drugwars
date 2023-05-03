@@ -1,8 +1,7 @@
 import { useAppDispatch, useAppSelector } from "../../utils/redux-hooks";
+import { useKeyDown } from "../../utils/hooks";
 import { moneyFormatter } from "../../utils/helpers";
 import { selectSharkBalance } from "../../store/shark/shark.slice";
-
-import Continue from "../../components/action/continue/continue.component";
 
 import {
   selectPlayerHealth,
@@ -14,6 +13,10 @@ import { resetStash } from "../../store/stash/stash.slice";
 import { resetBank } from "../../store/bank/bank.slice";
 import { setPrices } from "../../store/price/price.slice";
 import { selectBankBalance } from "../../store/bank/bank.slice";
+
+import Button from "../../components/button/button.component";
+
+import { GameOverContainer, GameInfo } from "./game-over.styles";
 
 export default function GameOver() {
   const dispatch = useAppDispatch();
@@ -34,34 +37,38 @@ export default function GameOver() {
     return "PABLO ESCOBAR... YOU ARE A GOD";
   };
 
+  const endGame = () => {
+    dispatch(resetPlayer());
+    dispatch(resetShark());
+    dispatch(resetStash());
+    dispatch(resetBank());
+    dispatch(setPrices());
+  };
+
+  useKeyDown(() => endGame(), ["Enter"]);
+
   return (
-    <div>
-      <div>Game Over!</div>
-      <br />
-      {playerHealth <= 0 ? (
-        <div>You got busted!</div>
-      ) : (
-        <div>
-          <div>You made {moneyFormatter(profit)}</div>
-          <br />
-          <div>{dealerRank()}</div>
-          <br />
-          {sharkBalance > 0 && (
-            <div>
-              You might want to skip town... the loan shark is looking for you
-            </div>
-          )}
-        </div>
-      )}
-      <Continue
-        onContinue={() => {
-          dispatch(resetPlayer());
-          dispatch(resetShark());
-          dispatch(resetStash());
-          dispatch(resetBank());
-          dispatch(setPrices());
-        }}
-      />
-    </div>
+    <GameOverContainer>
+      <GameInfo>
+        <div>Game Over!</div>
+        <br />
+        {playerHealth <= 0 ? (
+          <div>You got busted!</div>
+        ) : (
+          <div>
+            <div>You made {moneyFormatter(profit)}</div>
+            <br />
+            <div>{dealerRank()}</div>
+            <br />
+            {sharkBalance > 0 && (
+              <div>
+                You might want to skip town... the loan shark is looking for you
+              </div>
+            )}
+          </div>
+        )}
+      </GameInfo>
+      <Button onClick={() => endGame()}>main menu</Button>
+    </GameOverContainer>
   );
 }
