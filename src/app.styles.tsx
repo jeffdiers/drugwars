@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 export const AppContainer = styled.div`
   display: grid;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   width: 100vw;
   background-color: ${({ theme }) => theme.colors.black};
 
