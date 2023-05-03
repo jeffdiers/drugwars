@@ -2,6 +2,7 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { moneyFormatter, randomInteger } from "../../utils/helpers";
 
 import { initialState } from "./player.slice";
+import { inventoryHelper } from "./player.selectors";
 import {
   PlayerState,
   Areas,
@@ -57,13 +58,17 @@ export const playerReducers = {
           Object.values(Drugs)[
             randomInteger(1, Object.values(Drugs).length) - 1
           ];
-        return {
-          ...state,
-          [drug]: state[drug] + amount,
-          events: state.events.concat(
-            `You found ${amount} bags of ${drug} on the ground!! FUCK YEAH`
-          ),
-        };
+        const coatSpace = state.maxTrench - inventoryHelper(state);
+        if (coatSpace >= amount) {
+          return {
+            ...state,
+            [drug]: state[drug] + amount,
+            events: state.events.concat(
+              `You found ${amount} bags of ${drug} on the ground!! FUCK YEAH`
+            ),
+          };
+        }
+        break;
 
       case 3:
         const currentStash = Object.values(Drugs).filter(
