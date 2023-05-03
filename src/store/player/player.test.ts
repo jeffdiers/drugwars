@@ -186,4 +186,15 @@ describe("player slice", () => {
       }
     );
   });
+
+  test("player finds drugs only triggers if player has coat space", () => {
+    let { state, action } = setupRollPlayerEvents(0.1);
+    state = reducer(state, buy({ drug: Drugs.One, amount: 100, price: 0 }));
+
+    const expected = state;
+
+    const actual = reducer(state, action);
+
+    expect(actual).toEqual(expected);
+  });
 });
