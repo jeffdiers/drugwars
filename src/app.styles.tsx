@@ -4,11 +4,6 @@ export const AppContainer = styled.div`
   display: grid;
   height: calc(var(--vh, 1vh) * 100);
   width: 100vw;
-  background-color: ${({ theme }) => theme.colors.black};
-
-  font-family: ${({ theme }) => theme.fonts.primary};
-  font-size: ${({ theme }) => theme.fontSize.regular};
-  color: ${({ theme }) => theme.colors.primary};
 
   ${({ theme }) =>
     theme.media.sm(css`
