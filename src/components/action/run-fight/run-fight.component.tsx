@@ -1,6 +1,6 @@
 import { FC } from "react";
+import { useKeyDown } from "../../../utils/hooks";
 
-import ActionContainer from "../action-container.component";
 import Button from "../../button/button.component";
 
 import { RunFightContainer } from "./run-fight.styles";
@@ -12,25 +12,15 @@ type RunFightProps = {
 };
 
 const RunFight: FC<RunFightProps> = ({ onRun, onFight, canFight }) => {
-  const isRunFight = (key: string) => {
-    return key === "r" || key === "f";
-  };
-
-  const handleOnKeyDown = (key: string) => {
-    if (isRunFight(key)) {
-      if (key === "r") onRun();
-      if (key === "f" && canFight) onFight();
-    }
-  };
+  useKeyDown(() => onRun(), ["r"]);
+  useKeyDown(() => canFight && onFight(), ["f"]);
 
   return (
-    <ActionContainer onKeyDown={handleOnKeyDown}>
-      <RunFightContainer>
-        <span>{canFight ? `Will you run or fight?` : `Will you run?`}</span>
-        {canFight && <Button onClick={() => onFight()}>fight</Button>}
-        <Button onClick={() => onRun()}>run</Button>
-      </RunFightContainer>
-    </ActionContainer>
+    <RunFightContainer>
+      <span>{canFight ? `Will you run or fight?` : `Will you run?`}</span>
+      {canFight && <Button onClick={() => onFight()}>fight</Button>}
+      <Button onClick={() => onRun()}>run</Button>
+    </RunFightContainer>
   );
 };
 

@@ -19,7 +19,7 @@ describe("sell stage", () => {
 
     store.dispatch(action);
     renderWithProviders(<App />, { store });
-    const element = screen.getByRole("dialog");
+    const element = screen.getByTestId("app-container");
 
     fireEvent.keyDown(element, { key: input, keyCode: 66 });
 

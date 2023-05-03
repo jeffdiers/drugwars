@@ -8,13 +8,22 @@ describe("Stash Screen", () => {
 
     const expected = /What are you gonna do/i;
 
-    fireEvent.keyDown(screen.getByRole("dialog"), {
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
       key: "Enter",
       keyCode: 13,
     });
-    fireEvent.keyDown(screen.getByRole("dialog"), { key: "n", keyCode: 13 });
-    fireEvent.keyDown(screen.getByRole("dialog"), { key: "n", keyCode: 13 });
-    fireEvent.keyDown(screen.getByRole("dialog"), { key: "n", keyCode: 13 });
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
+      key: "n",
+      keyCode: 13,
+    });
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
+      key: "n",
+      keyCode: 13,
+    });
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
+      key: "n",
+      keyCode: 13,
+    });
 
     const actual = screen.getByText(expected);
 
@@ -26,13 +35,22 @@ describe("Stash Screen", () => {
 
     const expected = /Which drug do you want to stash/i;
 
-    fireEvent.keyDown(screen.getByRole("dialog"), {
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
       key: "Enter",
       keyCode: 13,
     });
-    fireEvent.keyDown(screen.getByRole("dialog"), { key: "n", keyCode: 13 });
-    fireEvent.keyDown(screen.getByRole("dialog"), { key: "n", keyCode: 13 });
-    fireEvent.keyDown(screen.getByRole("dialog"), { key: "y", keyCode: 13 });
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
+      key: "n",
+      keyCode: 13,
+    });
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
+      key: "n",
+      keyCode: 13,
+    });
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
+      key: "y",
+      keyCode: 13,
+    });
 
     const actual = screen.getByText(expected);
 
@@ -44,14 +62,26 @@ describe("Stash Screen", () => {
 
     const expected = /What are you gonna do/i;
 
-    fireEvent.keyDown(screen.getByRole("dialog"), {
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
       key: "Enter",
       keyCode: 13,
     });
-    fireEvent.keyDown(screen.getByRole("dialog"), { key: "n", keyCode: 13 });
-    fireEvent.keyDown(screen.getByRole("dialog"), { key: "n", keyCode: 13 });
-    fireEvent.keyDown(screen.getByRole("dialog"), { key: "y", keyCode: 13 });
-    fireEvent.keyDown(screen.getByRole("dialog"), { key: "x", keyCode: 13 });
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
+      key: "n",
+      keyCode: 13,
+    });
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
+      key: "n",
+      keyCode: 13,
+    });
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
+      key: "y",
+      keyCode: 13,
+    });
+    fireEvent.keyDown(screen.getByTestId("app-container"), {
+      key: "x",
+      keyCode: 13,
+    });
 
     const actual = screen.getByText(expected);
 

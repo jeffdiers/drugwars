@@ -4,7 +4,7 @@ import { selectPlayerArea } from "../../store/player/player.selectors";
 import { setPrices, rollEvents } from "../../store/price/price.slice";
 import { addInterestShark } from "../../store/shark/shark.slice";
 import { addInterestBank } from "../../store/bank/bank.slice";
-import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { useAppDispatch, useAppSelector } from "../../utils/redux-hooks";
 
 import SelectArea from "../../components/action/select-area/select-area.component";
 

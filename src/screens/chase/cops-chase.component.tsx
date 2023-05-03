@@ -11,12 +11,14 @@ import {
   selectPlayerHealth,
   selectPlayerGuns,
 } from "../../store/player/player.selectors";
-import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { useAppDispatch, useAppSelector } from "../../utils/redux-hooks";
 import { moneyFormatter, randomInteger } from "../../utils/helpers";
 
 import RunFight from "../../components/action/run-fight/run-fight.component";
 import Continue from "../../components/action/continue/continue.component";
 import { ActionEvents } from "../../store/player/player.types";
+
+import { CopsChaseContainer } from "./cops-chase.styles";
 
 export default function CopsChase() {
   const dispatch = useAppDispatch();
@@ -76,7 +78,7 @@ export default function CopsChase() {
   }, [playerCops]);
 
   return (
-    <>
+    <CopsChaseContainer>
       {gotAway ? (
         <Continue text="You got away!" onContinue={handleGotAway} />
       ) : startChase ? (
@@ -92,6 +94,6 @@ export default function CopsChase() {
           <RunFight onFight={fight} onRun={run} canFight={playerGuns > 0} />
         </div>
       )}
-    </>
+    </CopsChaseContainer>
   );
 }

@@ -10,7 +10,7 @@ import {
   updateActionEvent,
 } from "../../store/player/player.slice";
 import { selectPlayerMoney } from "../../store/player/player.selectors";
-import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { useAppDispatch, useAppSelector } from "../../utils/redux-hooks";
 import { moneyFormatter } from "../../utils/helpers";
 
 import YesNo from "../../components/action/yes-no/yes-no.component";

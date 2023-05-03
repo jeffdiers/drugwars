@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { useAppDispatch, useAppSelector } from "../../utils/redux-hooks";
 import { removePriceEvent } from "../../store/price/price.slice";
 import { selectPriceEvents } from "../../store/price/price.selectors";
 import {

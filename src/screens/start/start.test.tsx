@@ -15,7 +15,7 @@ describe("Start Screen", () => {
 
   test("render shark after new game", () => {
     renderWithProviders(<App />);
-    const element = screen.getByRole("dialog");
+    const element = screen.getByTestId("app-container");
 
     const expected = /Would you like to visit the loan shark/i;
 

@@ -1,6 +1,6 @@
 import { FC } from "react";
+import { useKeyDown } from "../../../utils/hooks";
 
-import ActionContainer from "../action-container.component";
 import Button from "../../button/button.component";
 import DialogBox from "../../dialog-box/dialog-box.component";
 
@@ -11,27 +11,17 @@ type BuySellJetProps = {
 };
 
 const BuySellJet: FC<BuySellJetProps> = ({ onBuy, onSell, onJet }) => {
-  const isBuySellJet = (key: string) => {
-    return key === "b" || key === "s" || key === "j";
-  };
-
-  const handleOnKeyDown = (key: string) => {
-    if (isBuySellJet(key)) {
-      if (key === "b") onBuy();
-      if (key === "s") onSell();
-      if (key === "j") onJet();
-    }
-  };
+  useKeyDown(() => onBuy(), ["b"]);
+  useKeyDown(() => onSell(), ["s"]);
+  useKeyDown(() => onJet(), ["j"]);
 
   return (
-    <ActionContainer onKeyDown={handleOnKeyDown}>
-      <DialogBox>
-        <span>What are you gonna do?</span>
-        <Button onClick={() => onBuy()}>buy</Button>
-        <Button onClick={() => onSell()}>sell</Button>
-        <Button onClick={() => onJet()}>jet</Button>
-      </DialogBox>
-    </ActionContainer>
+    <DialogBox>
+      <span>What are you gonna do?</span>
+      <Button onClick={() => onBuy()}>buy</Button>
+      <Button onClick={() => onSell()}>sell</Button>
+      <Button onClick={() => onJet()}>jet</Button>
+    </DialogBox>
   );
 };
 

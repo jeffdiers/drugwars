@@ -1,4 +1,4 @@
-import { useAppSelector } from "./utils/hooks";
+import { useAppSelector } from "./utils/redux-hooks";
 
 import Start from "./screens/start/start.component";
 import Shark from "./screens/shark/shark.component";
@@ -68,7 +68,7 @@ export default function App() {
   };
 
   return (
-    <AppContainer>
+    <AppContainer data-testid="app-container">
       <GameScreen>
         {renderGameStats()}
         {renderScreens()}
