@@ -8,7 +8,7 @@ export const GameStatsContainer = styled.div`
   grid-template-columns: 50% 50%;
   grid-template-rows: auto;
   grid-template-areas:
-    "title title"
+    "title menu"
     "days hold"
     "stash-title coat-title"
     "stash coat"
@@ -21,6 +21,16 @@ export const Title = styled.div`
   text-transform: uppercase;
   margin-bottom: ${marginBottom};
   font-size: ${({ theme }) => theme.fontSize.large};
+`;
+
+export const Menu = styled.div`
+  grid-area: menu;
+  display: grid;
+  justify-content: end;
+  align-items: end;
+  margin-bottom: ${marginBottom};
+  text-transform: uppercase;
+  font-size: ${({ theme }) => theme.fontSize.medium};
 `;
 
 export const Days = styled.div`

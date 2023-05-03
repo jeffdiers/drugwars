@@ -1,4 +1,4 @@
-import { screen } from "@testing-library/react";
+import { screen, fireEvent } from "@testing-library/react";
 import { renderWithProviders } from "./utils/test-utils";
 import App from "./app.component";
 import { setupStore } from "./store/store";
@@ -42,6 +42,20 @@ describe("app", () => {
       setUpApp(input);
 
       const expected = /trench coat/i;
+
+      const actual = screen.queryByText(expected);
+
+      expect(actual).toBeInTheDocument();
+    });
+
+    test("press spacebar to open menu", () => {
+      setUpApp(ActionEvents.Main);
+
+      const container = screen.getByTestId("app-container");
+
+      fireEvent.keyDown(container, { key: " " });
+
+      const expected = /new game/i;
 
       const actual = screen.queryByText(expected);
 
