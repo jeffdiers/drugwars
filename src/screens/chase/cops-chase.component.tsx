@@ -10,13 +10,14 @@ import {
   selectPlayerCops,
   selectPlayerHealth,
   selectPlayerGuns,
+  selectPlayerArea,
 } from "../../store/player/player.selectors";
 import { useAppDispatch, useAppSelector } from "../../utils/redux-hooks";
 import { moneyFormatter, randomInteger } from "../../utils/helpers";
 
 import RunFight from "../../components/action/run-fight/run-fight.component";
 import Continue from "../../components/action/continue/continue.component";
-import { ActionEvents } from "../../store/player/player.types";
+import { ActionEvents, Areas } from "../../store/player/player.types";
 
 import { CopsChaseContainer } from "./cops-chase.styles";
 
@@ -30,6 +31,7 @@ export default function CopsChase() {
   const playerCops = useAppSelector(selectPlayerCops);
   const playerHealth = useAppSelector(selectPlayerHealth);
   const playerGuns = useAppSelector(selectPlayerGuns);
+  const playerArea = useAppSelector(selectPlayerArea);
 
   const run = () => {
     setWinByFight(false);
@@ -70,7 +72,11 @@ export default function CopsChase() {
         )
       );
     }
-    dispatch(updateActionEvent(ActionEvents.Heal));
+    playerHealth < 100
+      ? dispatch(updateActionEvent(ActionEvents.Heal))
+      : playerArea === Areas.Bronx
+      ? dispatch(updateActionEvent(ActionEvents.Shark))
+      : dispatch(updateActionEvent(ActionEvents.Main));
   };
 
   useEffect(() => {
