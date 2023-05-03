@@ -24,6 +24,7 @@ describe("jet stage", () => {
     { input: "4", expected: /manhattan/i },
     { input: "5", expected: /coney island/i },
     { input: "6", expected: /brooklyn/i },
+    { input: "x", expected: /What are you gonna do/i },
   ])("input: $input, expected: $expected", ({ input, expected }) => {
     setUpJet(input);
 

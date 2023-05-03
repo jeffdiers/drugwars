@@ -9,15 +9,17 @@ import { SelectAreaButtons } from "./select-area.styles";
 
 type SelectAreaProps = {
   onSelect: (key: Areas) => void;
+  onExit: () => void;
 };
 
-const SelectArea: FC<SelectAreaProps> = ({ onSelect }) => {
+const SelectArea: FC<SelectAreaProps> = ({ onSelect, onExit }) => {
   useKeyDown(() => onSelect(Areas.Bronx), ["1"]);
   useKeyDown(() => onSelect(Areas.Queens), ["2"]);
   useKeyDown(() => onSelect(Areas.CentralPark), ["3"]);
   useKeyDown(() => onSelect(Areas.Manhattan), ["4"]);
   useKeyDown(() => onSelect(Areas.ConeyIsland), ["5"]);
   useKeyDown(() => onSelect(Areas.Brooklyn), ["6"]);
+  useKeyDown(() => onExit(), ["x"]);
 
   return (
     <DialogBox>
@@ -29,6 +31,7 @@ const SelectArea: FC<SelectAreaProps> = ({ onSelect }) => {
           </Button>
         ))}
       </SelectAreaButtons>
+      <Button onClick={() => onExit()}>exit</Button>
     </DialogBox>
   );
 };
