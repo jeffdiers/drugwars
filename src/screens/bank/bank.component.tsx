@@ -11,6 +11,7 @@ import {
 } from "../../store/player/player.slice";
 import { selectPlayerMoney } from "../../store/player/player.selectors";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { moneyFormatter } from "../../utils/helpers";
 
 import YesNo from "../../components/action/yes-no/yes-no.component";
 import InputAmount from "../../components/action/input-amount/input-amount.component";
@@ -73,7 +74,9 @@ export default function Shark() {
         <InputAmount
           name="amount"
           type="currency"
-          labelText={`How much would you like to deposit? Bank: ${bankBalance} | Wallet: ${playerMoney}`}
+          labelText={`How much would you like to deposit? Bank: ${moneyFormatter(
+            bankBalance
+          )} | Wallet: ${moneyFormatter(playerMoney)}`}
           handleValue={handleValueDeposit}
         />
       )}
@@ -81,7 +84,9 @@ export default function Shark() {
         <InputAmount
           name="amount"
           type="currency"
-          labelText={`How much would you like to withdraw? Bank: ${bankBalance} | Wallet: ${playerMoney}`}
+          labelText={`How much would you like to withdraw? Bank: ${moneyFormatter(
+            bankBalance
+          )} | Wallet: ${moneyFormatter(playerMoney)}`}
           handleValue={handleValueWithdraw}
         />
       )}

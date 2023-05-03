@@ -1,4 +1,5 @@
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { moneyFormatter } from "../../utils/helpers";
 
 import {
   buyGun,
@@ -31,7 +32,7 @@ export default function BuyGun() {
 
   return (
     <YesNo
-      text={`Would you like to buy a gun for $${priceGun}?`}
+      text={`Would you like to buy a gun for ${moneyFormatter(priceGun)}?`}
       onYes={() => {
         if (priceGun <= playerMoney && playerCoatSpace >= 5) {
           dispatch(buyGun(priceGun));

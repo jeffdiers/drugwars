@@ -12,7 +12,7 @@ import {
   selectPlayerGuns,
 } from "../../store/player/player.selectors";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
-import { randomInteger } from "../../utils/helpers";
+import { moneyFormatter, randomInteger } from "../../utils/helpers";
 
 import RunFight from "../../components/action/run-fight/run-fight.component";
 import Continue from "../../components/action/continue/continue.component";
@@ -62,7 +62,11 @@ export default function CopsChase() {
     if (winByFight) {
       const foundMoney = randomInteger(4000, 6000);
       dispatch(depositPlayer(foundMoney));
-      dispatch(addPlayerEvent(`You found $${foundMoney} while getting away!`));
+      dispatch(
+        addPlayerEvent(
+          `You found ${moneyFormatter(foundMoney)} while getting away!`
+        )
+      );
     }
     dispatch(updateActionEvent(ActionEvents.Heal));
   };
