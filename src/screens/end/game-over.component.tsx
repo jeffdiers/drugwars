@@ -1,4 +1,5 @@
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { moneyFormatter } from "../../utils/helpers";
 import { selectSharkBalance } from "../../store/shark/shark.slice";
 
 import Continue from "../../components/action/continue/continue.component";
@@ -41,7 +42,7 @@ export default function GameOver() {
         <div>You got busted!</div>
       ) : (
         <div>
-          <div>You made ${profit}</div>
+          <div>You made {moneyFormatter(profit)}</div>
           <br />
           <div>{dealerRank()}</div>
           <br />
