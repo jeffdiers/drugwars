@@ -19,6 +19,7 @@ import { selectPlayerActionEvent } from "./store/player/player.selectors";
 import { ActionEvents } from "./store/player/player.types";
 
 import { AppContainer, GameScreen } from "./app.styles";
+import Instructions from "./screens/instructions/instructions.component";
 
 export default function App() {
   const playerActionEvent = useAppSelector(selectPlayerActionEvent);
@@ -26,6 +27,7 @@ export default function App() {
   const renderGameStats = () => {
     if (
       playerActionEvent !== ActionEvents.Start &&
+      playerActionEvent !== ActionEvents.Instructions &&
       playerActionEvent !== ActionEvents.CopsChase &&
       playerActionEvent !== ActionEvents.GameOver
     ) {
@@ -37,6 +39,8 @@ export default function App() {
     switch (playerActionEvent) {
       case ActionEvents.Start:
         return <Start />;
+      case ActionEvents.Instructions:
+        return <Instructions />;
       case ActionEvents.Shark:
         return <Shark />;
       case ActionEvents.Bank:

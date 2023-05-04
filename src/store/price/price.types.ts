@@ -12,3 +12,12 @@ export type PriceState = {
   readonly heal: number;
   readonly events: string[];
 };
+
+export const priceRanges = {
+  [Drugs.One]: [15000, 29999],
+  [Drugs.Two]: [5000, 13999],
+  [Drugs.Three]: [1000, 4999],
+  [Drugs.Four]: [300, 899],
+  [Drugs.Five]: [90, 249],
+  [Drugs.Six]: [10, 89],
+};

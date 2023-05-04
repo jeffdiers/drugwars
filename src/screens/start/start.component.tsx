@@ -51,6 +51,11 @@ export default function Start() {
       {playerDaysEnd < 30 && (
         <Button onClick={() => contnueGame()}>Continue Game</Button>
       )}
+      <Button
+        onClick={() => dispatch(updateActionEvent(ActionEvents.Instructions))}
+      >
+        Instructions
+      </Button>
     </StartContainer>
   );
 }
