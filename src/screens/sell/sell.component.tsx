@@ -10,6 +10,7 @@ import SelectDrug from "../../components/action/select-drug/select-drug.componen
 import { selectPriceDrugs } from "../../store/price/price.selectors";
 import { moneyFormatter } from "../../utils/helpers";
 import PriceBox from "../../components/price-box/price-box.component";
+import DialogBox from "../../components/dialog-box/dialog-box.component";
 
 enum AskSell {
   ASK_SELECT,
@@ -51,7 +52,10 @@ export default function Sell() {
     <>
       {currentAsk === AskSell.ASK_SELECT && (
         <>
-          <PriceBox />
+          <DialogBox>
+            <div>Hey dude, the prices are:</div>
+            <PriceBox />
+          </DialogBox>
           <SelectDrug
             text="What would you like to sell?"
             onSelect={(drugKey) => {
