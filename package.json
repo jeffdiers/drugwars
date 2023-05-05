@@ -34,6 +34,7 @@
     "@types/redux-logger": "^3.0.9",
     "@types/styled-components": "^5.1.26",
     "@types/testing-library__jest-dom": "^5.14.5",
+    "@xata.io/netlify": "^0.1.1",
     "eslint": "^8.39.0",
     "eslint-config-react-app": "^7.0.1",
     "husky": "^8.0.0",

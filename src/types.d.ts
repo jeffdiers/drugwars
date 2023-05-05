@@ -6,7 +6,16 @@ import type {
 declare const tables: readonly [
   {
     readonly name: "scores";
-    readonly columns: readonly [];
+    readonly columns: readonly [
+      {
+        readonly name: "name";
+        readonly type: "string";
+      },
+      {
+        readonly name: "score";
+        readonly type: "int";
+      }
+    ];
   }
 ];
 export type SchemaTables = typeof tables;
