@@ -1,4 +1,4 @@
-import { FC, ButtonHTMLAttributes } from "react";
+import type { FC, ButtonHTMLAttributes } from "react";
 
 import { BaseButton, SimpleButton } from "./button.styles";
 

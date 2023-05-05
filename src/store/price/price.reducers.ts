@@ -1,8 +1,8 @@
-import { PayloadAction } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 import { randomInteger } from "../../utils/helpers";
 
 import { Drugs } from "../player/player.types";
-import { PriceState } from "./price.types";
+import type { PriceState } from "./price.types";
 
 export const priceReducers = {
   setPrices(state: PriceState, _action: PayloadAction) {

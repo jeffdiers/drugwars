@@ -1,15 +1,10 @@
-import { PayloadAction } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 import { moneyFormatter, randomInteger } from "../../utils/helpers";
 
 import { initialState } from "./player.slice";
 import { inventoryHelper } from "./player.selectors";
-import {
-  PlayerState,
-  Areas,
-  Drugs,
-  BuyAndSellPayloadAction,
-  ActionEvents,
-} from "./player.types";
+import { Areas, Drugs, ActionEvents } from "./player.types";
+import type { PlayerState, BuyAndSellPayloadAction } from "./player.types";
 
 export const playerReducers = {
   changeArea(state: PlayerState, action: PayloadAction<Areas>) {

@@ -1,0 +1,8 @@
+{
+  "databaseURL": "https://Jeff-Diers-s-workspace-h0gmfk.us-east-1.xata.sh/db/drugwars",
+  "codegen": {
+    "output": "src/xata.js",
+    "moduleType": "esm",
+    "declarations": true
+  }
+}

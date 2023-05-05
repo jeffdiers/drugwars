@@ -6,6 +6,8 @@
   "scripts": {
     "build": "react-scripts build",
     "start": "react-scripts start",
+    "start:serve": "netlify functions:serve",
+    "start:netlify": "netlify dev",
     "test": "react-scripts test",
     "test:clearCache": "react-scripts test --clearCache",
     "postinstall": "husky install",
@@ -26,7 +28,7 @@
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^29.5.1",
-    "@types/node": "^18.16.1",
+    "@types/node": "^20.0.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.1",
     "@types/redux-logger": "^3.0.9",
@@ -35,11 +37,14 @@
     "eslint": "^8.39.0",
     "eslint-config-react-app": "^7.0.1",
     "husky": "^8.0.0",
+    "netlify-cli": "^15.0.0",
     "pinst": "^3.0.0",
     "typescript": "5.0.4"
   },
   "dependencies": {
+    "@netlify/functions": "^1.4.0",
     "@reduxjs/toolkit": "^1.9.5",
+    "@xata.io/client": "^0.23.5",
     "react": "^18.2.0",
     "react-currency-input-field": "^3.6.10",
     "react-dom": "^18.2.0",

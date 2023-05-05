@@ -1,4 +1,4 @@
-import { ComponentType, FC } from "react";
+import type { ComponentType, FC } from "react";
 import { useAppSelector } from "../../utils/redux-hooks";
 import { moneyFormatter } from "../../utils/helpers";
 
