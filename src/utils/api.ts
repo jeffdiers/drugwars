@@ -1,4 +1,4 @@
-const readAll = async () => {
+export const readAll = async () => {
   try {
     const response = await fetch("/.netlify/functions/get-scores");
     return response.json();
