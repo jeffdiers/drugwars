@@ -1,6 +1,6 @@
 {
   "databaseURL": "https://Jeff-Diers-s-workspace-h0gmfk.us-east-1.xata.sh/db/drugwars",
   "codegen": {
-    "output": "lib/xata.codegen.ts"
+    "output": "_lib/xata.codegen.ts"
   }
 }
