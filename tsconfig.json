@@ -18,5 +18,5 @@
     "jsx": "react-jsx",
     "verbatimModuleSyntax": true
   },
-  "include": ["src", "netlify/functions/utils/xata.js"],
+  "include": ["src"],
 }

@@ -1,6 +1,16 @@
 import { Handler, HandlerEvent, HandlerContext } from "@netlify/functions";
-import { getXataClient } from "../../lib/xata.codegen";
+import { XataClient } from "../../lib/xata.codegen";
 import { FetcherError } from "@xata.io/client";
+import fetch from "node-fetch";
+
+let instance: XataClient | undefined = undefined;
+
+const getXataClient = () => {
+  if (instance) return instance;
+
+  instance = new XataClient({ fetch });
+  return instance;
+};
 
 const handler: Handler = async (
   event: HandlerEvent,
