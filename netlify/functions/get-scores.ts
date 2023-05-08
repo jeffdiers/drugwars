@@ -1,23 +1,13 @@
 import { Handler, HandlerEvent, HandlerContext } from "@netlify/functions";
-import { XataClient } from "../../lib/xata.codegen";
 import { FetcherError } from "@xata.io/client";
-import fetch from "node-fetch";
+import { getXataClient } from "../../lib/getXataClient";
 
-let instance: XataClient | undefined = undefined;
-
-const getXataClient = () => {
-  if (instance) return instance;
-
-  instance = new XataClient({ fetch });
-  return instance;
-};
+const xata = getXataClient();
 
 const handler: Handler = async (
   event: HandlerEvent,
   context: HandlerContext
 ) => {
-  const xata = getXataClient();
-
   if (event.httpMethod !== "GET") {
     return {
       statusCode: 405,
