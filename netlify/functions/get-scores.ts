@@ -3,8 +3,6 @@ import { getXataClient } from "../../lib/xata.codegen";
 import { FetcherError } from "@xata.io/client";
 const xata = getXataClient();
 
-require("node-fetch");
-
 const handler: Handler = async (
   event: HandlerEvent,
   context: HandlerContext
