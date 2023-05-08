@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import { randomInteger } from "../../utils/helpers";
 
 import { priceReducers } from "./price.reducers";
-import { PriceState, priceRanges } from "./price.types";
+import type { PriceState } from "./price.types";
+import { priceRanges } from "./price.types";
 import { Drugs } from "../player/player.types";
 
 const getRandomPrice = (drug: Drugs) =>

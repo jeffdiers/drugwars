@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 import { useKeyDown } from "../../../utils/hooks";
 
 import Button from "../../button/button.component";

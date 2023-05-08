@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 import { Areas } from "../../../store/player/player.types";
 import { useKeyDown } from "../../../utils/hooks";
 

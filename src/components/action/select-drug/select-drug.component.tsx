@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 import { Drugs } from "../../../store/player/player.types";
 import { getFirstLetter } from "../../../utils/helpers";
 import { useKeyDown } from "../../../utils/hooks";

@@ -1,0 +1,16 @@
+{
+  "id": "mig_chah94pe0mklna6cnsf0",
+  "parentID": "mig_chah77q5n7m9ao0rj4ig",
+  "checksum": "1:6ff14c4668082298b66c949f07c94b482d4a7e60cbda9cdd975e73d376101f09",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "name",
+          "type": "string"
+        },
+        "table": "scores"
+      }
+    }
+  ]
+}

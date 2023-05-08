@@ -1,4 +1,5 @@
-import { configureStore, PreloadedState } from "@reduxjs/toolkit";
+import type { PreloadedState } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import {
   persistStore,
   FLUSH,
@@ -8,10 +9,21 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import { CurriedGetDefaultMiddleware } from "@reduxjs/toolkit/dist/getDefaultMiddleware";
+import type { CurriedGetDefaultMiddleware } from "@reduxjs/toolkit/dist/getDefaultMiddleware";
 import logger from "redux-logger";
 
-import rootReducer, { RootState } from "./root-reducer";
+import rootReducer from "./root-reducer";
+import type { RootState } from "./root-reducer";
+
+import api from "../utils/api";
+
+const getData = async () => {
+  const records = await api.readAll();
+
+  console.log(records);
+};
+
+getData();
 
 export type AppStore = ReturnType<typeof setupStore>;
 export type AppDispatch = AppStore["dispatch"];

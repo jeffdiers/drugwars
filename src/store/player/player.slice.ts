@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { playerReducers } from "./player.reducers";
-import { PlayerState, Drugs, Areas, ActionEvents } from "./player.types";
+import { Drugs, Areas, ActionEvents } from "./player.types";
+import type { PlayerState } from "./player.types";
 
 export const initialState: PlayerState = {
   area: Areas.Bronx,

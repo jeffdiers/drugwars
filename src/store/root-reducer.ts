@@ -1,5 +1,6 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import { persistReducer, PersistConfig } from "redux-persist";
+import { persistReducer } from "redux-persist";
+import type { PersistConfig } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import playerReducer from "./player/player.slice";

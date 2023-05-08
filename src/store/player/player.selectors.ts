@@ -2,7 +2,8 @@ import { createSelector } from "@reduxjs/toolkit";
 
 import type { RootState } from "../root-reducer";
 
-import { PlayerState, Drugs, DrugsMap, ActionEvents } from "./player.types";
+import { Drugs, ActionEvents } from "./player.types";
+import type { PlayerState, DrugsMap } from "./player.types";
 
 export const inventoryHelper = (playerState: PlayerState) => {
   let total = playerState.guns * 5;

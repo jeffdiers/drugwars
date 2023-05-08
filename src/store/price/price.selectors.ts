@@ -1,9 +1,10 @@
 import { createSelector } from "@reduxjs/toolkit";
 
 import type { RootState } from "../root-reducer";
-import { Drugs, DrugsMap } from "../player/player.types";
+import { Drugs } from "../player/player.types";
+import type { DrugsMap } from "../player/player.types";
 
-import { PriceState } from "./price.types";
+import type { PriceState } from "./price.types";
 
 const selectPrice = (state: RootState): PriceState => state.price;
 

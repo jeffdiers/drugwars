@@ -1,4 +1,5 @@
-import { FC, FormEvent, useState } from "react";
+import type { FC, FormEvent } from "react";
+import { useState } from "react";
 import Button from "../../button/button.component";
 import Input from "../../input/input.component";
 
