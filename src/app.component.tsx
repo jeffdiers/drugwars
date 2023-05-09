@@ -1,6 +1,8 @@
-import { useAppDispatch, useAppSelector } from "./utils/redux-hooks";
+import { useAppSelector } from "./utils/redux-hooks";
 
 import Start from "./screens/start/start.component";
+import Instructions from "./screens/instructions/instructions.component";
+import Leaderboard from "./screens/leaderboard/leaderboard.component";
 import Shark from "./screens/shark/shark.component";
 import Bank from "./screens/bank/bank.component";
 import Stash from "./screens/stash/stash.component";
@@ -19,24 +21,15 @@ import { selectPlayerActionEvent } from "./store/player/player.selectors";
 import { ActionEvents } from "./store/player/player.types";
 
 import { AppContainer, GameScreen } from "./app.styles";
-import Instructions from "./screens/instructions/instructions.component";
-
-import { getTopTen } from "./store/leaderboard/leaderboard.slice";
-import { useEffect } from "react";
 
 export default function App() {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(getTopTen());
-  }, [dispatch]);
-
   const playerActionEvent = useAppSelector(selectPlayerActionEvent);
 
   const renderGameStats = () => {
     if (
       playerActionEvent !== ActionEvents.Start &&
       playerActionEvent !== ActionEvents.Instructions &&
+      playerActionEvent !== ActionEvents.Leaderboard &&
       playerActionEvent !== ActionEvents.CopsChase &&
       playerActionEvent !== ActionEvents.GameOver
     ) {
@@ -50,6 +43,8 @@ export default function App() {
         return <Start />;
       case ActionEvents.Instructions:
         return <Instructions />;
+      case ActionEvents.Leaderboard:
+        return <Leaderboard />;
       case ActionEvents.Shark:
         return <Shark />;
       case ActionEvents.Bank:
