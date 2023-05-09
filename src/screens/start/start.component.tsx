@@ -56,6 +56,11 @@ export default function Start() {
       >
         Instructions
       </Button>
+      <Button
+        onClick={() => dispatch(updateActionEvent(ActionEvents.Leaderboard))}
+      >
+        Leaderboard
+      </Button>
     </StartContainer>
   );
 }

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const InstructionsContainer = styled.div`
+export const LeaderboardContainer = styled.div`
   height: 100%;
   width: 100%;
   margin: auto;
@@ -10,9 +10,14 @@ export const InstructionsContainer = styled.div`
   row-gap: 7px;
 `;
 
-export const InstructionsTitleContainer = styled.div`
+export const LeaderboardTitleContainer = styled.div`
   margin-bottom: 5px;
   text-transform: uppercase;
 
   font-size: ${({ theme }) => theme.fontSize.large};
+`;
+
+export const LeaderboardItem = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;

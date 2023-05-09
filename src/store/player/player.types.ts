@@ -29,6 +29,7 @@ export interface BuyAndSellPayloadAction {
 export enum ActionEvents {
   Start,
   Instructions,
+  Leaderboard,
   Shark,
   Bank,
   Stash,

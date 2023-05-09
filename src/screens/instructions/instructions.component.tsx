@@ -4,13 +4,17 @@ import { updateActionEvent } from "../../store/player/player.slice";
 import { ActionEvents } from "../../store/player/player.types";
 import { useAppDispatch } from "../../utils/redux-hooks";
 
-import { InstructionsContainer } from "./instructions.styles";
+import {
+  InstructionsContainer,
+  InstructionsTitleContainer,
+} from "./instructions.styles";
 
 export default function Instructions() {
   const dispatch = useAppDispatch();
 
   return (
     <InstructionsContainer>
+      <InstructionsTitleContainer>instructions</InstructionsTitleContainer>
       <div>
         This is a game of buying, selling, and fighting. The object of the game
         is to pay off your debt to the loan shark. Then, make as much money as

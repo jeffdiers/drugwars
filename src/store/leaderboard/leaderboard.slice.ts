@@ -50,5 +50,7 @@ const bankSlice = createSlice({
 
 export const selectLeaderboardTopTen = (state: RootState) =>
   state.leaderboard.topTen;
+export const selectLeaderboardIsLoading = (state: RootState) =>
+  state.leaderboard.loading;
 
 export default bankSlice.reducer;
