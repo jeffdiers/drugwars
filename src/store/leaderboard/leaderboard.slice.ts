@@ -1,23 +1,29 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../root-reducer";
+import type { AppDispatch } from "../store";
+
+export type PlayerScoreData = {
+  name: string;
+  score: string | number;
+};
 
 export type PlayerScore = {
   id: string;
-  name: string;
-  score: string;
-};
+} & PlayerScoreData;
 
 export type LeaderBoardState = {
   readonly loading: boolean;
   readonly error: string | undefined;
   readonly topTen: PlayerScore[] | undefined;
+  readonly scorePosted: boolean;
 };
 
 const initialState: LeaderBoardState = {
   loading: false,
   error: undefined,
   topTen: undefined,
+  scorePosted: false,
 };
 
 export const getTopTen = createAsyncThunk(
@@ -28,11 +34,27 @@ export const getTopTen = createAsyncThunk(
   }
 );
 
-const bankSlice = createSlice({
+export const postScore = createAsyncThunk<PlayerScore, PlayerScoreData>(
+  "leaderboard/postScoreStatus",
+  async (score) => {
+    const response = await fetch("/.netlify/functions/post-score", {
+      method: "POST",
+      body: JSON.stringify(score),
+    });
+    return (await response.json()) as PlayerScore;
+  }
+);
+
+const leaderboardSlice = createSlice({
   name: "leaderboard",
   initialState,
-  reducers: {},
+  reducers: {
+    resetScoreIsPosted(state: LeaderBoardState, _action: PayloadAction) {
+      return { ...state, scorePosted: false };
+    },
+  },
   extraReducers: (builder) => {
+    // GET TOP TEN
     builder.addCase(getTopTen.pending, (state: LeaderBoardState) => {
       return { ...state, loading: true };
     });
@@ -45,6 +67,10 @@ const bankSlice = createSlice({
     builder.addCase(getTopTen.rejected, (state: LeaderBoardState, action) => {
       return { ...state, loading: false, error: action.error.message };
     });
+    // POST NEW SCORE
+    builder.addCase(postScore.fulfilled, (state: LeaderBoardState) => {
+      return { ...state, scorePosted: true };
+    });
   },
 });
 
@@ -52,5 +78,9 @@ export const selectLeaderboardTopTen = (state: RootState) =>
   state.leaderboard.topTen;
 export const selectLeaderboardIsLoading = (state: RootState) =>
   state.leaderboard.loading;
+export const selectLeaderboardScoreIsPosted = (state: RootState) =>
+  state.leaderboard.scorePosted;
 
-export default bankSlice.reducer;
+export const { resetScoreIsPosted } = leaderboardSlice.actions;
+
+export default leaderboardSlice.reducer;

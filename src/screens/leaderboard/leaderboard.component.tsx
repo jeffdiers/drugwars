@@ -19,8 +19,13 @@ import { moneyFormatter } from "../../utils/helpers";
 export default function Leaderboard() {
   const dispatch = useAppDispatch();
 
+  let mounted = false;
+
   useEffect(() => {
-    dispatch(getTopTen());
+    if (!mounted) {
+      mounted = true;
+      dispatch(getTopTen());
+    }
   }, [dispatch]);
 
   const leaderboardTopTen = useAppSelector(selectLeaderboardTopTen);
