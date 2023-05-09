@@ -28,7 +28,7 @@ type ExtendedPersistConfig = PersistConfig<RootState> & {
 const persistConfig: ExtendedPersistConfig = {
   key: "root",
   storage,
-  whitelist: ["player", "bank", "price", "shark", "stash"],
+  whitelist: ["player", "bank", "price", "shark", "stash", "leaderboard"],
 };
 
 export default persistReducer(persistConfig, rootReducer);

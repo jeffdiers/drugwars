@@ -17,6 +17,11 @@ import { selectBankBalance } from "../../store/bank/bank.slice";
 import Button from "../../components/button/button.component";
 
 import { GameOverContainer, GameInfo } from "./game-over.styles";
+import { useEffect } from "react";
+import {
+  postScore,
+  selectLeaderboardScoreIsPosted,
+} from "../../store/leaderboard/leaderboard.slice";
 
 export default function GameOver() {
   const dispatch = useAppDispatch();
@@ -25,6 +30,7 @@ export default function GameOver() {
   const playerMoney = useAppSelector(selectPlayerMoney);
   const bankBalance = useAppSelector(selectBankBalance);
   const sharkBalance = useAppSelector(selectSharkBalance);
+  const scoreIsPosted = useAppSelector(selectLeaderboardScoreIsPosted);
 
   const profit = playerMoney + bankBalance - sharkBalance;
   const rank = profit > 0 ? Math.floor((profit / 10000000) * 100) : 0;
@@ -36,6 +42,23 @@ export default function GameOver() {
     if (rank >= 76 && rank <= 99) return "Kingpin... GOD DAMN";
     return "PABLO ESCOBAR... YOU ARE A GOD";
   };
+
+  let mounted = false;
+
+  const getRandomNameAndPost = async () => {
+    const response = await fetch("/.netlify/functions/get-random-name");
+    const data = await response.json();
+    dispatch(postScore({ name: data[0].name, score: profit }));
+  };
+
+  useEffect(() => {
+    if (!mounted) {
+      mounted = true;
+      if (!scoreIsPosted) {
+        getRandomNameAndPost();
+      }
+    }
+  }, [scoreIsPosted]);
 
   const endGame = () => {
     dispatch(resetPlayer());
