@@ -1,4 +1,4 @@
-import { useAppSelector } from "./utils/redux-hooks";
+import { useAppDispatch, useAppSelector } from "./utils/redux-hooks";
 
 import Start from "./screens/start/start.component";
 import Shark from "./screens/shark/shark.component";
@@ -21,7 +21,16 @@ import { ActionEvents } from "./store/player/player.types";
 import { AppContainer, GameScreen } from "./app.styles";
 import Instructions from "./screens/instructions/instructions.component";
 
+import { getTopTen } from "./store/leaderboard/leaderboard.slice";
+import { useEffect } from "react";
+
 export default function App() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getTopTen());
+  }, [dispatch]);
+
   const playerActionEvent = useAppSelector(selectPlayerActionEvent);
 
   const renderGameStats = () => {

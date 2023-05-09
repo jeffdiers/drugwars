@@ -5,7 +5,7 @@
   "main": "src/index.ts",
   "scripts": {
     "build": "xata codegen && react-scripts build",
-    "start": "react-scripts start",
+    "start": "xata codegen && react-scripts start",
     "start:serve": "netlify functions:serve",
     "start:netlify": "netlify dev",
     "xata:codegen": "xata codegen",

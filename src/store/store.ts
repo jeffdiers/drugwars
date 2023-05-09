@@ -15,16 +15,6 @@ import logger from "redux-logger";
 import rootReducer from "./root-reducer";
 import type { RootState } from "./root-reducer";
 
-import api from "../utils/api";
-
-const getData = async () => {
-  const records = await api.readAll();
-
-  console.log(records);
-};
-
-getData();
-
 export type AppStore = ReturnType<typeof setupStore>;
 export type AppDispatch = AppStore["dispatch"];
 
