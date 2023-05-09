@@ -8,6 +8,7 @@ import priceSlice from "./price/price.slice";
 import sharkSlice from "./shark/shark.slice";
 import bankSlice from "./bank/bank.slice";
 import stashSlice from "./stash/stash.slice";
+import leaderboardSlice from "./leaderboard/leaderboard.slice";
 
 const rootReducer = combineReducers({
   player: playerReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   shark: sharkSlice,
   bank: bankSlice,
   stash: stashSlice,
+  leaderboard: leaderboardSlice,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

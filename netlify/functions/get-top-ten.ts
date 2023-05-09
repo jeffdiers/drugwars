@@ -16,7 +16,9 @@ const handler: Handler = async (
   }
 
   try {
-    const records = await xata.db.scores.sort("score", "desc").getMany();
+    const records = await xata.db.scores.sort("score", "desc").getMany({
+      pagination: { size: 10 },
+    });
 
     return {
       statusCode: 200,
