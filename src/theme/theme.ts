@@ -6,6 +6,7 @@ export const theme: DefaultTheme = {
   colors: {
     black: "#141414",
     primary: "#1B998B",
+    secondary: "#12685E",
   },
   fonts: {
     primary: "Share Tech Mono",
