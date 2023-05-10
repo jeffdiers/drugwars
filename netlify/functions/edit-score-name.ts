@@ -8,10 +8,10 @@ const handler: Handler = async (
   event: HandlerEvent,
   context: HandlerContext
 ) => {
-  if (event.httpMethod !== "POST") {
+  if (event.httpMethod !== "PUT") {
     return {
       statusCode: 405,
-      message: "Only `POST` requests",
+      message: "Only `PUT` requests",
     };
   }
 
@@ -24,13 +24,18 @@ const handler: Handler = async (
 
   try {
     const data = await JSON.parse(event.body);
-    const record = await xata.db.scores.create(data);
+    const record = await xata.db.scores.update(data.id, {
+      name: data.name,
+    });
+
+    console.log(record);
 
     return {
       statusCode: 200,
       body: JSON.stringify(record),
     };
   } catch (error) {
+    console.log(error);
     if (error instanceof FetcherError) {
       return {
         statusCode: error.errors?.[0]?.status || 500,
