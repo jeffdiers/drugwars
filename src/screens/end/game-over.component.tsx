@@ -17,11 +17,14 @@ import { selectBankBalance } from "../../store/bank/bank.slice";
 import Button from "../../components/button/button.component";
 
 import { GameOverContainer, GameInfo } from "./game-over.styles";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
+  editScoreName,
   postScore,
+  selectLeaderboardScoreId,
   selectLeaderboardScoreIsPosted,
 } from "../../store/leaderboard/leaderboard.slice";
+import InputAmount from "../../components/action/input-amount/input-amount.component";
 
 export default function GameOver() {
   const dispatch = useAppDispatch();
@@ -31,6 +34,7 @@ export default function GameOver() {
   const bankBalance = useAppSelector(selectBankBalance);
   const sharkBalance = useAppSelector(selectSharkBalance);
   const scoreIsPosted = useAppSelector(selectLeaderboardScoreIsPosted);
+  const scoreId = useAppSelector(selectLeaderboardScoreId);
 
   const profit = playerMoney + bankBalance - sharkBalance;
   const rank = profit > 0 ? Math.floor((profit / 10000000) * 100) : 0;
@@ -70,28 +74,49 @@ export default function GameOver() {
 
   useKeyDown(() => endGame(), ["Enter"]);
 
+  const [enterName, setEnterName] = useState(false);
+
+  const handleUpdateScoreName = (value: string) => {
+    scoreId && dispatch(editScoreName({ name: value, id: scoreId }));
+    setEnterName(false);
+  };
+
   return (
     <GameOverContainer>
-      <GameInfo>
-        <div>Game Over!</div>
-        <br />
-        {playerHealth <= 0 ? (
-          <div>You got busted!</div>
-        ) : (
-          <div>
-            <div>You made {moneyFormatter(profit)}</div>
+      {enterName ? (
+        <InputAmount
+          name="player-name"
+          type="text"
+          labelText="Whats your name pal?"
+          handleValue={handleUpdateScoreName}
+          goBack={() => setEnterName(false)}
+        />
+      ) : (
+        <>
+          <GameInfo>
+            <div>Game Over!</div>
             <br />
-            <div>{dealerRank()}</div>
-            <br />
-            {sharkBalance > 0 && (
+            {playerHealth <= 0 ? (
+              <div>You got busted!</div>
+            ) : (
               <div>
-                You might want to skip town... the loan shark is looking for you
+                <div>You made {moneyFormatter(profit)}</div>
+                <br />
+                <div>{dealerRank()}</div>
+                <br />
+                {sharkBalance > 0 && (
+                  <div>
+                    You might want to skip town... the loan shark is looking for
+                    you
+                  </div>
+                )}
               </div>
             )}
-          </div>
-        )}
-      </GameInfo>
-      <Button onClick={() => endGame()}>main menu</Button>
+          </GameInfo>
+          <Button onClick={() => setEnterName(true)}>enter name</Button>
+          <Button onClick={() => endGame()}>main menu</Button>
+        </>
+      )}
     </GameOverContainer>
   );
 }

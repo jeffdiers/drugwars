@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../root-reducer";
-import type { AppDispatch } from "../store";
 
 export type PlayerScoreData = {
   name: string;
@@ -17,6 +16,7 @@ export type LeaderBoardState = {
   readonly error: string | undefined;
   readonly topTen: PlayerScore[] | undefined;
   readonly scorePosted: boolean;
+  readonly scoreId: string | undefined;
 };
 
 const initialState: LeaderBoardState = {
@@ -24,6 +24,7 @@ const initialState: LeaderBoardState = {
   error: undefined,
   topTen: undefined,
   scorePosted: false,
+  scoreId: undefined,
 };
 
 export const getTopTen = createAsyncThunk(
@@ -40,6 +41,22 @@ export const postScore = createAsyncThunk<PlayerScore, PlayerScoreData>(
     const response = await fetch("/.netlify/functions/post-score", {
       method: "POST",
       body: JSON.stringify(score),
+    });
+    return (await response.json()) as PlayerScore;
+  }
+);
+
+type EditScoreName = {
+  id: string;
+  name: string;
+};
+
+export const editScoreName = createAsyncThunk<PlayerScore, EditScoreName>(
+  "leaderboard/editScoreNameStatus",
+  async (name) => {
+    const response = await fetch("/.netlify/functions/edit-score-name", {
+      method: "PUT",
+      body: JSON.stringify(name),
     });
     return (await response.json()) as PlayerScore;
   }
@@ -68,9 +85,12 @@ const leaderboardSlice = createSlice({
       return { ...state, loading: false, error: action.error.message };
     });
     // POST NEW SCORE
-    builder.addCase(postScore.fulfilled, (state: LeaderBoardState) => {
-      return { ...state, scorePosted: true };
-    });
+    builder.addCase(
+      postScore.fulfilled,
+      (state: LeaderBoardState, action: PayloadAction<PlayerScore>) => {
+        return { ...state, scorePosted: true, scoreId: action.payload.id };
+      }
+    );
   },
 });
 
@@ -80,6 +100,8 @@ export const selectLeaderboardIsLoading = (state: RootState) =>
   state.leaderboard.loading;
 export const selectLeaderboardScoreIsPosted = (state: RootState) =>
   state.leaderboard.scorePosted;
+export const selectLeaderboardScoreId = (state: RootState) =>
+  state.leaderboard.scoreId;
 
 export const { resetScoreIsPosted } = leaderboardSlice.actions;
 

@@ -10,16 +10,18 @@ import { InputForm } from "./input-amount.styles";
 
 type InputAmountProps = {
   name: string;
-  type?: "currency";
+  type?: "currency" | "text" | "number";
   labelText: string;
   handleValue: Function;
+  goBack?: Function;
 };
 
 const InputAmount: FC<InputAmountProps> = ({
   name,
-  type,
+  type = "number",
   labelText,
   handleValue,
+  goBack,
 }) => {
   const [inputValue, setinputValue] = useState<string | undefined>(undefined);
 
@@ -33,20 +35,32 @@ const InputAmount: FC<InputAmountProps> = ({
     type === "currency" ? handleValue(inputValue) : handleValue(value);
   };
 
-  return (
-    <InputForm onSubmit={handleOnSubmit}>
-      <DialogBox>
-        <label>{labelText}</label>
-        {type === "currency" ? (
+  const getInputType = () => {
+    switch (type) {
+      case "currency":
+        return (
           <CurrencyInput
             prefix="$"
             name={name}
             onValueChange={(value) => setinputValue(value)}
           />
-        ) : (
-          <Input type="tel" autoFocus name={name} />
-        )}
+        );
+
+      case "text":
+        return <Input autoFocus name={name} />;
+
+      default:
+        return <Input type="tel" autoFocus name={name} />;
+    }
+  };
+
+  return (
+    <InputForm onSubmit={handleOnSubmit}>
+      <DialogBox>
+        <label>{labelText}</label>
+        {getInputType()}
         <Button type="submit">submit</Button>
+        {goBack && <Button onClick={() => goBack()}>back</Button>}
       </DialogBox>
     </InputForm>
   );
