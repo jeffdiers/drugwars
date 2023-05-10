@@ -1,54 +1,30 @@
-import { useEffect } from "react";
-import Button from "../../components/button/button.component";
-import {
-  getTopTen,
-  selectLeaderboardIsLoading,
-  selectLeaderboardTopTen,
-} from "../../store/leaderboard/leaderboard.slice";
-import { updateActionEvent } from "../../store/player/player.slice";
-import { ActionEvents } from "../../store/player/player.types";
-import { useAppDispatch, useAppSelector } from "../../utils/redux-hooks";
+import type { FC } from "react";
+import type { PlayerScore } from "../../store/leaderboard/leaderboard.slice";
+import { moneyFormatter } from "../../utils/helpers";
 
+import Button from "../../components/button/button.component";
 import {
   LeaderboardContainer,
   LeaderboardTitleContainer,
   LeaderboardItem,
 } from "./leaderboard.styles";
-import { moneyFormatter } from "../../utils/helpers";
 
-export default function Leaderboard() {
-  const dispatch = useAppDispatch();
+type LeaderboardProps = {
+  topTen: PlayerScore[] | undefined;
+  goBack: () => void;
+};
 
-  let mounted = false;
+const Leaderboard: FC<LeaderboardProps> = ({ topTen, goBack }) => (
+  <LeaderboardContainer>
+    <LeaderboardTitleContainer>leaderboard</LeaderboardTitleContainer>
+    {topTen?.map(({ name, score }, i) => (
+      <LeaderboardItem key={i}>
+        <div>{name}</div>
+        <div>{moneyFormatter(Number(score))}</div>
+      </LeaderboardItem>
+    ))}
+    <Button onClick={goBack}>back</Button>
+  </LeaderboardContainer>
+);
 
-  useEffect(() => {
-    if (!mounted) {
-      mounted = true;
-      dispatch(getTopTen());
-    }
-  }, [dispatch]);
-
-  const leaderboardTopTen = useAppSelector(selectLeaderboardTopTen);
-  const isLoading = useAppSelector(selectLeaderboardIsLoading);
-
-  return (
-    <LeaderboardContainer>
-      {!isLoading && (
-        <>
-          <LeaderboardTitleContainer>leaderboard</LeaderboardTitleContainer>
-          {leaderboardTopTen?.map(({ name, score }, i) => (
-            <LeaderboardItem key={i}>
-              <div>{name}</div>
-              <div>{moneyFormatter(Number(score))}</div>
-            </LeaderboardItem>
-          ))}
-          <Button
-            onClick={() => dispatch(updateActionEvent(ActionEvents.Start))}
-          >
-            back
-          </Button>
-        </>
-      )}
-    </LeaderboardContainer>
-  );
-}
+export default Leaderboard;

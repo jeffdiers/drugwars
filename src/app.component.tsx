@@ -2,7 +2,7 @@ import { useAppSelector } from "./utils/redux-hooks";
 
 import Start from "./screens/start/start.component";
 import Instructions from "./screens/instructions/instructions.component";
-import Leaderboard from "./screens/leaderboard/leaderboard.component";
+import LeaderboardContainer from "./screens/leaderboard/leaderboard.container";
 import Shark from "./screens/shark/shark.component";
 import Bank from "./screens/bank/bank.component";
 import Stash from "./screens/stash/stash.component";
@@ -44,7 +44,7 @@ export default function App() {
       case ActionEvents.Instructions:
         return <Instructions />;
       case ActionEvents.Leaderboard:
-        return <Leaderboard />;
+        return <LeaderboardContainer />;
       case ActionEvents.Shark:
         return <Shark />;
       case ActionEvents.Bank:
