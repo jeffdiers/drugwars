@@ -1,7 +1,5 @@
 [build]
-  publish = "build/"
-
-  # Default build command.
+  publish = "build"
   command = "CI= yarn build"
 
 [[plugins]]
