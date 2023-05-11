@@ -1,6 +1,7 @@
 {
   "recommendations": [
     "arcanis.vscode-zipfs",
-    "styled-components.vscode-styled-components"
+    "styled-components.vscode-styled-components",
+    "orta.vscode-jest"
   ]
 }

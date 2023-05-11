@@ -1,2 +1,8 @@
+[build]
+  publish = "build/"
+
+  # Default build command.
+  command = "CI= yarn build"
+
 [[plugins]]
 package = "@xata.io/netlify"
