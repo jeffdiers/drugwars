@@ -36,4 +36,3 @@ yarn-error.log*
 
 # Xata
 xata.codegen.ts
-.xatarc
