@@ -60,16 +60,15 @@ Deploy your own version of this site by selecting the Deploy to Netlify Button b
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/jeffdiers/drugwars)
 
-
 ## Built With
 
-* [TypeScript](https://www.typescriptlang.org/) - The language used
-* [React](https://react.dev/) - The web framework used
-* [Redux toolkit]( https://redux-toolkit.js.org/) - State managment
-* [Xata](https://xata.io/) - The database used
-* [Netlify](https://www.netlify.com/) - Used for CI/CD deployments
-* [Jest](https://jestjs.io/) - Testing library
-* [Styled components](https://styled-components.com/) - Used to style components
+- [TypeScript](https://www.typescriptlang.org/) - The language used
+- [React](https://react.dev/) - The web framework used
+- [Redux toolkit](https://redux-toolkit.js.org/) - State managment
+- [Xata](https://xata.io/) - The database used
+- [Netlify](https://www.netlify.com/) - Used for CI/CD deployments
+- [Jest](https://jestjs.io/) - Testing library
+- [Styled components](https://styled-components.com/) - Used to style components
 
 ## Contributing
 
@@ -77,13 +76,12 @@ Please read [CONTRIBUTING.md](CONTRIBUTTING.md) for details on our code of condu
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/jeffdiers/drugwars/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/jeffdiers/drugwars/tags).
 
 ## Authors
 
-* **Jeff Diers** - [website](https://jeffdiers.com/)
+- **Jeff Diers** - [website](https://jeffdiers.com/)
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-

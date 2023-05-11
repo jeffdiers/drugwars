@@ -1,0 +1,21 @@
+{
+  "id": "mig_chek3eq20ftt4pj77qpg",
+  "parentID": "mig_chah9ape0mklna6cnsg0",
+  "checksum": "1:aacba7b59f6c857fe9ca0e08bdd3dbeb90083be0f855fc3d7d024894ab733c9c",
+  "operations": [
+    {
+      "addTable": {
+        "table": "randomNames"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "name",
+          "type": "string"
+        },
+        "table": "randomNames"
+      }
+    }
+  ]
+}
