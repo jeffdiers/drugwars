@@ -1,6 +1,6 @@
 {
   "name": "drugwars",
-  "version": "1.0.0",
+  "version": "0.1.0-alpha",
   "description": "",
   "main": "src/index.ts",
   "scripts": {
