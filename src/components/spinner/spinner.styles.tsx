@@ -17,14 +17,14 @@ export const SpinnerContainer = styled.div`
   border-top-color: ${({ theme }) => theme.colors.primary};
   animation: spin 1s ease-in-out infinite;
   -webkit-animation: spin 1s ease-in-out infinite;
-  @keyframes spin {
+  @-webkit-keyframes spin {
     to {
       -webkit-transform: rotate(360deg);
     }
   }
-  @-webkit-keyframes spin {
+  @keyframes spin {
     to {
-      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
     }
   }
 `;
