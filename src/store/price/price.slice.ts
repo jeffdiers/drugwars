@@ -19,6 +19,7 @@ const initialState: PriceState = {
   coat: randomInteger(150, 250),
   gun: randomInteger(200, 400),
   heal: randomInteger(1000, 3000),
+  foundMoney: randomInteger(6000, 12000),
   events: [],
 };
 

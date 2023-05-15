@@ -129,9 +129,6 @@ export const playerReducers = {
       events: state.events.concat(`You're back to full health!`),
     };
   },
-  hitCop(state: PlayerState, _action: PayloadAction) {
-    return { ...state, cops: state.cops - 1 };
-  },
   hitPlayer(state: PlayerState, action: PayloadAction<number>) {
     return { ...state, health: state.health - action.payload };
   },

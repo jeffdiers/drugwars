@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import {
-  hitCop,
   hitPlayer,
   addPlayerEvent,
   depositPlayer,
@@ -12,26 +11,30 @@ import {
   selectPlayerGuns,
   selectPlayerArea,
 } from "../../store/player/player.selectors";
+import { ActionEvents, Areas } from "../../store/player/player.types";
+import { selectFoundMoney } from "../../store/price/price.selectors";
+
 import { useAppDispatch, useAppSelector } from "../../utils/redux-hooks";
 import { moneyFormatter, randomInteger } from "../../utils/helpers";
 
 import RunFight from "../../components/action/run-fight/run-fight.component";
 import Continue from "../../components/action/continue/continue.component";
-import { ActionEvents, Areas } from "../../store/player/player.types";
 
 import { CopsChaseContainer } from "./cops-chase.styles";
 
 export default function CopsChase() {
   const dispatch = useAppDispatch();
 
-  const [startChase, setStartChase] = useState(true);
-  const [gotAway, setGotaway] = useState(false);
-  const [winByFight, setWinByFight] = useState(false);
-
   const playerCops = useAppSelector(selectPlayerCops);
   const playerHealth = useAppSelector(selectPlayerHealth);
   const playerGuns = useAppSelector(selectPlayerGuns);
   const playerArea = useAppSelector(selectPlayerArea);
+  const foundMoney = useAppSelector(selectFoundMoney);
+
+  const [numberOfCops, setNumberOfCops] = useState(playerCops);
+  const [startChase, setStartChase] = useState(true);
+  const [gotAway, setGotaway] = useState(false);
+  const [winByFight, setWinByFight] = useState(false);
 
   const run = () => {
     setWinByFight(false);
@@ -39,7 +42,7 @@ export default function CopsChase() {
     if (playerHit) {
       dispatch(hitPlayer(3));
     } else {
-      dispatch(hitCop());
+      setNumberOfCops(numberOfCops - 1);
     }
   };
 
@@ -56,7 +59,7 @@ export default function CopsChase() {
     setWinByFight(true);
     const copHit = rollsPerGun();
     if (copHit) {
-      dispatch(hitCop());
+      setNumberOfCops(numberOfCops - 1);
     } else {
       dispatch(hitPlayer(6));
     }
@@ -64,12 +67,10 @@ export default function CopsChase() {
 
   const handleGotAway = () => {
     if (winByFight) {
-      const foundMoney = randomInteger(4000, 6000);
-      dispatch(depositPlayer(foundMoney));
+      const money = foundMoney * playerCops;
+      dispatch(depositPlayer(money));
       dispatch(
-        addPlayerEvent(
-          `You found ${moneyFormatter(foundMoney)} while getting away!`
-        )
+        addPlayerEvent(`You found ${moneyFormatter(money)} while getting away!`)
       );
     }
     playerHealth < 100
@@ -80,8 +81,8 @@ export default function CopsChase() {
   };
 
   useEffect(() => {
-    if (playerCops <= 0) setGotaway(true);
-  }, [playerCops]);
+    if (numberOfCops <= 0) setGotaway(true);
+  }, [numberOfCops]);
 
   return (
     <CopsChaseContainer>
@@ -95,7 +96,7 @@ export default function CopsChase() {
       ) : (
         <div>
           <div>Health: {playerHealth}</div>
-          <div>Cops: {playerCops}</div>
+          <div>Cops: {numberOfCops}</div>
           <div>Guns: {playerGuns}</div>
           <RunFight onFight={fight} onRun={run} canFight={playerGuns > 0} />
         </div>
