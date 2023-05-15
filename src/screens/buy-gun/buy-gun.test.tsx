@@ -50,7 +50,7 @@ describe("Buy Coat Screen", () => {
     {
       inputKey: "n",
       inputArea: Areas.Bronx,
-      expectedText: /Would you like to visit the loan shark/i,
+      expectedText: /Would you like to visit the shark/i,
       expectedState: {
         area: Areas.Bronx,
         daysEnd: 29,

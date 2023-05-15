@@ -50,7 +50,6 @@ export default function Shark() {
   };
 
   const handleValueWithdraw = (value: string) => {
-    console.log(value);
     const amount = Number(value);
     if (Number.isNaN(amount)) {
       setInfo("That isn't a number!");
@@ -70,7 +69,7 @@ export default function Shark() {
     <>
       {currentAsk === CurrentAsk.ASK_VISIT && (
         <YesNo
-          text="Would you like to visit the loan shark?"
+          text="Would you like to visit the shark?"
           onYes={() => setCurrentAsk(CurrentAsk.ASK_DEPOSIT)}
           onNo={() => dispatch(updateActionEvent(ActionEvents.Bank))}
         />
