@@ -93,3 +93,25 @@ If `master` has moved on a point release (1.0, 1.1, 2.0, etc) and a hotfix must 
 - Do this for other older major releases as necessary
 
 The support branch effectively becomes a master branch for a past version.
+
+## Changelog
+
+All notable changes to this project will be documented in CHANGELOG.md.
+
+The format is based on [Keep a Changelog](http://keepachangelog.com/)
+and this project adheres to [Semantic Versioning](http://semver.org/).
+
+## [Unreleased] - yyyy-mm-dd
+
+Here we write upgrading notes.
+
+### Added
+
+- PROJECTNAME-XXXX
+  MINOR Ticket title goes here.
+- PROJECTNAME-YYYY
+  PATCH Ticket title goes here.
+
+### Changed
+
+### Fixed

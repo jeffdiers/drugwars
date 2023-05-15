@@ -2,23 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/)
-and this project adheres to [Semantic Versioning](http://semver.org/).
+## [0.1.3-alpha] - 2023-05-15
 
-## [Unreleased] - yyyy-mm-dd
-
-Here we write upgrading notes.
+Hotfix.
 
 ### Added
-
-- PROJECTNAME-XXXX
-  MINOR Ticket title goes here.
-- PROJECTNAME-YYYY
-  PATCH Ticket title goes here.
 
 ### Changed
 
 ### Fixed
+
+- fixed the conflicting found money values.
 
 ## [0.1.2-alpha] - 2023-05-15
 
