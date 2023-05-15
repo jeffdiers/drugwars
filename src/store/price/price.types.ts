@@ -10,6 +10,7 @@ export type PriceState = {
   readonly coat: number;
   readonly gun: number;
   readonly heal: number;
+  readonly foundMoney: number;
   readonly events: string[];
 };
 

@@ -26,6 +26,11 @@ export const selectPriceHeal = createSelector(
   (price) => price.heal
 );
 
+export const selectFoundMoney = createSelector(
+  selectPrice,
+  (price) => price.foundMoney
+);
+
 export const selectPriceEvents = createSelector(
   selectPrice,
   (price) => price.events

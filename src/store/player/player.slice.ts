@@ -37,7 +37,6 @@ export const {
   rollPlayerEvents,
   upgradeCoat,
   buyGun,
-  hitCop,
   hitPlayer,
   healPlayer,
   addPlayerEvent,
