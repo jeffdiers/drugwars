@@ -67,7 +67,7 @@ const leaderboardSlice = createSlice({
   initialState,
   reducers: {
     resetScoreIsPosted(state: LeaderBoardState, _action: PayloadAction) {
-      return { ...state, scorePosted: false };
+      return { ...state, scorePosted: false, scoreId: undefined };
     },
   },
   extraReducers: (builder) => {
