@@ -17,7 +17,7 @@ describe("Start Screen", () => {
     renderWithProviders(<App />);
     const element = screen.getByTestId("app-container");
 
-    const expected = /Would you like to visit the loan shark/i;
+    const expected = /Would you like to visit the shark/i;
 
     fireEvent.keyDown(element, { key: "Enter", keyCode: 13 });
 
