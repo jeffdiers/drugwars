@@ -26,7 +26,7 @@ describe("player slice", () => {
       guns: 0,
       cops: 0,
       cocaine: 0,
-      heroin: 0,
+      adderall: 0,
       molly: 0,
       lsd: 0,
       shrooms: 0,
