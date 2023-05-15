@@ -8,7 +8,7 @@ export const GameStatsContainer = styled.div`
   grid-template-columns: 50% 50%;
   grid-template-rows: auto;
   grid-template-areas:
-    "title menu"
+    "title title"
     "days hold"
     "stash-title coat-title"
     "stash coat"
@@ -24,7 +24,7 @@ export const Title = styled.div`
 `;
 
 export const Menu = styled.div`
-  grid-area: menu;
+  grid-area: title;
   display: grid;
   justify-content: end;
   align-items: end;
