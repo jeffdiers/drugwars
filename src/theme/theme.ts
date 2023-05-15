@@ -4,8 +4,8 @@ import { media } from "./media";
 
 export const theme: DefaultTheme = {
   colors: {
-    black: "#141414",
-    primary: "#1B998B",
+    black: "#121212",
+    primary: "#1FB2A1",
     secondary: "#12685E",
   },
   fonts: {
