@@ -17,6 +17,7 @@ export const priceReducers = {
       coat: randomInteger(150, 250),
       gun: randomInteger(200, 400),
       heal: randomInteger(1000, 3000),
+      foundMoney: randomInteger(12000, 24000),
     };
   },
   rollEvents(state: PriceState, _action: PayloadAction) {
@@ -30,73 +31,73 @@ export const priceReducers = {
         "Holy shit! You found a time machine to the 80s. Coke is cheap!"
       );
     }
-    if (1 === randomInteger(1, 35)) {
+    if (1 === randomInteger(1, 40)) {
       updateState[Drugs.One] = Math.floor(updateState[Drugs.One] * 2);
       updateState.events = updateState.events.concat(
         "Cops made a huge cocaine bust! Prices are rising!!!"
       );
     }
-    if (1 === randomInteger(1, 35)) {
+    if (1 === randomInteger(1, 40)) {
       updateState[Drugs.One] = Math.floor(updateState[Drugs.One] * 4);
       updateState.events = updateState.events.concat(
         "Some pure cocaine just hit the market. Prices are skyrocketing!!"
       );
     }
     //
-    // HEROIN EVENTS
+    // MOLLY EVENTS
     // Drugs.Two
     if (1 === randomInteger(1, 35)) {
-      updateState[Drugs.Two] = Math.floor(updateState[Drugs.Two] / 4);
-      updateState.events = updateState.events.concat(
-        "Heroin markets are flooded! Prices have dropped!!"
-      );
-    }
-    if (1 === randomInteger(1, 25)) {
-      updateState[Drugs.Two] = Math.floor(updateState[Drugs.Two] * 2);
-      updateState.events = updateState.events.concat(
-        "Cops raided a heroin kingpin's warehouse! Prices are rising!!!"
-      );
-    }
-    if (1 === randomInteger(1, 25)) {
-      updateState[Drugs.Two] = Math.floor(updateState[Drugs.Two] * 4);
-      updateState.events = updateState.events.concat(
-        "Heroin prices are skyrocketing!!"
-      );
-    }
-    //
-    // MOLLY EVENTS
-    // Drugs.Three
-    if (1 === randomInteger(1, 25)) {
-      updateState[Drugs.Three] = Math.floor(updateState[Drugs.Three] / 4);
+      updateState[Drugs.Two] = Math.floor(updateState[Drugs.Two] / 5);
       updateState.events = updateState.events.concat(
         "Somebody found a reliable method for making molly. It's super cheap!"
       );
     }
+    if (1 === randomInteger(1, 35)) {
+      updateState[Drugs.Two] = Math.floor(updateState[Drugs.Two] * 4);
+      updateState.events = updateState.events.concat(
+        "Everyone wants to rave! Molly prices are skyrocketing!!"
+      );
+    }
     //
     // LSD EVENTS
-    // Drugs.Four
+    // Drugs.Three
     if (1 === randomInteger(1, 20)) {
-      updateState[Drugs.Four] = Math.floor(updateState[Drugs.Four] / 4);
+      updateState[Drugs.Three] = Math.floor(updateState[Drugs.Three] / 4);
       updateState.events = updateState.events.concat(
         "The Grateful Dead are in town! The market is flooded with LSD!!"
       );
     }
     //
     // MUSHROOMS EVENTS
-    // Drugs.Five
+    // Drugs.Four
     if (1 === randomInteger(1, 20)) {
-      updateState[Drugs.Five] = Math.floor(updateState[Drugs.Five] / 4);
+      updateState[Drugs.Four] = Math.floor(updateState[Drugs.Four] / 4);
       updateState.events = updateState.events.concat(
         "Shroomfest time!! Mushrooms are basically being handed out!"
       );
     }
     //
     // WEED EVENTS
+    // Drugs.Five
+    if (1 === randomInteger(1, 20)) {
+      updateState[Drugs.Five] = Math.floor(updateState[Drugs.Five] / 4);
+      updateState.events = updateState.events.concat(
+        "420 blaze it! Prices are dropping!"
+      );
+    }
+    //
+    // ADDERALL EVENTS
     // Drugs.Six
     if (1 === randomInteger(1, 20)) {
       updateState[Drugs.Six] = Math.floor(updateState[Drugs.Six] / 4);
       updateState.events = updateState.events.concat(
-        "420 blaze it! Prices are dropping!"
+        "The pharmacy has adderall! Prices are dropping!"
+      );
+    }
+    if (1 === randomInteger(1, 20)) {
+      updateState[Drugs.Six] = Math.floor(updateState[Drugs.Six] * 4);
+      updateState.events = updateState.events.concat(
+        "There's a national shortage! Adderall prices are skyrocketing!!"
       );
     }
     return { ...state, ...updateState };

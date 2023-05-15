@@ -9,11 +9,11 @@ export enum Areas {
 
 export enum Drugs {
   One = "cocaine",
-  Two = "heroin",
-  Three = "molly",
-  Four = "lsd",
-  Five = "shrooms",
-  Six = "weed",
+  Two = "molly",
+  Three = "lsd",
+  Four = "shrooms",
+  Five = "weed",
+  Six = "adderall",
 }
 
 export type DrugsMap = {

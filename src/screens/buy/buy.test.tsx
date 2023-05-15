@@ -8,7 +8,7 @@ import { ActionEvents } from "../../store/player/player.types";
 describe("buy stage", () => {
   test.each([
     { input: "c", expected: /How much cocaine would you like to buy/i },
-    { input: "h", expected: /How much heroin would you like to buy/i },
+    { input: "a", expected: /How much adderall would you like to buy/i },
     { input: "m", expected: /How much molly would you like to buy/i },
     { input: "l", expected: /How much lsd would you like to buy/i },
     { input: "s", expected: /How much shrooms would you like to buy/i },

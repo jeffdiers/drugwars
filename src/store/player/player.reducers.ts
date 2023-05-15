@@ -59,7 +59,9 @@ export const playerReducers = {
             ...state,
             [drug]: state[drug] + amount,
             events: state.events.concat(
-              `You found ${amount} bags of ${drug} on the ground!! FUCK YEAH`
+              `You found ${amount} ${
+                amount === 1 ? `bag` : `bags`
+              } of ${drug} on the ground!! FUCK YEAH`
             ),
           };
         }
@@ -77,7 +79,9 @@ export const playerReducers = {
             ...state,
             [drug]: state[drug] - amount,
             events: state.events.concat(
-              `Police dogs chase you for ${blocks} blocks! You dropped ${amount} ${drug}! That's a drag man...`
+              `Police dogs chase you for ${blocks} ${
+                blocks === 1 ? `block` : `blocks`
+              }! You dropped ${amount} ${drug}! That's a drag man...`
             ),
           };
         }
@@ -128,9 +132,6 @@ export const playerReducers = {
       money: state.money - action.payload,
       events: state.events.concat(`You're back to full health!`),
     };
-  },
-  hitCop(state: PlayerState, _action: PayloadAction) {
-    return { ...state, cops: state.cops - 1 };
   },
   hitPlayer(state: PlayerState, action: PayloadAction<number>) {
     return { ...state, health: state.health - action.payload };
