@@ -17,7 +17,7 @@ export const priceReducers = {
       coat: randomInteger(150, 250),
       gun: randomInteger(200, 400),
       heal: randomInteger(1000, 3000),
-      foundMoney: randomInteger(12000, 24000),
+      foundMoney: randomInteger(4000, 8000),
     };
   },
   rollEvents(state: PriceState, _action: PayloadAction) {
