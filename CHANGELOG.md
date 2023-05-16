@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.5-alpha] - 2023-05-15
+
+Gameplay bugfix.
+
+### Added
+
+### Changed
+
+### Fixed
+
+- player lose if doesn't pay loan shark
+- fix leaderboard names capitalize
+
 ## [0.1.4-alpha] - 2023-05-15
 
 Minor bugfixes.
