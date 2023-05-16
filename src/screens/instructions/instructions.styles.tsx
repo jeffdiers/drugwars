@@ -6,7 +6,6 @@ export const InstructionsContainer = styled.div`
   margin: auto;
   display: grid;
   align-content: center;
-  text-align: center;
   row-gap: 7px;
 `;
 
