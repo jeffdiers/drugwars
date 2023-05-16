@@ -11,3 +11,9 @@ export const SimpleButton = styled(BaseButton)`
   padding: 0;
   border: none;
 `;
+
+export const InvertedButton = styled(BaseButton)`
+  border: none;
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.black};
+`;

@@ -2,17 +2,20 @@ import type { FC } from "react";
 import { Areas } from "../../../store/player/player.types";
 import { useKeyDown } from "../../../utils/hooks";
 
+import { BUTTON_TYPE_CLASSES } from "../../button/button.component";
+
 import Button from "../../button/button.component";
 import DialogBox from "../../dialog-box/dialog-box.component";
 
 import { SelectAreaButtons } from "./select-area.styles";
 
 type SelectAreaProps = {
+  currentArea: string;
   onSelect: (key: Areas) => void;
   onExit: () => void;
 };
 
-const SelectArea: FC<SelectAreaProps> = ({ onSelect, onExit }) => {
+const SelectArea: FC<SelectAreaProps> = ({ currentArea, onSelect, onExit }) => {
   useKeyDown(() => onSelect(Areas.Bronx), ["1"]);
   useKeyDown(() => onSelect(Areas.Queens), ["2"]);
   useKeyDown(() => onSelect(Areas.CentralPark), ["3"]);
@@ -26,7 +29,15 @@ const SelectArea: FC<SelectAreaProps> = ({ onSelect, onExit }) => {
       <span>Where you gonna go?</span>
       <SelectAreaButtons>
         {Object.values(Areas).map((area, i) => (
-          <Button key={i} onClick={() => onSelect(area)}>
+          <Button
+            key={i}
+            onClick={() => onSelect(area)}
+            buttonType={
+              currentArea === area
+                ? BUTTON_TYPE_CLASSES.inverted
+                : BUTTON_TYPE_CLASSES.base
+            }
+          >
             {area}
           </Button>
         ))}
