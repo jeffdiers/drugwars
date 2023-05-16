@@ -1,3 +1,4 @@
+import packageJson from "../package.json";
 import { useAppSelector } from "./utils/redux-hooks";
 
 import Start from "./screens/start/start.component";
@@ -20,7 +21,7 @@ import GameStats from "./components/game-stats/game-stats.component";
 import { selectPlayerActionEvent } from "./store/player/player.selectors";
 import { ActionEvents } from "./store/player/player.types";
 
-import { AppContainer, GameScreen } from "./app.styles";
+import { AppContainer, GameScreen, VersionContainer } from "./app.styles";
 
 export default function App() {
   const playerActionEvent = useAppSelector(selectPlayerActionEvent);
@@ -81,6 +82,7 @@ export default function App() {
         {renderGameStats()}
         {renderScreens()}
       </GameScreen>
+      <VersionContainer>v{packageJson.version}</VersionContainer>
     </AppContainer>
   );
 }

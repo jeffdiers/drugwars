@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.4-alpha] - 2023-05-15
+
+Minor bugfixes.
+
+### Added
+
+### Changed
+
+### Fixed
+
+- add to the instructions.
+- mover adderall above weed.
+- capitalize leaderbord names.
+- add version to bottom of screen.
+- add favicon and description.
+
 ## [0.1.3-alpha] - 2023-05-15
 
 Hotfix.
