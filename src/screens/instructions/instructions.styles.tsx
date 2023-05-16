@@ -12,6 +12,7 @@ export const InstructionsContainer = styled.div`
 export const InstructionsTitleContainer = styled.div`
   margin-bottom: 5px;
   text-transform: uppercase;
+  text-align: center;
 
   font-size: ${({ theme }) => theme.fontSize.large};
 `;
