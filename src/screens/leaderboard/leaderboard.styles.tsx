@@ -12,7 +12,7 @@ export const LeaderboardContainer = styled.div`
 
 export const LeaderboardTitleContainer = styled.div`
   margin-bottom: 5px;
-  text-transform: uppercase;
+  text-transform: capitalize;
 
   font-size: ${({ theme }) => theme.fontSize.large};
 `;
