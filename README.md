@@ -70,9 +70,9 @@ Deploy your own version of this site by selecting the Deploy to Netlify Button b
 - [Jest](https://jestjs.io/) - Testing library
 - [Styled components](https://styled-components.com/) - Used to style components
 
-## Contributing
+## Workflow
 
-Please read [CONTRIBUTING.md](CONTRIBUTTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [workflow.md](workflow.md) for details on releases.
 
 ## Versioning
 
