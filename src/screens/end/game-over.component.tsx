@@ -52,7 +52,8 @@ export default function GameOver() {
   const getRandomNameAndPost = async () => {
     const response = await fetch("/.netlify/functions/get-random-name");
     const data = await response.json();
-    dispatch(postScore({ name: data[0].name, score: profit }));
+    const score = sharkBalance > 0 ? -sharkBalance : profit;
+    dispatch(postScore({ name: data[0].name, score }));
   };
 
   useEffect(() => {
@@ -98,18 +99,16 @@ export default function GameOver() {
             <br />
             {playerHealth <= 0 ? (
               <div>You got busted!</div>
+            ) : sharkBalance > 0 ? (
+              <div>
+                You owe the loan shark {moneyFormatter(sharkBalance)}. He sent
+                his goons after you...
+              </div>
             ) : (
               <div>
                 <div>You made {moneyFormatter(profit)}</div>
                 <br />
                 <div>{dealerRank()}</div>
-                <br />
-                {sharkBalance > 0 && (
-                  <div>
-                    You might want to skip town... the loan shark is looking for
-                    you
-                  </div>
-                )}
               </div>
             )}
           </GameInfo>

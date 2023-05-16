@@ -6,6 +6,7 @@ export const GameOverContainer = styled.div`
   text-align: center;
   display: grid;
   align-content: center;
+  row-gap: 7px;
 `;
 
 export const GameInfo = styled.div`
