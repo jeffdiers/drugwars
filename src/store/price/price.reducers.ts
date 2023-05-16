@@ -77,27 +77,27 @@ export const priceReducers = {
       );
     }
     //
-    // WEED EVENTS
+    // ADDERALL EVENTS
     // Drugs.Five
     if (1 === randomInteger(1, 20)) {
       updateState[Drugs.Five] = Math.floor(updateState[Drugs.Five] / 4);
-      updateState.events = updateState.events.concat(
-        "420 blaze it! Prices are dropping!"
-      );
-    }
-    //
-    // ADDERALL EVENTS
-    // Drugs.Six
-    if (1 === randomInteger(1, 20)) {
-      updateState[Drugs.Six] = Math.floor(updateState[Drugs.Six] / 4);
       updateState.events = updateState.events.concat(
         "The pharmacy has adderall! Prices are dropping!"
       );
     }
     if (1 === randomInteger(1, 20)) {
-      updateState[Drugs.Six] = Math.floor(updateState[Drugs.Six] * 4);
+      updateState[Drugs.Five] = Math.floor(updateState[Drugs.Five] * 4);
       updateState.events = updateState.events.concat(
         "There's a national shortage! Adderall prices are skyrocketing!!"
+      );
+    }
+    //
+    // WEED EVENTS
+    // Drugs.Six
+    if (1 === randomInteger(1, 20)) {
+      updateState[Drugs.Six] = Math.floor(updateState[Drugs.Six] / 4);
+      updateState.events = updateState.events.concat(
+        "420 blaze it! Prices are dropping!"
       );
     }
     return { ...state, ...updateState };
