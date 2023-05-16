@@ -12,8 +12,8 @@ export enum Drugs {
   Two = "molly",
   Three = "lsd",
   Four = "shrooms",
-  Five = "weed",
-  Six = "adderall",
+  Five = "adderall",
+  Six = "weed",
 }
 
 export type DrugsMap = {
