@@ -12,6 +12,7 @@ declare module "styled-components" {
       primary: string;
     };
     fontSize: {
+      small: string;
       regular: string;
       medium: string;
       large: string;

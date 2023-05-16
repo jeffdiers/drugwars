@@ -12,6 +12,7 @@ export const theme: DefaultTheme = {
     primary: "Share Tech Mono",
   },
   fontSize: {
+    small: "9pt",
     regular: "14pt",
     medium: "16pt",
     large: "24pt",

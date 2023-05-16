@@ -20,3 +20,14 @@ export const GameScreen = styled.div`
       grid-area: 2 / 2 / auto / auto;
     `)}
 `;
+
+export const VersionContainer = styled.div`
+  display: grid;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin-bottom: 3px;
+  color: ${({ theme }) => theme.colors.secondary};
+  font-size: ${({ theme }) => theme.fontSize.small};
+`;
