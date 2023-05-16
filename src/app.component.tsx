@@ -81,8 +81,8 @@ export default function App() {
       <GameScreen>
         {renderGameStats()}
         {renderScreens()}
-        <VersionContainer>v{packageJson.version}</VersionContainer>
       </GameScreen>
+      <VersionContainer>v{packageJson.version}</VersionContainer>
     </AppContainer>
   );
 }
