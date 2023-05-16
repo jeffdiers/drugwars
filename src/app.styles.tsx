@@ -27,7 +27,12 @@ export const VersionContainer = styled.div`
   position: absolute;
   bottom: 0;
   width: 100%;
-  margin-bottom: 3px;
+  margin-bottom: 5px;
   color: ${({ theme }) => theme.colors.secondary};
   font-size: ${({ theme }) => theme.fontSize.small};
+
+  ${({ theme }) =>
+    theme.media.sm(css`
+      grid-area: 2 / 2 / auto / auto;
+    `)}
 `;
