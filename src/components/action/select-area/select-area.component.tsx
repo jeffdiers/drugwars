@@ -2,10 +2,9 @@ import type { FC } from "react";
 import { Areas } from "../../../store/player/player.types";
 import { useKeyDown } from "../../../utils/hooks";
 
-import { BUTTON_TYPE_CLASSES } from "../../button/button.component";
-
-import Button from "../../button/button.component";
+import Button, { BUTTON_TYPE_CLASSES } from "../../button/button.component";
 import DialogBox from "../../dialog-box/dialog-box.component";
+import Icon, { ICON_NAME, ICON_TYPE_CLASSES } from "../../icon/icon.component";
 
 import { SelectAreaButtons } from "./select-area.styles";
 
@@ -38,6 +37,17 @@ const SelectArea: FC<SelectAreaProps> = ({ currentArea, onSelect, onExit }) => {
                 : BUTTON_TYPE_CLASSES.base
             }
           >
+            {area === Areas.Bronx && (
+              <Icon
+                iconName={ICON_NAME.home}
+                iconType={
+                  currentArea === area
+                    ? ICON_TYPE_CLASSES.inverted
+                    : ICON_TYPE_CLASSES.base
+                }
+              />
+            )}
+
             {area}
           </Button>
         ))}
