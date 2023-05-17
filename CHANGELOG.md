@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.6-alpha] - 2023-05-17
+
+UI changes.
+
+### Added
+
+- inverted button
+- icon component
+
+### Changed
+
+- invert button on current location
+- add home icon to bronx
+
+### Fixed
+
 ## [0.1.5-alpha] - 2023-05-15
 
 Gameplay bugfix.

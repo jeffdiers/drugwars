@@ -30,6 +30,7 @@ export default function Jet() {
 
   return (
     <SelectArea
+      currentArea={playerArea}
       onSelect={handleOnSelect}
       onExit={() => dispatch(updateActionEvent(ActionEvents.Main))}
     />
