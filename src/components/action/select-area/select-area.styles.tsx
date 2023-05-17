@@ -8,4 +8,8 @@ export const SelectAreaButtons = styled.div`
   justify-items: stretch;
   justify-content: center;
   padding: 0 3px;
+
+  svg {
+    margin-right: 4px;
+  }
 `;
