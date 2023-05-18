@@ -21,4 +21,8 @@ export const priceRanges = {
   [Drugs.Four]: [300, 899],
   [Drugs.Five]: [90, 249],
   [Drugs.Six]: [10, 89],
+  coat: [150, 250],
+  gun: [200, 400],
+  heal: [1000, 3000],
+  foundMoney: [4000, 8000],
 };

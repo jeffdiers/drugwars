@@ -16,10 +16,13 @@ const initialState: PriceState = {
   [Drugs.Four]: getRandomPrice(Drugs.Four),
   [Drugs.Five]: getRandomPrice(Drugs.Five),
   [Drugs.Six]: getRandomPrice(Drugs.Six),
-  coat: randomInteger(150, 250),
-  gun: randomInteger(200, 400),
-  heal: randomInteger(1000, 3000),
-  foundMoney: randomInteger(4000, 8000),
+  coat: randomInteger(priceRanges.coat[0], priceRanges.coat[1]),
+  gun: randomInteger(priceRanges.gun[0], priceRanges.gun[1]),
+  heal: randomInteger(priceRanges.heal[0], priceRanges.heal[1]),
+  foundMoney: randomInteger(
+    priceRanges.foundMoney[0],
+    priceRanges.foundMoney[1]
+  ),
   events: [],
 };
 
