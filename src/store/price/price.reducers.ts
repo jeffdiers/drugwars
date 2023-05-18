@@ -26,7 +26,7 @@ export const priceReducers = {
     //
     // COCAINE EVENTS
     // Drugs.One
-    if (1 === randomInteger(1, 35)) {
+    if (1 === randomInteger(1, 30)) {
       updateState[Drugs.One] = randomInteger(
         eventPriceRange.one_drop_1[0],
         eventPriceRange.one_drop_1[1]
@@ -35,7 +35,7 @@ export const priceReducers = {
         "Holy shit! You found a time machine to the 80s. Coke is cheap!"
       );
     }
-    if (1 === randomInteger(1, 35)) {
+    if (1 === randomInteger(1, 30)) {
       updateState[Drugs.One] = randomInteger(
         eventPriceRange.one_increase_2[0],
         eventPriceRange.one_increase_2[1]
@@ -44,7 +44,7 @@ export const priceReducers = {
         "Cops made a huge cocaine bust! Prices are rising!!!"
       );
     }
-    if (1 === randomInteger(1, 40)) {
+    if (1 === randomInteger(1, 35)) {
       updateState[Drugs.One] = randomInteger(
         eventPriceRange.one_increase_1[0],
         eventPriceRange.one_increase_1[1]
@@ -56,7 +56,7 @@ export const priceReducers = {
     //
     // MOLLY EVENTS
     // Drugs.Two
-    if (1 === randomInteger(1, 30)) {
+    if (1 === randomInteger(1, 25)) {
       updateState[Drugs.Two] = randomInteger(
         eventPriceRange.two_drop_1[0],
         eventPriceRange.two_drop_1[1]
@@ -65,7 +65,7 @@ export const priceReducers = {
         "Somebody found a reliable method for making molly. It's super cheap!"
       );
     }
-    if (1 === randomInteger(1, 30)) {
+    if (1 === randomInteger(1, 25)) {
       updateState[Drugs.Two] = randomInteger(
         eventPriceRange.two_increase_1[0],
         eventPriceRange.two_increase_1[1]
@@ -96,6 +96,24 @@ export const priceReducers = {
       );
       updateState.events = updateState.events.concat(
         "Shroomfest time!! Mushrooms are basically being handed out!"
+      );
+    }
+    if (1 === randomInteger(1, 25)) {
+      updateState[Drugs.Four] = randomInteger(
+        eventPriceRange.four_drop_2[0],
+        eventPriceRange.four_drop_2[1]
+      );
+      updateState.events = updateState.events.concat(
+        "Shrooms are legal!! They're being sold at bodega's everywhere!"
+      );
+    }
+    if (1 === randomInteger(1, 20)) {
+      updateState[Drugs.Four] = randomInteger(
+        eventPriceRange.four_increase_1[0],
+        eventPriceRange.four_increase_1[1]
+      );
+      updateState.events = updateState.events.concat(
+        "A new shroom chocolate hit the market!! Everyone is buying!"
       );
     }
     //
