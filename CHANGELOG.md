@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.7-alpha] - 2023-05-19
+
+Hotfix.
+
+### Added
+
+- add leaderboard countdown
+
+### Changed
+
+### Fixed
+
 ## [0.1.6-alpha] - 2023-05-17
 
 UI changes.
