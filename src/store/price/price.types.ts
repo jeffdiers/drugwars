@@ -30,7 +30,7 @@ export const priceRanges = {
 export const eventPriceRange = {
   one_drop_1: [4500, 16000],
   one_increase_2: [29000, 59999],
-  one_increase_1: [70000, 89999],
+  one_increase_1: [70000, 79999],
   two_drop_1: [1500, 6000],
   two_increase_1: [13000, 42000],
   three_drop_1: [300, 1200],

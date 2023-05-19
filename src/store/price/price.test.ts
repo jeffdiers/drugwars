@@ -9,7 +9,7 @@ describe("price slice", () => {
       { drug: Drugs.Two, greaterThan: 5000, lessThan: 13999 },
       { drug: Drugs.Three, greaterThan: 1000, lessThan: 4999 },
       { drug: Drugs.Four, greaterThan: 300, lessThan: 899 },
-      { drug: Drugs.Five, greaterThan: 90, lessThan: 249 },
+      { drug: Drugs.Five, greaterThan: 90, lessThan: 299 },
       { drug: Drugs.Six, greaterThan: 10, lessThan: 89 },
     ])(
       "drug: $drug, greaterThan: $greaterThan, lessThan: $lessThan",
