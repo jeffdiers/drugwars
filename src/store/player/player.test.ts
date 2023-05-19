@@ -1,6 +1,7 @@
 import reducer, {
   changeArea,
   buy,
+  buyGun,
   sell,
   rollPlayerEvents,
 } from "./player.slice";
@@ -141,9 +142,9 @@ describe("player slice", () => {
       {
         input: 0.2,
         expectedState: {
-          cocaine: 8,
+          cocaine: 7,
           events: [
-            "Police dogs chase you for 2 blocks! You dropped 2 cocaine! That's a drag man...",
+            "Police dogs chase you for 2 blocks! You dropped 3 cocaine! That's a drag man...",
           ],
         },
       },
@@ -190,6 +191,33 @@ describe("player slice", () => {
   test("player finds drugs only triggers if player has coat space", () => {
     let { state, action } = setupRollPlayerEvents(0.1);
     state = reducer(state, buy({ drug: Drugs.One, amount: 100, price: 0 }));
+
+    const expected = state;
+
+    const actual = reducer(state, action);
+
+    expect(actual).toEqual(expected);
+  });
+
+  test("player wont get mugged if has more than three guns", () => {
+    let { state, action } = setupRollPlayerEvents(0);
+
+    state = reducer(state, buyGun(0));
+    state = reducer(state, buyGun(0));
+    state = reducer(state, buyGun(0));
+
+    const expected = state;
+
+    const actual = reducer(state, action);
+
+    expect(actual).toEqual(expected);
+  });
+
+  test("player wont get chased by dogs if has more than two guns", () => {
+    let { state, action } = setupRollPlayerEvents(0.2);
+
+    state = reducer(state, buyGun(0));
+    state = reducer(state, buyGun(0));
 
     const expected = state;
 
