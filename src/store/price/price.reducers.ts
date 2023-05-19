@@ -21,6 +21,12 @@ export const priceReducers = {
       foundMoney: randomInteger(4000, 8000),
     };
   },
+  clearPriceEvents(state: PriceState, _action: PayloadAction) {
+    return { ...state, events: [] };
+  },
+  removePriceEvent(state: PriceState, _action: PayloadAction) {
+    return { ...state, events: state.events.slice(1) };
+  },
   rollEvents(state: PriceState, _action: PayloadAction) {
     let updateState = { ...state };
     //
@@ -150,8 +156,5 @@ export const priceReducers = {
       );
     }
     return { ...state, ...updateState };
-  },
-  removePriceEvent(state: PriceState, _action: PayloadAction) {
-    return { ...state, events: state.events.slice(1) };
   },
 };
