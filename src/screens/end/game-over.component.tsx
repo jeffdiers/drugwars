@@ -50,10 +50,22 @@ export default function GameOver() {
   let mounted = false;
 
   const getRandomNameAndPost = async () => {
-    const response = await fetch("/.netlify/functions/get-random-name");
-    const data = await response.json();
+    const randomNameResponse = await fetch(
+      "/.netlify/functions/get-random-name"
+    );
+    const randomNameData = await randomNameResponse.json();
+    const currentSeasonResponse = await fetch(
+      "/.netlify/functions/get-current-season-id"
+    );
+    const currentSeasonData = await currentSeasonResponse.json();
     const score = sharkBalance > 0 ? -sharkBalance : profit;
-    dispatch(postScore({ name: data[0].name, score }));
+    dispatch(
+      postScore({
+        name: randomNameData[0].name,
+        score,
+        season: currentSeasonData[0].id,
+      })
+    );
   };
 
   useEffect(() => {
