@@ -32,6 +32,7 @@ const priceSlice = createSlice({
   reducers: priceReducers,
 });
 
-export const { setPrices, rollEvents, removePriceEvent } = priceSlice.actions;
+export const { setPrices, rollEvents, removePriceEvent, clearPriceEvents } =
+  priceSlice.actions;
 
 export default priceSlice.reducer;

@@ -3,6 +3,9 @@ import { renderWithProviders } from "../../utils/test-utils";
 import App from "../../app.component";
 
 const setUpStash = () => {
+  // roll player events wont get an event
+  global.Math.random = () => 1;
+
   renderWithProviders(<App />);
 
   const container = screen.getByTestId("app-container");
