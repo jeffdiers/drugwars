@@ -1,6 +1,6 @@
 {
   "name": "drugwars",
-  "version": "0.1.6-alpha",
+  "version": "0.1.7-alpha",
   "description": "A turn-based strategy video game in which the player assumes the role of a drug dealer engaged in arbitrage.",
   "main": "src/index.ts",
   "scripts": {
