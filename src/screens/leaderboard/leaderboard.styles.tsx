@@ -17,6 +17,12 @@ export const LeaderboardTitleContainer = styled.div`
   font-size: ${({ theme }) => theme.fontSize.large};
 `;
 
+export const LeaderboardCountdownContainer = styled.div`
+  margin-bottom: 5px;
+
+  font-size: ${({ theme }) => theme.fontSize.small};
+`;
+
 export const LeaderboardItem = styled.div`
   display: flex;
   justify-content: space-between;
