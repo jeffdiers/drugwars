@@ -32,7 +32,9 @@ export default function BuyGun() {
 
   return (
     <YesNo
-      text={`Would you like to buy a gun for ${moneyFormatter(priceGun)}?`}
+      text={`Would you like to buy a gun for ${moneyFormatter(
+        priceGun
+      )}? (5 pockets)`}
       onYes={() => {
         if (priceGun <= playerMoney && playerCoatSpace >= 5) {
           dispatch(buyGun(priceGun));
