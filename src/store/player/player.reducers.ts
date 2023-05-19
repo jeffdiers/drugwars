@@ -39,13 +39,16 @@ export const playerReducers = {
     switch (choice) {
       case 1:
         const lostMoney = Math.floor(state.money * 0.2);
-        return {
-          ...state,
-          money: state.money - lostMoney,
-          events: state.events.concat(
-            `You got mugged!! You lost ${moneyFormatter(lostMoney)}!!`
-          ),
-        };
+        if (state.guns < 3) {
+          return {
+            ...state,
+            money: state.money - lostMoney,
+            events: state.events.concat(
+              `You got mugged!! You lost ${moneyFormatter(lostMoney)}!!`
+            ),
+          };
+        }
+        break;
 
       case 2:
         const amount = randomInteger(1, 10);
@@ -71,9 +74,9 @@ export const playerReducers = {
         const currentStash = Object.values(Drugs).filter(
           (drug) => state[drug] !== 0
         );
-        if (currentStash.length) {
+        if (currentStash.length && state.guns < 2) {
           const drug = currentStash[randomInteger(1, currentStash.length) - 1];
-          const amount = randomInteger(1, Math.floor(state[drug] / 2));
+          const amount = randomInteger(1, Math.floor(state[drug]));
           const blocks = randomInteger(1, 5);
           return {
             ...state,
