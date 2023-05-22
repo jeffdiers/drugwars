@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.0-beta] - 2023-05-22
+
+Gameplay changes.
+
+### Added
+
+### Changed
+
+- price events ranges (gameplay)
+- having guns protects from muggers (gameplay)
+- get leaderboard from current season
+
+### Fixed
+
+- fix price events on first round
+- single source of truth for prices
+
 ## [0.1.7-alpha] - 2023-05-19
 
 Hotfix.

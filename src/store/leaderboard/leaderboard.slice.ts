@@ -5,6 +5,7 @@ import type { RootState } from "../root-reducer";
 export type PlayerScoreData = {
   name: string;
   score: string | number;
+  season: string;
 };
 
 export type PlayerScore = {

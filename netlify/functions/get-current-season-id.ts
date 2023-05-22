@@ -16,12 +16,10 @@ const handler: Handler = async (
   }
 
   try {
-    const records = await xata.db.scores
-      .filter({ "season.currentSeason": true })
-      .sort("score", "desc")
-      .getMany({
-        pagination: { size: 10 },
-      });
+    const records = await xata.db.season
+      .filter({ currentSeason: true })
+      .select(["id"])
+      .getMany();
 
     return {
       statusCode: 200,

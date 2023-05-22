@@ -8,7 +8,11 @@ import {
 import { resetBank } from "../../store/bank/bank.slice";
 import { resetShark } from "../../store/shark/shark.slice";
 import { resetStash } from "../../store/stash/stash.slice";
-import { setPrices } from "../../store/price/price.slice";
+import {
+  clearPriceEvents,
+  rollEvents,
+  setPrices,
+} from "../../store/price/price.slice";
 import { resetScoreIsPosted } from "../../store/leaderboard/leaderboard.slice";
 
 import Button from "../../components/button/button.component";
@@ -33,6 +37,8 @@ export default function Start() {
     dispatch(resetStash());
     dispatch(resetBank());
     dispatch(setPrices());
+    dispatch(clearPriceEvents());
+    dispatch(rollEvents());
     dispatch(resetScoreIsPosted());
     dispatch(updateActionEvent(ActionEvents.Shark));
   };
