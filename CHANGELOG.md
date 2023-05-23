@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.7-alpha] - 2023-05-23
+## [0.2.1-alpha] - 2023-05-23
 
 Hotfix.
 
