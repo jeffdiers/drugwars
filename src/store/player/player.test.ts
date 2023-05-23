@@ -142,9 +142,9 @@ describe("player slice", () => {
       {
         input: 0.2,
         expectedState: {
-          cocaine: 7,
+          cocaine: 9,
           events: [
-            "Police dogs chase you for 2 blocks! You dropped 3 cocaine! That's a drag man...",
+            "Police dogs chase you for 2 blocks! You dropped 1 cocaine! That's a drag man...",
           ],
         },
       },
