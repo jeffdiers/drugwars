@@ -76,7 +76,7 @@ export const playerReducers = {
         );
         if (currentStash.length && state.guns < 2) {
           const drug = currentStash[randomInteger(1, currentStash.length) - 1];
-          const amount = randomInteger(1, Math.floor(state[drug]));
+          const amount = randomInteger(1, Math.floor(state[drug] / 5));
           const blocks = randomInteger(1, 5);
           return {
             ...state,
